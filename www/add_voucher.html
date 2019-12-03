@@ -778,7 +778,7 @@ function getRcvd2(id,s,e){
 
 
 function getPeriod1(){
-    
+    localStorage["s_start"] = "2019-04-01";
 	var dateObj = new Date(localStorage["s_start"]);
 	var m = dateObj.getMonth() + 1; //months from 1-12
 	var day = dateObj.getDate();
