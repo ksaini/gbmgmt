@@ -1,0 +1,1170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1"/>
+        <title>Assign HW</title>
+        <!-- Script -->
+        <script type="text/javascript" src="cordova.js" ></script>
+       <script src="./js/jquery.min.js"></script>
+	   <script src="./assets/js/bootstrap.min.js"></script>
+	  <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="css/index.css" />
+      <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+      <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+<style>
+body {
+	#background-image:url(img/s71.png);
+	background-image:none;
+	background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    height: auto !important;
+    min-height:100%;
+	text-transform:inherit;
+	height: 100%;
+}	
+.fdetails {
+	font-size:8px;
+    text-transform: uppercase;
+    color: #9A9A9A;
+    font-weight: 400;
+	padding-right:0px;
+	-webkit-font-smoothing: antialiased;
+    font-family: "Roboto","Helvetica Neue",Arial,sans-serif;
+	vertical-align: middle;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  margin-bottom:100px;
+}
+table, tbody {
+	font-size:10px;
+}
+.btn{
+	font-size:10px;
+	padding:2px;
+}
+.btn1{
+	border: 1px solid #34495E;
+	color:#34495E;
+}
+.table>tbody>tr>td {
+	vertical-align: middle;
+}
+#name {
+	margin-bottom:0px;
+	font-weight:700;
+	color:#34495E;
+	letter-spacing: 2px;
+}
+#admn {
+	margin-bottom:0px;
+	font-size:10px;
+}
+#feenode {
+	border: 1px solid #34495E;
+	border-radius: 15px;
+	margin-top: 5px;
+	margin-left: -10px;
+	margin-right: -10px;
+	padding-bottom:5px;
+}
+#alert1{
+	font-size:12px;
+	color:red;
+}
+.ok {
+	margin-right:15px;
+	font-size:12px;
+	border-radius: 3px;
+	border: 1px solid #34495E;
+	color:#34495E;
+	width:70px;
+}
+.cncl {
+	margin-left:15px;
+	font-size:12px;
+	border: 1px solid #34495E;
+	color:#34495E;
+	border-radius: 3px;
+	width:70px;
+}
+</style>
+</head>
+<body>
+	<div class="main-panel">
+	 <div class="panel-heading sticky" style="background-color: #34495E;">
+        <div class="row" >
+			<div class="col-xs-1" style="color:white;text-align:center;">
+				<i class="fa fa-arrow-circle-left" onclick="window.location.href='dashboard.html'"></i>
+			</div>
+			<div class="col-xs-10" style="color:white;text-align:center;">Fee</div>
+			<div class="col-xs-1"></div>
+					
+        </div>
+	</div>		
+		<div class="content" style="margin-top:40px" id="x">
+			<div class="container-fluid">
+				<div class="card">
+					<div class="row" style="padding-top:8px;padding-bottom:0px;padding-left:10px;border-bottom: 1px solid #34495E;" >
+					
+						<div class="col-xs-8"> 
+                              <div class="header">
+								<p class="name" id='name'></p>
+								
+								</div>
+						</div>
+						<div class="col-xs-4"> 
+							<p id="admn"  class="text-primary"></p>
+						</div>
+					
+
+						</div>	
+					</div>	
+					
+					<!-------- payment screen ----><br>
+					<div class="row" id="feenode" style="display:none;">
+						<div class="col-xs-12" style="padding-left:12px;">
+                           <div class="card">
+                              <div class="header" style="background-color:#ddd;border-color:#ddd;">
+                                 <h4 class="title" >Fee Deposit</h4>
+                              </div>
+							  <input type="hidden" id='rcv' value=''>
+							   <input type="hidden" id='fulljsn' value=''>
+							    <input type="hidden" id='pd' value=''>
+								<input type="hidden" id='prev_due' value='0'>
+							</div>
+						</div>	
+					<div class="col-xs-12"  style="padding-left:12px;" >
+						 <div class="content table-responsive table-full-width" style="">
+                                    <table class="table table-hover table-striped sortable" key="" id="ps">
+                                      
+                                       <thead>
+                                          <tr id='thead_ps'>
+											<th style="width:14%">Fee Name</th>
+											<th  >Total Due</th>
+											<th >Received</th>
+											<th >To Pay</th>
+											<th >Discount</th>
+											
+                                          <tr>
+                                       </thead>
+                                       <tbody id='fdetail'></tbody>
+                                    </table>
+                                    
+                                 </div>
+					</div>	
+					
+					<div class="col-xs-4" style="font-size:10px;padding-left:15px;padding-right:5px;">
+						<label >Cheque/Txn# :&nbsp;</label><input class="form-control input-sm" type='text' name='trid' id='trid' >
+					</div>
+					<div class="col-xs-5" style="font-size:10px;padding-left:5px;padding-right:5px;">
+						<label >Cheque/ Date# :&nbsp;</label><input class="form-control input-sm" type='date' name='tilldate' id='tilldate' >
+					</div>
+					<div class="col-xs-3" style="font-size:10px;padding-left:5px;padding-right:15px;">
+						<label >Mode :&nbsp;</label>
+							<select class="form-control" style="height:28px;font-size:8px;padding:3px;" name='class'  id='mode' onchange="selectChange()">
+							<option id='cash' value='cash'>Cash</option>
+							<option id='cheque' value='cheque'>Cheque</option>
+							<option id='online' value='online'>Online</option>
+							</select>
+					</div>
+					<div class="col-xs-8" style="font-size:10px;padding-top:10px">
+						<label  >Pay :&nbsp;</label><label style="font-size:14px;color:red" id="tot" ></label>
+					</div>
+					<div class="col-xs-4" style="font-size:10px;">
+						<br><button type="button" style="font-size:12px;" class="btn btn1" onclick="saveRecord()">Save</button>
+						<button type="button" style="font-size:12px;" class="btn btn1" onclick="document.getElementById('feenode').style.display = 'none';">Close</button>
+						
+					</div>	
+					
+						
+						
+					</div><br>
+					<div class='' id='alert1'></div>
+					<!------payment screen ends------>
+					
+					<div class="row tab-pane fade in active" id="">
+						<div class="col-xs-12">
+                           <div class="card">
+                              <div class="header" style="background-color:#ddd;border-color:#ddd;">
+                                 <h4 class="title" >Payment Schedule 
+								 <span style="font-size:12px;padding-left:10px;color:black;" >| Fee Schedule</span>
+								
+                              </div>
+                              <div class="content ">
+                                 <div class="content table-responsive table-full-width">
+                                    <table class="table table-hover table-striped sortable table-condensed" key="" id="ps">
+                                      
+                                       <thead>
+                                          <tr id='thead_ps' style="font-size:10px;">
+											<th >Period</th>
+											<th >Due Fee</th>
+											<th >Received<br> Fee</th>
+											<th >Pending<br> Fee</th>
+											<th ></th>
+											
+                                          <tr>
+                                       </thead>
+                                       <tbody id='table_ps'></tbody>
+                                    </table>
+                                    
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+						
+						
+						
+						<div class="col-xs-12">
+                           <div class="card">
+                              <div class="header" style="background-color:#ddd;border-color:#ddd;">
+                                 <h4 class="title" >Recieved Fee</h4>
+                              </div>
+                              <div class="content ">
+                                 <div class="content table-responsive table-full-width">
+                                    <table class="table table-hover table-striped sortable table-condensed" key="" id="tableid1">
+                                      
+                                       <thead>
+                                          <tr id='thead1'>
+											<th>Receipt ID </th>
+											<th>Amount</th>
+											<th>Deposit Date</th>
+											<th>Mode</th>
+                                          <tr>
+                                       </thead>
+                                       <tbody id='table1'></tbody>
+									   <tbody id='table2'></tbody>
+                                    </table>
+                                    
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+            
+            
+            <!---------- Individual fee------>            
+			        	<div class="col-xs-12">
+                           <div class="card">
+                              <div class="header" style="background-color:#ddd;border-color:#ddd;">
+                                 <h4 class="title" >Add Individual Fee</h4>
+                              </div>
+                              <div class="content ">
+                                  	<div class="row" >
+				                	<div class="card" style="font-size:10px;">
+						                <div class="col-md-3" style="display:flex;padding-top:10px;"> 
+                                            <label >Select Fee :&nbsp;</label><select style="font-size:10px;" id='feeid' class="form-control select-sm"></select>
+                                        </div>    
+                                         <div class="col-md-3" style="display:flex;padding-top:10px;"> 
+                                             <label >Fee Value :&nbsp;</label><input type="form-control input-sm" style="border-radius: 5%;text-align:center;width:50%;" class="width:100%;text-align:center" id="fv" value="0">
+                                        </div>
+                                        <div class="col-md-4"  style="display:flex;padding-top:10px;"> 
+                                        	<label >Fee Date# :&nbsp;</label><input class="form-control input-sm" type='date' id='f1d' >
+                                        </div>
+                                        <div class="col-md-12"  style="display:flex;padding-top:10px;"> 
+                                            <button class="btn btn-sm" type="button" onclick="addindfee()">Assign Fee</button>
+                                        </div>
+                                         	
+                                    </div> <!------ card----->
+                                    </div> <!----row---->
+									<br><br>
+                              </div>
+                           </div>
+                        </div>			
+   
+                     </div>
+					 </div>
+		</div>	
+		
+	</div>
+
+</form>
+</body>
+
+<!--   Core JS Files   -->
+<script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+<!--  Checkbox, Radio & Switch Plugins -->
+<script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
+
+<!--  Charts Plugin -->
+<script src="assets/js/chartist.min.js"></script>
+
+<!--  Notifications Plugin    -->
+<script src="assets/js/bootstrap-notify.js"></script>
+
+<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+<script src="assets/js/light-bootstrap-dashboard.js"></script>
+<script src='js/dataTbl.js'></script>
+<script>
+Date.prototype.toDateInputValue = (function() {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0,10);
+});
+
+$(document).ready( function() {
+    $('#tilldate').val(new Date().toDateInputValue());
+	$('#cdate').val(new Date().toDateInputValue());
+	$('#f1d').val(new Date().toDateInputValue());
+});
+$('#tilldate').val(new Date().toDateInputValue());
+	$('#cdate').val(new Date().toDateInputValue());
+	$('#f1d').val(new Date().toDateInputValue());
+var feeJSON = {};
+var rcvd_details = {};
+var duefee=0;
+var rcvdfee=0;
+var balfee=0;
+var discount=0;
+var sdetails = {};
+</script>
+<script type='text/javascript'>
+	var flg = 4;
+	var sid = getParameterByName('sid');
+	var name = getParameterByName('name');
+	var c =  getParameterByName('class');
+	var tilldate = new Date().toDateInputValue();
+	var cn1;
+	var cn2;
+	
+	//document.getElementById('projectedfee').href +=sid;
+	/**document.getElementById('name').innerHTML = name;
+	if(sid>0)
+		document.getElementById('admn').innerHTML = sid + "/(" + c + ")";
+	else
+		document.getElementById('admn').innerHTML = "P" + (-1)*sid + "/(" + c + ")";
+	document.getElementById('table1').innerHTML = "";
+	**/
+	setTimeout(function () {getData('table1','thead1','__!fee_details_06,'+ sid +','+ sid +'',3,0,1002);}, 300);
+	
+	var feedate = endOfThisMonth(); //fee due till last month
+	
+	setTimeout(function () {getData('','','__!s_cn,'+sid+';',0,0,1001);	}, 300);
+	
+		
+	// If name and class is not a part of url fetch them explicitly
+	getData('','','__!get_student_08,'+sid+';',0,0,1007);
+    getDropDownData('feeid','SELECT id,feename from s_fee_master where frequency=0;');
+		
+	function endOfThisMonth(){
+	var x = new Date();
+	x.setDate(1);
+	
+	var m = x.getMonth();
+	var y = x.getFullYear();
+	//var max_days = new Date(y, m, 0).getDate();
+	var d= new Date(x.getFullYear(), x.getMonth()+1, 0);
+        var max_days = d.getDate();
+			
+	var local = new Date(y,m,max_days);
+		
+    local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
+	
+    return local.toJSON().slice(0,10);
+}	
+</script>
+<script>
+
+var totaldiscount = 0;
+
+function custom(d,p){
+	if(p==1001){
+	window.cn1= d[0]['cn1'];
+	window.cn2= d[0]['cn2'];
+	}
+	else if(p==1002){
+		showRecipt(d,"table1","thead1");
+		setTimeout(function () {getData('','','__!fee_details_05,'+sid+';',0,0,1009);	}, 300);
+	}
+	else if(p==1007)
+		fillStudentRecord(d);
+	else if(p==1008)
+		showRecipt1(d,"table2","thead1");
+	else if(p==1009)
+		feeSchedule(d);
+		
+}
+function confirmRecord(){
+
+}
+function saveCnf(){
+	localStorage.r=true;
+	document.getElementById("alert1").innerHTML = "n";
+	saveRecord();
+}
+function saveCncl(){
+	localStorage.r=false;
+	document.getElementById("alert1").innerHTML = "";
+}
+function saveRecord()
+{	
+	recalculate();
+	var sid = getParameterByName('sid');
+	var cid = getParameterByName('class');
+	var deposit_dt = document.getElementById("tilldate").value;
+	var mode = document.getElementById("mode").value;
+	var trid = document.getElementById("trid").value;
+	
+	//var r = confirm("You are going to deposit Rs:" + document.getElementById("totvalue").innerHTML);
+	document.getElementById("alert1").innerHTML = "You are going to deposit Rs:" + document.getElementById("totvalue").innerHTML + "<br><span class='btn btn-sm ok' onclick='saveCnf()'>Ok</span><span class='btn btn-sm cncl' onclick='saveCncl()'>Cancel</span>";
+	r = localStorage.r;
+	if(r== true)
+	{
+		// get jsom for all fees
+		var rows = document.getElementById("fdetail").childNodes;
+		var jsn = [];
+		var od = {}; //otherdetails
+		
+		for(var i=0;i<rows.length;i++){
+			var tmp = {};
+			tmp["feeid"] = rows[i].cells[0].textContent;
+			tmp["feename"] = rows[i].cells[1].textContent;
+			if(isNaN(parseInt(rows[i].cells[4].children[0].value)))
+				tmp["amount"] = 0;
+			else
+				tmp["amount"] = rows[i].cells[4].children[0].value;
+			if(isNaN(parseInt(rows[i].cells[5].children[0].value)))
+				tmp["discount"] = 0;
+			else	
+				tmp["discount"] = rows[i].cells[5].children[0].value;		
+			jsn.push(tmp);
+		}
+		
+		od["sname"] = sdetails["fname"];
+		od["classname"] = sdetails["cname"];
+		od["roll"] = sdetails["roll"];
+		od["deposit_dt"] = deposit_dt;
+		od["sid"] = sid;
+		od["mode"] = mode;
+		od["trid"] = trid;
+		
+		
+		var sql = "jsn=" + JSON.stringify(jsn) + "&od=" + JSON.stringify(od);
+	    
+		var req = new XMLHttpRequest();
+			req.onreadystatechange = function() {
+			if (req.readyState == 4 && req.status == 200) {
+				//alert(req.responseText);
+				location.reload();
+			}
+			};
+	
+				
+			req.open("POST", base_url + "/addvoucher2.php", true);
+			req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		
+			req.send(sql);	
+				
+    }				
+}
+
+
+function selectChange()
+{
+	var sel = document.getElementById('mode').value;
+}
+
+function searchRecord()
+{
+	document.getElementById('table1').innerHTML = "";
+	var sid = getParameterByName('sid');
+	var sessionid = document.getElementById("sessionid").value;
+	getData('table1','thead1','__!fee_details_01,'+ sid +','+ sessionid +'',0,0,0);
+
+}
+function addPrint(node){
+	var acc_id = node.cells[0].innerHTML;
+	var base_url = document.URL.substr(0,document.URL.lastIndexOf('/'));
+	var sid = getParameterByName('sid');
+	window.open(base_url + "/school_fee_receipt.html?sid="+ sid +"&acc_id=" + acc_id + "&cls=" + getParameterByName('class'), "_blank", "");
+}
+function delReceipt(node){
+	var acc_id = node.cells[0].innerHTML;
+	var base_url = document.URL.substr(0,document.URL.lastIndexOf('/'));
+	
+	var r = confirm("This will cancel this receipt# " + acc_id + ". Continue?");
+	if (r == true) {
+    
+	var req = new XMLHttpRequest();
+	req.onreadystatechange = function() {
+		if (req.readyState == 4 && req.status == 200) {
+			if(req.responseText.includes("Results stored successfully")){
+				alert("Receipt " + acc_id + " has been canceled.");
+				location.reload();
+				}
+			else
+				alert(req.responseText);
+		}
+	};
+	var base_url = document.URL.substr(0,document.URL.lastIndexOf('/'));
+	
+	req.open("GET", base_url + "/deleteReceipt.php?id=" + acc_id, true);
+	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	req.send();
+	
+	}
+}
+
+function addPrint1(node){
+	var acc_id = node.cells[0].innerHTML;
+	var base_url = document.URL.substr(0,document.URL.lastIndexOf('/'));
+	var sid = getParameterByName('sid');
+	window.open(base_url + "/school_fee_receipt.html?sid="+ sid +"&acc_id=" + acc_id + "&cls=" + getParameterByName('class') + "&level=1", "_blank", "");
+}
+function addPrint2(node){
+	var acc_id = node.cells[0].innerHTML;
+	var base_url = document.URL.substr(0,document.URL.lastIndexOf('/'));
+	var sid = getParameterByName('sid');
+	window.open(base_url + "/school_fee_receipt1.html?sid="+ sid +"&acc_id=" + acc_id + "&cls=" + getParameterByName('class') + "&level=1", "_blank", "");
+}
+function addPrint3(node){
+	var acc_id = node.cells[0].innerHTML;
+	var base_url = document.URL.substr(0,document.URL.lastIndexOf('/'));
+	var sid = getParameterByName('sid');
+	window.open(base_url + "/school_fee_receipt3.html?sid="+ sid +"&acc_id=" + acc_id + "&cls=" + getParameterByName('class'), "_blank", "");
+}
+function addPrint_prev(node){
+	var acc_id = node.cells[0].innerHTML;
+	var base_url = document.URL.substr(0,document.URL.lastIndexOf('/'));
+	var sid = getParameterByName('sid');
+	window.open(base_url + "/school_fee_receipt.html?sid="+ sid +"&acc_id=" + acc_id + "&cls=" + getParameterByName('class') + "&feeid=0", "_blank", "");
+}
+
+function sendFeeSMS(node){
+	var mode = node.cells[3].innerHTML;
+	var amt = node.cells[1].innerHTML;
+	var name = getParameterByName('name');
+	var sid = getParameterByName('sid');
+    var msg = "Thanks for depositing Rs. " + amt + "  as "+ mode +" against fee for " + name + "(" + sid + ")";
+	//if(localStorage.schoolcode == "SASBSS")	
+		//msg = name + "  के लिए rs "+amt+" जमा करने के लिए धन्यवाद।  शाहिदे आजम स्कूल M: 978378913";
+	if(amt.trim().length >0 && window.cn1.length >7)
+		sendSMS(window.cn1,msg);
+	if(amt.trim().length >0 && window.cn2.length >7)
+		sendSMS(window.cn2,msg);	
+	
+	//alert(msg)
+	//
+}
+function smsCallback(x){ alert(x);}
+
+function feeSchedule(d){
+	var tblBodyId = 'table_ps';
+	
+			try {
+				
+				var dataArray= d;
+				var tblBodyElement = document.getElementById(tblBodyId);
+				var tbodyData="";
+				var text = getPeriod1();
+				p = JSON.parse(text);
+								
+				var period = p["periodM"];
+				var period1 = p["periodD"];
+				
+				var sum_due = 0;
+				var sum_rcvd = 0;
+				var rcvd_over = 0; // store recieved overfloe from one quarter to another
+				
+				// parse d and add revd info in the array
+				 //tmp = rcvd_details  wrong keep deep copy
+				var tmp = [];
+				for(var i=0;i<rcvd_details.length; i++){
+					tmp.push(rcvd_details[i]);
+				}
+				//document.getElementById("name").innerHTML = JSON.stringify(rcvd_details);
+				localStorage["s_start"] = "2019-04-01";
+				var s_start = new Date(localStorage["s_start"]);
+				
+				for(var i=0;i<d.length; i++){
+					for(var j=0;j<tmp.length;j++){
+					    var dd = new Date(tmp[j]["deposit_dt"]);
+						if(tmp[j]["feeid"]!= null && tmp[j]["feeid"].length >0 && (s_start <=dd) ){ // feeid!null or not empty 
+							if(d[i]["feeid"]==tmp[j]["feeid"] && (d[i]["value"]- d[i]["rcvd"]-d[i]["discount"]) > 0 ){ 
+							    var bl = d[i]["value"]- d[i]["rcvd"]-d[i]["discount"]; // current that can be rcvd
+								
+								if(bl >= tmp[j]["amount"] + tmp[j]["discount"] ){
+									d[i]["rcvd"] = parseInt(d[i]["rcvd"]) + parseInt(tmp[j]["amount"]);
+									d[i]["discount"] = parseInt(d[i]["discount"]) + parseInt(tmp[j]["discount"]);
+									tmp[j]["amount"] = 0; tmp[j]["discount"] = 0;
+									
+								}
+								else{
+									// consume discount first
+									if(bl >= tmp[j]["discount"]){
+										bl = bl - tmp[j]["discount"];
+										d[i]["discount"] = parseInt(d[i]["discount"]) +  parseInt(tmp[j]["discount"]);
+										tmp[j]["discount"] = 0;
+										
+										if(bl >= tmp[j]["amount"]){
+											d[i]["rcvd"] = parseInt(d[i]["rcvd"]) + parseInt(tmp[j]["amount"]);
+											tmp[j]["amount"] = 0;
+										}
+										else{
+											d[i]["rcvd"] = parseInt(d[i]["rcvd"]) + parseInt(bl);
+											tmp[j]["amount"] = tmp[j]["amount"] - bl;
+										}
+									}	
+									else{   // bl < tmp[j]['discount']
+										d[i]["discount"] =  parseInt(d[i]["discount"]) + parseInt(bl);
+										tmp[j]["discount"] = tmp[j]["discount"] - bl;
+									}
+								}
+								
+							}
+						}
+					}
+				}
+				
+				//document.getElementById("name").innerHTML = JSON.stringify(tmp);
+				//document.getElementById("name").innerHTML += JSON.stringify(d);
+				//document.getElementById("name").innerHTML = JSON.stringify(rcvd_details);
+				//alert(JSON.stringify(d));
+				//alert(JSON.stringify(tmp));
+				
+				tbodyData = displaySchedule1(d,period,period1);
+				tblBodyElement.innerHTML=tbodyData;
+				
+				
+				
+				document.getElementById("table_fs").innerHTML = displaySchedule2(d,period,period1);
+	
+				
+				document.getElementById("pd11").innerHTML = document.getElementById("prev_due").value;
+				
+				} catch (e) {
+				console.log("Exceptions::-"+e.toString());
+			}
+}
+
+function displaySchedule1(d,period,period1){
+	var tbodyData="";
+	//tbodyData +="<tr><td>Previous Dues</td><td id='pd11'>0</td><td></td><td></td><td><button class='btn' type='button' onclick=payAggr()>Pay Prev Dues</button></td></tr>";
+
+	var due=0,rcvd=0;dis=0;	
+	
+	for (var p = 0; p < period.length; p++) {
+	    var sm = 0;
+		var r = 0;
+		var ds = 0;dis=0;
+		tbodyData +="<tr style='background-color: #ddd;display:none;' id='hdr_"+p+"'><td>Quarter</td><td colspan='1'>Fee Name</td><td>Due Fee</td><td>Received</td><td>Discount</td></tr>";
+		for(var i=0;i< d.length;i++){ 
+		   // if(d[i]["feeid"]==1)
+			 //   dis += parseInt(d[i]["discount"]);
+		   if(d[i]["start_date"]>= period1[2*p] && d[i]["start_date"] < period1[2*p + 1] ){
+				sm += parseInt(d[i]["value"]);
+				r += parseInt(d[i]["rcvd"]);
+				ds += parseInt(d[i]["discount"]);
+				dis += ds;
+				duefee += parseInt(d[i]["value"]);			
+				tbodyData +="<tr name='qtr_"+p+"' style='display:none;'>";
+				tbodyData += "<td class='fdetails'>"+period[p]+"</td>";
+				tbodyData += "<td class='fdetails' style='display:none'>"+d[i]["feeid"]+"</td>";
+				tbodyData += "<td colspan='1' class='fdetails' style='width:20%;'><b>"+d[i]["feename"]+"</b></td>"; 
+				tbodyData += "<td colspan='1' class='fdetails' id=due_"+i+">"+ d[i]["value"]+"</td>";
+				tbodyData += "<td colspan='1' class='fdetails' >"+ d[i]["rcvd"]+"</td>";
+				tbodyData += "<td colspan='1' class='fdetails' >"+ d[i]["discount"]+"</td>";
+				tbodyData +="</tr>";				
+			}
+		}
+		//var r = getRcvd1(period1[2*p],period1[2*p+1]);
+		tbodyData +="<tr style='height:50px;'>";
+		tbodyData += "<td class='valign'><b><a href='#' onclick='showdetails("+p+")'>"+period[p]+"</a></b></td>"; 
+		tbodyData += "<td class='valign' id=due_"+i+">"+ sm+"</td>";
+		tbodyData += "<td class='valign' style='color:green;' id=rcvd_"+i+">"+ r +"</td>";
+		
+		if((sm-r-ds)> 0)
+			tbodyData += "<td class='valign' colspan='1' id=pending_"+i+" style='color:red;'>"+(sm -r-ds)+"</td>";
+		else
+			tbodyData += "<td class='valign' colspan='1' id=pending_"+i+" style='color:green;'>+"+(r-sm + ds)+"</td>";
+		
+		balfee += parseInt((sm));			
+		tbodyData +="<td class='valign' ><button class='btn' type='button' onclick=payAggr("+p+")>Pay for "+period[p]+"</button><br><div id='div_"+p+"' style='display:none;'><label style='font-size:10px;' ></label></div></td>";
+		tbodyData +="</tr>";
+		
+		due += parseInt(sm);
+		rcvd += parseInt(r);
+	}	
+	//total
+	tbodyData += "<tr style='background-color: #faffbd;'><td><b>TOTAL</b></td><td><b>"+due+"</b></td><td><b>"+rcvd+"("+dis+")</b></td><td>"+(due-rcvd-dis)+"</td><td></td></tr>";
+	return tbodyData;
+}
+
+function displaySchedule2(d,period,period1){
+	var tbodyData="";
+	var feearray = [];
+	var due=0,rcvd=0;dis=0;
+	for(var i=0;i< d.length;i++){ 
+	    var flag = 0;
+		for(var j=0;j<feearray.length;j++){
+			if(feearray[j][0] == d[i]["feeid"]){
+				feearray[j][2] = parseInt(feearray[j][2]) + parseInt(d[i]["value"]);
+				flag=1;
+			}
+			
+		}	
+		if(flag ==0){
+			var rcvd_discount = getFRcvd(d,d[i]["feeid"]);
+			feearray.push([d[i]["feeid"],d[i]["feename"],d[i]["value"],rcvd_discount[0],rcvd_discount[1]]);
+			
+		}
+	}
+	
+	//alert(JSON.stringify(feearray));
+	for(var i=0; i< feearray.length; i++){
+	    var r = getRcvd2(feearray[i][0],period1[0],period1[period1.length-1]);
+		tbodyData +="<tr name='feeid_"+i+"' >";
+		tbodyData += "<td style='display:none'><b>"+feearray[i][0]+"</b></td>";
+		tbodyData += "<td ><b>"+feearray[i][1]+"</b></td>";
+		tbodyData += "<td >"+feearray[i][2]+"</td>"; 
+		tbodyData += "<td colspan='1'  id=due_"+i+">"+ (feearray[i][3]) +"</td>";  // rcvd = topay-discount
+		tbodyData += "<td >"+feearray[i][4]+"</td>";
+		tbodyData += "<td >"+(feearray[i][2] - feearray[i][3] - feearray[i][4] )+"</td>";
+		tbodyData +="</tr>";
+		due += parseInt(feearray[i][2]);
+		rcvd += parseInt(feearray[i][3]);
+		dis += parseInt(feearray[i][4]);
+	}	
+	tbodyData += "<tr style='background-color: #faffbd;'><td><b>TOTAL</b></td><td><b>"+due+"</b></td><td><b>"+rcvd+"</b></td><td><b>"+dis+"</b></td><td><b>"+(due-rcvd-dis)+"</b></td><td></td></tr>";
+	tbodyData += "<tr><td colspan='5' style='text-align:center'><button class='btn' type='button' style='width:50%' onclick='payFeeWise()'>Pay Fee-wise</button></td></tr>";
+	
+	return tbodyData;
+}
+function getFRcvd(d,id){
+    var x = [0,0];
+	for(var i=0;i<d.length;i++){
+		if(d[i]["feeid"] == id){ 
+			x[0] = parseInt(x[0]) + parseInt(d[i]["rcvd"]);
+			x[1] = parseInt(x[1]) + parseInt(d[i]["discount"]);
+			
+		}
+	}
+	return x;
+}
+
+function getRcvd1(s,e){ 
+	var sum =0;
+	var d = 0;
+	for(var i=0;i< rcvd_details.length; i++){
+		var d1 = new Date(rcvd_details[i]["deposit_dt"]); 
+		if( (d1.getTime()<= new Date(e).getTime()) && (d1.getTime() >= new Date(s).getTime()) ){
+			sum = parseInt(sum) + parseInt(rcvd_details[i]["amount"]);
+			d = parseInt(d) + parseInt(rcvd_details[i]["discount"]);	
+		}
+	}
+   return [sum,d];
+}
+
+function getRcvd2(id,s,e){ 
+	var sum =0;
+	var discount = 0;
+	for(var i=0;i< rcvd_details.length; i++){
+		var d1 = new Date(rcvd_details[i]["deposit_dt"]);
+		if( (d1.getTime()<= new Date(e).getTime()) && (d1.getTime() >= new Date(s).getTime()) )
+			if(id == rcvd_details[i]["feeid"]){
+				sum = parseInt(sum) + parseInt(rcvd_details[i]["amount"]);
+				discount = parseInt(discount) + parseInt(rcvd_details[i]["discount"]);
+			}
+	}
+	//alert(rcvd_details + "-" + sum);
+   return [sum,discount];
+}
+
+
+function getPeriod1(){
+    
+	var dateObj = new Date(localStorage["s_start"]);
+	var m = dateObj.getMonth() + 1; //months from 1-12
+	var day = dateObj.getDate();
+	var year = dateObj.getFullYear();
+	var p="";
+	
+	if(flg ==4){
+		p = '{ "periodM" : ["'+getM(m) + '-' + getM(m+2) +'","'+getM(m+3) + '-' + getM(m+5) +'","'+getM(m+6) + '-' + getM(m+8) +'","'+getM(m+9) + '-' + getM(m+11) +'"],' +
+				'"periodD" : [ "'+ formatD(dateObj,0,0)+'","'+ formatD(dateObj,2,1)+'","'+ formatD(dateObj,3,0)+'", "'+ formatD(dateObj,5,1)+'", "'+ formatD(dateObj,6,0)+'", "'+ formatD(dateObj,8,1)+'", "'+ formatD(dateObj,9,0)+'", "'+ formatD(dateObj,11,1)+'" ]}';
+	}
+	if(flg ==1){
+		p = '{ "periodM" : ["'+getM(m) + '-' + getM(m+11) +'"],' +
+				'"periodD" : [ "'+ formatD(dateObj,0,0)+'", "'+ formatD(dateObj,11,1)+'" ]}';
+	}
+	if(flg ==2){
+		p = '{ "periodM" : ["'+getM(m) + '-' + getM(m+5) +'","'+getM(m+6) + '-' + getM(m+11) +'"],' +
+				'"periodD" : [ "'+ formatD(dateObj,0,0)+'","'+ formatD(dateObj,5,1)+'", "'+ formatD(dateObj,6,0)+'",  "'+ formatD(dateObj,11,1)+'" ]}';
+	}
+	return p;
+}
+// input date, monts to be added, start of month or end
+function formatD(date,m,x) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1 + m),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+	if(parseInt(month)>12){
+		month = "" + (parseInt(month)-12);
+		year = year + 1;
+		}
+    //if end of month
+	if (x){day = '' + new Date(year, month, 0).getDate();}
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+function getPeriod(){
+	
+	var p="";
+	
+	if(flg ==4){
+		p = '{ "periodM" : ["APR-JUN","JUL-SEP","OCT-DEC","JAN-MAR"],' +
+				'"periodD" : [ "2018-04-01","2018-06-30","2018-07-01", "2018-09-30", "2018-10-01", "2018-12-31", "2019-01-01", "2019-03-31" ]}';
+	}
+	if(flg ==1){
+		p = '{ "periodM" : ["APR-MAR"],' +
+				'"periodD" : [ "2018-04-01", "2019-03-31" ]}';
+	}
+	if(flg ==2){
+		p = '{ "periodM" : ["APR-SEP","OCT-MAR"],' +
+				'"periodD" : [ "2018-04-01","2018-09-30", "2018-10-01",  "2019-03-31" ]}';
+	}
+	
+	return p;
+}
+
+
+function qtr(){
+	localStorage.setItem("feebreakup", 4);
+	setTimeout(function () {feeSchedule(sid,feedate,'table_ps');}, 300);
+	location.reload();
+}
+
+function showdetails(i){
+	
+	var xs =document.getElementsByName("qtr_"+i);
+	var hdr =document.getElementById("hdr_"+i);
+	for(var j=0;j< xs.length;j++){
+	    var x = xs[j];
+		if (x.style.display === "none") {
+			x.style.display = "";
+			hdr.style.display = "";
+			window.scrollBy(0, -300);
+			
+			
+		} else {
+			x.style.display = "none";
+			hdr.style.display = "none";
+		}
+	}	
+		
+	return false;
+}
+function payAggr(id){
+  // get all rows with name	
+  var rows = document.getElementsByName("qtr_"+id);
+  var txt = "";
+  var sum = 0;
+  for(var i=0; i < rows.length ; i++){
+	var td0 = rows[i].cells[1].textContent;
+	var td1 = rows[i].cells[2].textContent;//due
+	var td2 = rows[i].cells[3].textContent;//rcvd
+	var td3 = rows[i].cells[4].textContent; // id
+	var td4 = rows[i].cells[5].textContent ; // discounts
+	txt += "<tr><td style='display:none'>"+td0+"</td><td style='white-space:normal;width:20%;'>"+ td1+"</td><td>"+td2+"</td><td>"+td3+"</td><td><input onchange='recalculate()' style='width:100%;text-align:center' value="+(td2-td3-td4)+"></input></td><td><input style='width:100%;text-align:center' value=0></input></td></tr>";
+	
+	sum += parseInt((td2-td3-td4));
+	
+  }
+  document.getElementById("feenode").style.display = "block";
+  document.getElementById("fdetail").innerHTML = txt;
+  document.getElementById('tot').innerHTML = '<i class="fa fa-rupee" style="font-size:14px"></i><span id="totvalue"> ' + sum + "</span>";
+  document.getElementById("feenode").scrollIntoView();
+  window.scrollBy(0, -300);
+			
+}
+
+function showRecipt(data,tblId,tblHdrId){
+	var tblElement=document.getElementById(tblId);
+	var tblHeadElement = document.getElementById(tblHdrId);
+	var tbodyData="";
+	var theadData="";
+	
+	var rcptid =0;
+		
+	if(data.length >0)
+	{
+		for(var key in data[0])	{
+			
+			theadData += "<th>" + key + "</th>";
+		}
+	}
+	
+	
+	data.sort(function (a, b) {
+           
+    //return a.Receipt.localeCompare(b.Receipt);
+      return parseInt(a.Receipt) - parseInt(b.Receipt); 
+});
+
+//if first entry is Total resort it
+
+if(data[0]["id"] == "Total"){
+    data.sort(function (a, b) {
+           
+    //return a.Receipt.localeCompare(b.Receipt);
+      return parseInt(b.Receipt) - parseInt(a.Receipt); 
+});
+}
+   
+
+//alert(JSON.stringify(data));
+//console.log(data);
+	rcvd_details =  data;
+	var totalrcpt = 0;
+	var sum_amount =0;
+	for (var i = 0; i < data.length; i++) {
+	 if(data[i]["id"]!="Total"){
+		if(rcptid ==0){ 
+			rcptid = data[i]["Receipt"];
+			sum_amount += parseInt(data[i]["amount"]);
+		}
+		else if(rcptid !=data[i]["Receipt"] ){ 
+			tbodyData +="<tr>";
+			rcptid = data[i]["Receipt"];
+			
+			if(data[i-1]["Receipt"] > 0)
+				tbodyData += "<td >" + data[i-1]["Receipt"] + "</td>";
+			else
+				tbodyData += "<td >-</td>"; //discount
+			if(data[i-1]["feename"] == "Discount")
+				tbodyData += "<td >(-" + sum_amount + ")</td>";
+			else	
+				tbodyData += "<td >" + sum_amount + "</td>";
+			tbodyData += "<td >" + data[i-1]["deposit_dt"] + "</td>";
+			tbodyData += "<td >" + data[i-1]["mode"] + "</td>";
+			//tbodyData += "<td width='5%' id='"+tblId+"_p"+i+"' onclick='delReceipt(this.parentNode)' data-toggle='tooltip' title='Delete'><i class='fa fa-trash' style='color:red;' aria-hidden='true'></i></td>";
+			//tbodyData += "<td width='5%' id='"+tblId+"_p"+i+"' onclick='addPrint(this.parentNode)' data-toggle='tooltip' title='Print Receipt'><i class='fa fa-print' aria-hidden='true'></i></td>";
+			//tbodyData += "<td width='10%' id='"+tblId+"_p"+i+"' onclick='addPrint1(this.parentNode)' data-toggle='tooltip' title='Print Receipt'><u style='font-size:10px;' > Raw Print </u></td>";
+			tbodyData += "<td width='5%' id='"+tblId+"_s"+i+"' onclick='sendFeeSMS(this.parentNode)' data-toggle='tooltip' title='Send SMS'><i class='fa fa-2x fa-mobile' aria-hidden='true'></i></td>";
+			sum_amount =parseInt(data[i]["amount"]);
+			tbodyData +="</tr>";
+			totalrcpt++;
+		}
+		else
+			sum_amount += parseInt(data[i]["amount"]);
+	 }	
+		
+	}
+	/**
+	if(data.length ==2) // just single fee type and single entry.
+	    tbodyData += displayLastRcpt(data,2,sum_amount,tblId);
+	else if(data.length > 2 && totalrcpt ==0) // single entry with multiple fee types
+	   tbodyData += displayLastRcpt(data,data.length,sum_amount,tblId);
+	  **/
+	 try{ 
+	if(data.length ==2) // just single fee type and single entry.
+	   tbodyData += displayLastRcpt(data,1,sum_amount,tblId); 
+	else  
+	    tbodyData += displayLastRcpt(data,data.length-1,sum_amount,tblId);  
+	tblElement.innerHTML=tbodyData;
+	} catch (err){}
+	
+	// Show receipts for difefernt firms like stationary and transport
+	// This is only for RDIS
+	if(localStorage["schoolcode"] == "RPSBNR")
+		getData('','','__!acc_2,'+sid+';',0,0,1008);
+}
+function displayLastRcpt(data,i,sum_amount,tblId){
+        var tbodyData ="<tr>";
+			rcptid = data[i-1]["Receipt"];
+			
+			if(data[i-1]["Receipt"] > 0)
+				tbodyData += "<td >" + data[i-1]["Receipt"] + "</td>";
+			else
+				tbodyData += "<td >-</td>"; //discount
+			if(data[i-1]["feename"] == "Discount")
+				tbodyData += "<td >(-" + sum_amount + ")</td>";
+			else	
+				tbodyData += "<td >" + sum_amount + "</td>";
+		
+			tbodyData += "<td >" + data[i-1]["deposit_dt"] + "</td>";
+			tbodyData += "<td >" + data[i-1]["mode"] + "</td>";
+			//tbodyData += "<td width='5%' id='"+tblId+"_p"+i+"' onclick='delReceipt(this.parentNode)' data-toggle='tooltip' title='Delete'><i class='fa fa-trash' style='color:red;' aria-hidden='true'></i></td>";
+			//tbodyData += "<td width='5%' id='"+tblId+"_p"+i+"' onclick='addPrint(this.parentNode)' data-toggle='tooltip' title='Print Receipt'><i class='fa fa-print' aria-hidden='true'></i></td>";
+			//tbodyData += "<td width='10%' id='"+tblId+"_p"+i+"' onclick='addPrint1(this.parentNode)' data-toggle='tooltip' title='Print Receipt'><u style='font-size:10px;' > Raw Print </u></td>";
+			tbodyData += "<td width='5%' id='"+tblId+"_s"+i+"' onclick='sendFeeSMS(this.parentNode)' data-toggle='tooltip' title='Send SMS'><i class='fa fa-2x fa-mobile' aria-hidden='true'></i></td>";
+			
+			return tbodyData;
+    
+}
+function showRecipt1(data,tblId,tblHdrId){
+	var tblElement=document.getElementById(tblId);
+	var tblHeadElement = document.getElementById(tblHdrId);
+	var tbodyData="";
+	var theadData="";
+	
+	var rcptid =0;
+	data.sort(function (a, b) {
+           
+    //return a.Receipt.localeCompare(b.Receipt);
+      return parseInt(a.Receipt) - parseInt(b.Receipt); 
+	});
+
+	var totalrcpt = 0;
+	var sum_amount =0;
+	for (var i = 0; i < data.length; i++) {
+		tbodyData +="<tr>";
+		tbodyData += "<td >" + data[i]["Receipt"] + "</td>";
+		tbodyData += "<td >" + data[i]["amount"] + "</td>";
+		tbodyData += "<td >" + data[i]["deposit_dt"] + "</td>";
+		tbodyData += "<td >" + data[i]["mode"] + "</td>";
+		//tbodyData += "<td width='5%' id='"+tblId+"_p"+i+"' onclick='delReceipt(this.parentNode)' data-toggle='tooltip' title='Delete'><i class='fa fa-trash' style='color:red;' aria-hidden='true'></i></td>";
+		//tbodyData += "<td width='5%' id='"+tblId+"_p"+i+"' onclick='addPrint3(this.parentNode)' data-toggle='tooltip' title='Print Receipt'><i class='fa fa-print' aria-hidden='true'></i></td>";
+		//tbodyData += "<td width='10%' id='"+tblId+"_p"+i+"' onclick='addPrint3(this.parentNode)' data-toggle='tooltip' title='Print Receipt'><u style='font-size:10px;' > Raw Print </u></td>";
+		tbodyData += "<td width='5%' id='"+tblId+"_s"+i+"' onclick='sendFeeSMS(this.parentNode)' data-toggle='tooltip' title='Send SMS'><i class='fa fa-2x fa-mobile' aria-hidden='true'></i></td>";
+		sum_amount =parseInt(data[i]["amount"]);
+		tbodyData +="</tr>";
+	}
+	tblElement.innerHTML=tbodyData;
+}
+	
+
+function addnewrow(){
+	var p1=document.getElementById('pbody1');
+	var txt = "<tr><td></td><td id='f1' contenteditable=true bgcolor='#faffbd'>Fee Name</td><td id='f2' contenteditable=true bgcolor='#faffbd'>Fee description</td><td id='f3' contenteditable=true bgcolor='#faffbd'>amount</td><td><a onclick='addFee()' class='btn btn-sm'>Add Fee</a></td></tr>";
+	
+	p1.innerHTML = txt + p1.innerHTML;
+}
+function addFee(node){
+	var f1 = document.getElementById('f1').innerHTML;
+	var f2 = document.getElementById('f2').innerHTML;
+	var f3 = document.getElementById('f3').innerHTML;
+	var sql = "fname=" + f1 + "&fdesc="+f2 + "&amount=" + f3;
+	getData('pbody1','phead1','INSERT into s_fee_ind1 (sid,feename,feedesc,amount) VALUES('+ sid + ',"' +f1+'","'+f2+'",'+f3+')' ,0,0,1005);
+	setTimeout(location.reload.bind(location), 300);
+}
+function fillStudentRecord(data){
+	var d = data[0];
+	sdetails = d;
+	var sid = getParameterByName('sid');
+	var c = d["cname"];
+	
+	document.getElementById('name').innerHTML = d['fname'];
+	if(sid>0)
+		document.getElementById('admn').innerHTML = sid + "/(" + c + ")";
+	else
+		document.getElementById('admn').innerHTML = "P" + (-1)*sid + "/(" + c + ")";
+	
+	
+	var x = d["metainfo"];
+	x = x.substring(1, x.length - 1);
+	var metainfo = JSON.parse(x);
+	if(metainfo['sib'] != undefined){
+	    var s = metainfo['sib'].split(",");
+		var txt = "";
+		for(var i=0;i<s.length;i++){
+		  txt += " <a href='./add_voucher.html?sid="+s[i] + "' target='_blank'>" + s[i] + "</a>, ";
+		}
+		document.getElementById('sib').innerHTML = "Siblings: " + txt;
+    }		
+	
+}
+function payFeeWise(){
+	document.getElementById('fdetail').innerHTML = "";
+	var rows = document.getElementById('table_fs').childNodes;
+	var sum = 0;
+	var txt = "";
+	for(var i=0;i<rows.length-2;i++){
+		//alert(rows[i].cells[0].textContent);
+		var td = rows[i].cells[0].textContent;// id 
+		var td0 = rows[i].cells[1].textContent;// feename 
+		var td1 = rows[i].cells[2].textContent; // total due 
+		var td2 = rows[i].cells[3].textContent; // rcvd 
+		var td3 = rows[i].cells[4].textContent; // discount 
+		var td4 = rows[i].cells[5].textContent; // bal
+		txt += "<tr><td style='display:none'>"+td+"</td><td style='width:20%;white-space:wrap'>"+td0+"</td><td>"+ td1+"</td><td>"+td2+"</td><td><input onchange='recalculate()' style='width:100%;text-align:center' value="+(td4)+"></input></td><td><input style='width:100%;text-align:center' value=0></input></td></tr>";
+		
+		sum += parseInt(td4);
+	
+	}
+	document.getElementById("feenode").style.display = "block";
+	document.getElementById('fdetail').innerHTML = txt;
+	document.getElementById('tot').innerHTML = '<i class="fa fa-rupee" ></i><span id="totvalue">' + sum + "</span>";
+	document.getElementById("feenode").scrollIntoView();  
+}
+function recalculate(){
+	var rows = document.getElementById('fdetail').childNodes;
+	var sum = 0;
+	for(var i=0;i<rows.length;i++){
+	  try{
+	    if(isNaN(parseInt(rows[i].cells[4].children[0].value)))
+			sum = parseInt(sum) ;
+		else	
+			sum = parseInt(sum) + parseInt(rows[i].cells[4].children[0].value);
+		} catch(err){}
+	
+	}
+	document.getElementById('totvalue').innerHTML = sum;
+}
+function addindfee(){
+    var f = document.getElementById("feeid");
+   	var r = confirm("Are you adding new Individual Fee# "+  f.options[f.selectedIndex].text +". Continue?");
+    f=f.value; 
+    var v = document.getElementById("fv").value;  
+    var d = document.getElementById("f1d").value;  
+    if(r== true)
+    {
+        var req = new XMLHttpRequest();
+	    req.onreadystatechange = function() {
+		if (req.readyState == 4 && req.status == 200) {
+			if(req.responseText.includes("Results stored successfully")){
+				alert("Receipt " + acc_id + " has been canceled.");
+				location.reload();
+				}
+			else
+				alert(req.responseText);
+		    }
+	    };
+	    var base_url = document.URL.substr(0,document.URL.lastIndexOf('/'));
+	
+	    req.open("GET", base_url + "/indfee.php?f=" + f + "&v=" + v + "&d=" + d + "&sid=" + sid, true);
+	    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	    req.send();        
+    }
+}
+function getM(m){
+ if(m > 12)
+	m =  m- 12;
+ if(m==1)
+ 	return "Jan";
+ else if(m==2)
+    return "Feb";
+ else if(m==3)
+    return "Mar"; 
+ else if(m==4)
+    return "Apr";  
+ else if(m==5)
+    return "May"; 
+ else if(m==6)
+    return "Jun";   
+ else if(m==7)
+    return "Jul"; 
+ else if(m==8)
+    return "Aug";  
+ else if(m==9)
+    return "Sep";  
+ else if(m==10)
+    return "Oct"; 
+ else if(m==11)
+    return "Nov";
+ else if(m==12)
+    return "Dec";     
+
+}
+
+</script>
+</html>

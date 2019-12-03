@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="msapplication-tap-highlight" content="no" />
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+      <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+      <!---<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />---->
+      
+	  <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="../css/index.css" />
+      <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	  <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	  
+	  <script src="../js/moment.min.js"></script>   
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+	  <script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+      <title>GreyBox Admin</title>
+	  <style>
+body {
+	#background-image:url(img/s71.png);
+	background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    height: auto !important;
+    min-height:100%;
+	text-transform:inherit;
+	height: 100%;
+	
+}	
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding-top: 5px;
+	padding-bottom: 10px;
+	padding-left:15px;
+	padding-right:5px;
+	border-bottom:1px solid #E0E0E0;
+	
+}
+
+.chat li
+{
+    margin-bottom: 2px;
+    padding-bottom: 2px;
+	color:#B3A9A9;
+    border-bottom: 1px dotted #B3A9A9;
+	height:30px;
+	vertical-align:middle;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+	
+}
+
+.valtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+	color: #4F545B;
+	contenteditable = true;
+	box-shadow: none;
+	border-bottom: 0px;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	margin-bottom:0px;
+	letter-spacing: 1px;
+}
+
+.chat li .chat-body p
+{
+    margin: 0;
+	width:100%;
+    color: #F5F5F5;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.sticky {
+  
+}
+.smallf3 {
+	font-size:11px;
+	text-align:left;
+	font-weight: 400;
+	
+}
+.smallf4 {
+	font-size:12px;
+	text-align:left;
+	font-weight: 400;
+	margin-bottom:5px;
+}
+.stickyfooter {
+  position: fixed;
+  bottom:0;
+}
+.panel-body
+{
+    overflow-y: scroll;
+	min-height: 760px;
+    height: 100%;
+	padding-top: 45px;
+}
+.panel-footer{
+	padding: 1px 5px;
+}
+.slots{
+ background-color:#eee;
+}
+.slots:focus {outline:0;}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+.navbar-custom{
+	background-color: #8159bb;
+}
+a{
+	color:white
+}
+
+.toolbar {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    padding-bottom:7px;padding-top:7px;
+	font-size:10px;
+	padding-left: 5px;
+    padding-right: 5px;
+}
+input:focus,
+select:focus,
+button:focus {
+    outline: none;
+}
+.desc {
+	font-size:12px;
+	padding-left:0px;
+}
+</style>
+     
+   </head>
+   <body >
+     
+<nav class="navbar navbar-custom navbar-fixed-top" ">
+  <div class="container-fluid">
+    <div class="navbar-header" >
+      <a class="navbar-brand" style="width:100%;text-align:center;" href="../dashboard.html"><i style="position: absolute;left:5px;;" class="fa fa-home" aria-hidden="true"></i> <span style="font-size:14px;">Patient Profile</span></a>
+    </div>
+   
+  </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5" style="padding-right:0px;padding-left:0px;">
+            <div class="panel panel-primary">
+                <div class="panel-body" id="p0"> 
+				<div class="sticky">
+					<div class="row "><br>
+						<div class="content col-md-2 col-xs-2" >
+							<p class="smallf4">Name: </p>
+						</div>
+						<div class="content col-md-8 col-xs-8" >
+							<p class="valtext" id="name"></p>
+						</div>
+						<div class="content col-md-2 col-xs-2" >
+							<p id="gender"></p>
+						</div>
+						
+                </div>
+				<div class="row " >
+					<div class="content col-md-2 col-xs-2" >
+						<p class="smallf3">Age: </p>
+					</div>
+					<div class="content col-md-2 col-xs-2" >
+						<p class="valtext" id="age"></p>
+					</div>	
+					<div class="content col-md-2 col-xs-2" >
+						<p class="smallf3">Mobile: </p>
+					</div>
+					<div class="content col-md-4 col-xs-4" >
+						<span style="display:flex;"><p class="valtext" id="mobile" ></p>  <i class="fa fa-phone" style="font-size:18px;color:green;padding-left:10px;padding-right:10px;" onclick="callapp('mobile')"></i></span>
+					</div>
+				</div>
+				<div class="row " style="border-bottom: 1px solid #E0E0E0;">
+					<div class="content col-md-2 col-xs-2" >
+						<p class="smallf3">Address: </p>
+					</div>
+					<div class="content col-md-10 col-xs-10" >
+						<p class="valtext" style="letter-spacing: 1px;font-size:12px;" id="address"></p>
+					</div>
+					
+				
+				</div>
+				<div id="toolbar1" class="row " style="border-bottom: 1px solid #ccc;">
+					<div class="content col-md-3 col-xs-3 toolbar" id="tb1" onclick="gotoaddcase()" style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext "><i class="fa fa-plus " ></i></p>
+						<p class="valtext ">Add Case</p>
+					</div>
+					<div class="content col-md-3 col-xs-3 toolbar" id="tb2" onclick='gotopmt()' style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext "><i class="fa fa-rupee " ></i></p>
+						<p class="valtext ">Payments</p>
+					</div>
+					<div class="content col-md-3 col-xs-3 toolbar" id="tb3" onclick='editprofile1()' style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext "><i class="fa fa-edit "></i></p>
+						<p class="valtext ">Profile</p>
+					</div>
+					<div class="content col-md-3 col-xs-3 toolbar" id="tb3" onclick='gotoschedule()' style="text-align:center">
+						<p class="valtext "><i class="fa fa-calendar "></i></p>
+						<p class="valtext ">Schedule</p>
+					</div>					
+					
+				</div>
+				</div>
+				<ul class="chat"  style="margin-top:10px;" id="chist">
+					<p class = ' text-warning' style='font-size:10px;margin-top:10px;margin-bottom:10px;letter-spacing: 1px;'>No Case history. Use Add Case to add a new case</p>
+				</ul>
+			</div>
+		</div>	
+	</div>
+</div>
+</div>
+ <script type="text/javascript" src="../js/dataTbl.js"></script>
+<script>
+	 var total =0; // variable to store total treatement cost at new case
+		var pid = getParameterByName("pid");
+		var did = localStorage.did;
+		var myJSON;
+		if(localStorage.basicInfo== undefined)
+			myJSON = '{"title":"Mr","name":"Uday Kumar Bhaskar", "age":31,"gender":"m","mobile":"9876543210", "addr":"Dadabari Kota"}';
+		else
+			myJSON = localStorage.basicInfo;
+			
+		displayBasicInfo();
+		getData("q=SELECT DISTINCT cid,udate,exm from d_exm_tbl where pid='" + pid + "' and did='"+did+"' order by cid desc,udate desc ;",0,"dataTbl.php",showHistory,errHistory);
+		function showHistory(data){
+		try{
+			var d = JSON.parse(jsonEscape(data));  //jsonEscape to handel new line
+			var txt = "";
+			var tmp =0;
+			for (i = 0; i < d.length; i++) {
+				var details = JSON.parse(jsonEscape(d[i]["exm"]))["details"];
+				var note = JSON.parse(jsonEscape(d[i]["exm"]))["note"];
+				var pid = getParameterByName("pid");
+				var cid = d[i]["cid"];
+				
+				if(tmp!=cid){
+				txt += "<li class='chat' style='margin-left:-30px;height:75px;' onclick=location.href='view.html?pid="+pid+"&cid="+cid+"'>";
+				txt += "<div class='col-xs-3' style='padding-right:0px'>Case : " + d[i]["cid"]   +"</div>";
+				txt += "<div class='col-xs-3' style='color: darkslateblue;font-size:12px;'>" + formatDate(d[i]["udate"])   +"</div>";
+				txt += "<div class='col-xs-6' ><div class='row valtext'>" + details + "</div><div class='row desc'>" +note  + "</div></div>";
+				txt += "</li>";
+				tmp = cid;
+				}
+				//alert(d[i]["cid"]);
+			}
+			
+			document.getElementById("chist").innerHTML = txt;
+			} catch(e) { console.log("Exception::-"+e.toString());}
+		}
+		function errHistory(){}
+		function gotoaddcase(){
+			var pid = getParameterByName("pid");
+			window.location.href = 'view.html?pid='+pid+'&cid=0'
+		}
+		function gotopmt(){
+			window.location = "payments.html?pid="+getParameterByName("pid");
+			}
+		
+</script>	

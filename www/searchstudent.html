@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!---<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'" />--->
+		<!---<meta http-equiv="Content-Security-Policy" content="default-src *;
+   img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *;
+   style-src  'self' 'unsafe-inline' *">---->
+   <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1"/>
+        <title>Assign HW</title>
+        <!-- Script -->
+        <script type="text/javascript" src="cordova.js" ></script>
+       <script src="./js/jquery.min.js"></script>
+	   <script src="./assets/js/bootstrap.min.js"></script>
+	  <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="css/index.css" />
+      <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+      <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+	  <style>
+body {
+	#background-image:url(img/s71.png);
+	background-image:none;
+	background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    height: auto !important;
+    min-height:100%;
+	text-transform:inherit;
+	height: 100%;
+}	
+.chat {
+	background-color: #fff; 
+}
+.regtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: left;
+    margin-top: 14px;
+    font-size: 10px;
+    font-weight: 400;
+	color: #636972;
+	padding-left:3px;
+	padding-right:3px;
+	
+}
+.rowsearch {
+	margin-top:6px;
+}
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+	
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+.stickyfooter {
+  position: fixed;
+  bottom:0;
+}
+.panel-body
+{
+    overflow-y: scroll;
+	min-height: 560px;
+    height: 100%;
+	padding-top: 40px;
+}
+.panel-footer{
+	padding: 1px 5px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+.icon {
+	padding-top:6px;
+	padding-left:3px;
+	padding-right:5px;
+	font-size:18px;
+}
+.gbhide {
+	display: none;
+}
+.navbar-custom{
+	background-color: #34495E;
+}
+</style>
+<script type="text/javascript" src="js/camera.js"></script>
+<title>Search Student</title>
+    </head>
+    <body>
+	<nav class="navbar navbar-custom navbar-fixed-top">
+  <div class="container-fluid"> 
+	<div class="ntitle" style="padding-top:14px;" >
+	<i style="position: absolute;left:5px;color:white;" onclick="window.location.href='dashboard.html'" class="fa fa-home" aria-hidden="true"></i> 
+	<span class="left" onclick="window.location.href='dashboard.html'" style="font-size:14px;color:white;padding-left:10px;" id='cname'>HOME</span></div>
+  </div>
+</nav>
+<div class="row">
+   <div class="col-md-5" style="padding-right:0px;padding-left:0px;">
+		<div class="content" >
+        <div class="container-fluid" >
+			<div class="panel-body">
+				
+	<div class="row" style="padding-top:20px;">
+	<div class="content col-xs-9" style="padding-right:3px;">
+		<input  class="form-control" type='text' name='' id='byid' placeholder="Student Name/ID" onkeypress="return runscript(this.value,event)" autofocus> 
+	</div>
+	<div class="content col-xs-3" style="padding-left:3px;">
+		<button type='button' id="search" class='btn' onClick='changeMe()'>Search</button>
+	</div>
+    </div>	
+	<div  class="panel-body" style="padding-top:20px;">
+	<div id="notice" class="chat"></div>
+	</div>
+			</div>		
+			 
+		 </div>
+    	</div>
+     </div>
+</div>	 
+
+              
+   
+  </body>
+  <script src='js/msg.js'></script>
+ <script> 
+  
+  function changeMe(){
+	
+	var s = document.getElementById('byid').value;
+	document.getElementById('notice').innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size:20px"></i>';
+	var req = new XMLHttpRequest();
+	req.onreadystatechange = function() {
+		if (req.readyState == 4 && req.status == 200) {
+			try {
+				var txt = '<div class="row rowsearch" ><div class="col-xs-2 regtext">Sr No.</div>';
+				txt += '<div class="col-xs-3 regtext">Name</div>';
+				txt += '<div class="col-xs-3 regtext">Father Name</div>';
+				txt += '<div class="col-xs-2 regtext">Class</div>';
+				txt += '<div class="col-xs-2 regtext"></div></div>';
+				var data=JSON.parse(req.responseText);
+				data.forEach(function(e){
+					txt += '<div class="row rowsearch" ><div class="col-xs-2 smallf3 regtext">' + e["admn"] +  '</div>';
+					txt += '<div class="col-xs-3 smallf3 regtext">' + e["name"] + "</div>";
+					txt += '<div class="col-xs-3 smallf3 regtext">' + e["fathername"] + "</div>";
+					txt += '<div class="col-xs-2 smallf3 regtext">' + e["class"] + "</div>";
+					txt += '<div class="col-xs-2 smallf3 regtext"><a href="./add_voucher.html?sid='+e["admn"]+'&name='+e["name"]+'&class='+e["class"]+'">View</a></div>';
+					txt += "</div>";
+				});
+				document.getElementById('notice').innerHTML = txt;
+								
+			} catch (e) {
+				//alert("Some errors have occured to add/update.");
+				console.log("Exception::-"+e.toString() + req.responseText);
+			}
+		}
+	};
+	
+	//var base_url = document.URL.substr(0,document.URL.lastIndexOf('/'));
+	
+	req.open("GET", base_url + "/searchstudent.php?k=" + s, true);
+	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	req.send();
+  }
+ </script> 
+</html>

@@ -1,0 +1,244 @@
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/png" href="assets/img/favicon.ico">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<title>Report</title>
+
+<meta
+	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+	name='viewport' />
+<meta name="viewport" content="width=device-width" />
+
+
+<!-- Bootstrap core CSS     -->
+<link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+ <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+<!-- Animation library for notifications   -->
+<link href="../assets/css/animate.min.css" rel="stylesheet" />
+
+<!--  Light Bootstrap Table core CSS    -->
+<link href="../assets/css/light-bootstrap-dashboard.css" rel="stylesheet" />
+
+
+
+<script src="../js/jquery-1.10.2.js"></script>
+	  <link href="../assets/css/demo.css" rel="stylesheet" />
+	
+      <title>GreyBox Admin</title>
+	  <style>
+body {
+	#background-image:url(img/s71.png);
+	background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    height: auto !important;
+    min-height:100%;
+	text-transform:inherit;
+	height: 100%;
+	
+}	
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding-top: 5px;
+	padding-bottom: 10px;
+	padding-left:15px;
+	padding-right:5px;
+	border-bottom:1px solid #E0E0E0;
+	
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+	
+}
+
+.chat li .chat-body p
+{
+    margin: 0;
+	width:100%;
+    color: #F5F5F5;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+
+.panel-body
+{
+    overflow-y: scroll;
+	min-height: 660px;
+    height: 100%;
+	padding-top: 45px;
+}
+.panel-footer{
+	padding: 1px 5px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+.navbar-custom{
+	background-color: #8159bb;
+}
+a{
+	color:white
+}
+
+.toolbar {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    padding-bottom:7px;padding-top:7px;
+	font-size:10px;
+}
+.valtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+	color: #636972;
+	contenteditable = true;
+	box-shadow: none;
+	
+	margin-bottom:0px;
+	letter-spacing: 1px;
+}
+.oc {
+	background-color:#eee9f6;
+	color:#8159bb;
+	font-weight:600;
+}
+.rvisit {
+height:80px;color:white;font-size:16px;line-height:80px;
+}
+.ppl {background: #8159bb;}
+.grn { background: #5aaa78;}
+.rmz {background-color:#db0a5b;}
+.ct-series-a .ct-bar {
+	stroke:#8159bb;
+}
+.tst {stroke:#8159bb;}
+.tst1 {stroke:#5aaa78;}
+.tst2 {stroke:#db0a5b;}
+</style>
+     
+   </head>
+   <body >
+     
+<nav class="navbar navbar-custom navbar-fixed-top" >
+  <div class="container-fluid">
+    <div class="navbar-header" >
+      <a class="navbar-brand" style="width:100%;text-align:center;" href="index.html"><i style="position: absolute;left:5px;" class="fa fa-arrow-left" aria-hidden="true"></i> <span style="font-size:14px;">Patient Visits</span></a>
+    </div>
+   
+  </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5" style="padding-right:0px;padding-left:0px;">
+            <div class="panel panel-primary">
+                <div class="panel-body" id="p0"> 
+				<div class="sticky">
+				<ul class="chat"  style="margin-top:10px;" id="chist">
+					<p class = ' text-warning' style='font-size:10px;margin-top:0px;margin-bottom:0px;letter-spacing: 1px;'></p>
+				</ul>
+				<div id="toolbar1 " class="row " style="border-bottom: 1px solid #ccc;">
+					<div class="content col-md-4 col-xs-4 toolbar oc" id="tb1" onclick="reportdaily(this)" style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext ">Today</p>
+					</div>
+					<div class="content col-md-4 col-xs-4 toolbar" id="tb2" onclick='reportweek(this)' style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext ">Week</p>
+					</div>
+					<div class="content col-md-4 col-xs-4 toolbar" id="tb3" onclick='' style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext ">Month</p>
+					</div>
+					
+				</div>
+				</div>
+				<ul class="chat"  style="margin-top:10px;display:none;" >
+					<p class = ' text-warning' style='font-size:10px;margin-top:10px;margin-bottom:10px;letter-spacing: 1px;text-align:center;'>No data available currently.</p>
+				</ul>
+				<div id="daily">
+				<ul class="chat "  style="" ></ul>
+				<ul class="chat rvisit ppl"  style="" >
+					<div class="col-md-8 col-xs-8" >TOTAL VISITS</div><div class="col-md-4 col-xs-4" style="font-size:26px;text-align:center;">8</div>		
+				</ul>
+				<ul class="chat rvisit grn"  style="" >
+					<div class="col-md-8 col-xs-8" >NEW PATIENTS</div><div class="col-md-4 col-xs-4" style="font-size:26px;text-align:center;">3</div>		
+				</ul>
+				<ul class="chat rvisit rmz"  style="" >
+					<div class="col-md-8 col-xs-8" >NEW BILLING</div><div class="col-md-4 col-xs-4" style="font-size:26px;text-align:center;">5</div>		
+				</ul>
+				</div>
+				<div id="weekly" style="display:none;"><br>
+					<div class="valtext">Total Visits</div>
+					<div id="rtotal"  style="height:150px;" class="ct-chart ct-perfect-fourth"></div>
+					<div class="valtext">New Visits</div>
+					<div id="rnew"  style="margin-top:1px;height:150px" class="ct-chart ct-perfect-fourth"></div>
+					<div class="valtext">New Billing</div>
+					<div id="rbill"  style="margin-top:1px;height:150px" class="ct-chart ct-perfect-fourth"></div>
+				</div>	
+			</div>
+		</div>	
+	</div>
+</div>
+</div>
+ <script type="text/javascript" src="../js/dataTbl.js"></script>
+ <script src="../assets/js/chartist.min.js"></script>
+<script>
+
+
+function reportweek(e){
+	document.getElementById("daily").style.display = "none";
+	document.getElementById("weekly").style.display = "block";
+	document.getElementById("tb1").classList.remove("oc");
+	e.classList.add("oc");
+	drawMonthTotal('#rtotal','tst');
+	drawMonthTotal('#rnew','tst1');
+	drawMonthTotal('#rbill','tst2');
+}
+function reportdaily(e){
+	document.getElementById("weekly").style.display = "none";
+	document.getElementById("daily").style.display = "block";
+	document.getElementById("tb2").classList.remove("oc");
+	e.classList.add("oc");
+}
+
+function drawMonthTotal(id,cls){
+	var l = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];	
+    var s = [2, 6, 1, 2, 8, 2, 10];
+	var max = Math.max.apply(Math,s); 
+    var data = {
+				labels: l,
+				series: [{ className:cls, data:s}]
+			};	
+	var options = 
+	{
+		seriesBarDistance: 5,
+		high: max,
+		axisX: { showGrid: false },
+		axisY: { onlyInteger: true, offset: 20  },
+		height: "145px"
+	};	
+			
+	var resOps = 
+	[
+		['screen and (max-width: 640px)', { seriesBarDistance: 5 }]
+	];		
+	Chartist.Bar(id, data, options, resOps);
+	//Chartist.Bar('#rnew', data, options, resOps);
+}
+</script>	

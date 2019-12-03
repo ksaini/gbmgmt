@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="msapplication-tap-highlight" content="no" />
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+      <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+      <!---<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />---->
+       <link href="./assets/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="./css/index.css" />
+      <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+	  
+	  <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	  <link href="./css/bootstrap-theme.min.css" rel="stylesheet">
+	 	  
+	  
+	  <script src="./js/moment.min.js"></script>   
+<script src="./js/jquery-1.10.2.js"></script>
+<script src="./assets/js/bootstrap.min.js"></script>
+<script src="./assets/js/bootstrap-datetimepicker.min.js"></script>
+
+      <title>GreyBox Admin</title>
+	  <style>
+body {
+	#background-image:url(img/s71.png);
+	background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    height: auto !important;
+    min-height:100%;
+	text-transform:inherit;
+	height: 100%;
+	
+}	
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding-top: 5px;
+	padding-bottom: 10px;
+	padding-left:5px;
+	padding-right:5px;
+	<!---border-bottom:1px solid #E0E0E0;--->
+	
+}
+
+.chat li
+{
+    margin-bottom: 2px;
+    padding-bottom: 2px;
+	padding-right:10px;
+	padding-top:10px;
+	width:100%;
+	color:#B3A9A9;
+    border-bottom: 1px dotted #B3A9A9;
+	min-height:40px;
+	vertical-align:middle;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+	
+}
+
+.valtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+	color: #4F545B;
+	contenteditable = true;
+	box-shadow: none;
+	border-bottom: 0px;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	margin-bottom:0px;
+	letter-spacing: 1px;
+}
+.exmdetails {
+	display: block;
+	font-size:10px;
+	font-family: 'open_sans','Open Sans',sans-serif;	
+	letter-spacing: 1px;
+	font-weight: 300;
+	color: #636972;
+}
+
+.chat li .chat-body p
+{
+    margin: 0;
+	width:100%;
+    color: #F5F5F5;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.sticky {
+  
+}
+
+.stickyfooter {
+  position: fixed;
+  bottom:0;
+}
+.panel-body
+{
+    overflow-y: scroll;
+	min-height: 760px;
+    height: 100%;
+	padding-top: 45px;
+}
+.panel-footer{
+	padding: 1px 5px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+.navbar-custom{
+	background-color: #8159bb;
+}
+a{
+	color:white
+}
+
+.toolbar {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    padding-bottom:7px;padding-top:7px;
+}
+
+.smallf {
+	font-size:18px;
+}
+.smallf2 {
+	font-size:16px;
+	text-align:left;
+	font-weight: 400;
+}
+.smallf3 {
+	font-size:11px;
+	text-align:left;
+	font-weight: 400;
+	
+}
+.smallf4 {
+	font-size:12px;
+	text-align:left;
+	font-weight: 400;
+	margin-bottom:5px;
+}
+
+
+.tbselected{
+	border:1 px solid #8159bb;
+	background-color:#DCDCDC;
+}
+
+.selectedF {
+	border: 1px solid #F7A7C8;
+}
+.dchart {
+	width:37px;
+}
+.hide {
+	display:none;
+}
+.show {
+	display:block;
+}
+.btn-nav {
+	height:50px;
+	font-family: 'open_sans','Open Sans',sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+	color: #636972;
+	letter-spacing:1px;
+	background-color:#eee;	
+}
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+  width:100%;
+}
+
+.autocomplete-items {
+  
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+  width:80%;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9; 
+}
+
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+
+input:focus,
+select:focus,
+button:focus {
+    outline: none;
+}
+
+.desc {
+	font-size:12px;
+	padding-left:0px;
+}
+.trbody{
+	font-family: 'open_sans','Open Sans',sans-serif;	
+	letter-spacing: 1px;
+	font-size:12px;
+	height:30px;
+	
+	padding-left: 15px;
+    padding-top: 5px;
+	border: 1px solid #d3d3d3;
+	border-bottom:none;
+	padding-bottom:10px;
+}
+.trhead {
+	background: #aa8fd1;<!---#4285f4;--->
+	font-family: 'open_sans','Open Sans',sans-serif;	
+	letter-spacing: 1px;
+	color:white;
+	font-size:14px;
+	height:30px;
+	font-weight:bold;
+	padding-left: 15px;
+    padding-top: 5px;
+	border: 1px solid #d3d3d3;
+}
+.trans {
+	font-family:'Roboto','Arial','Helvetica',sans-serif!important;
+	font-weight:300;
+}
+.advance{
+	font-size:7px;
+	font-style: italic;
+}
+.pmt {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    
+    font-size: 18px;
+    font-weight: 300;
+	color: #636972;
+	contenteditable = true;
+	box-shadow: none;
+	border-bottom: 1px solid #B3A9A9;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	margin-bottom:0px;
+	letter-spacing: 3px;
+}
+.pmt:focus {
+	border:0;
+	box-shadow: none;
+	border-bottom: 1px solid #B3A9A9;
+	color:#8159bb;
+}
+.dt1 {
+	font-size:16px;
+	line-height: 1.6;
+	padding-top:2px;
+	letter-spacing: 3px;
+	text-align:center;
+	font-family:'Roboto','Arial','Helvetica',sans-serif!important;
+	font-weight: 500;
+	color: #4F545B;
+}
+
+</style>
+     
+   </head>
+   <body >
+     
+<nav class="navbar navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" style="width:100%;text-align:center;" href="./dashboard.html"><i style="position: absolute;left:5px;;" class="fa fa-home" aria-hidden="true"></i> <span style="font-size:14px;">Add Expenses</span></a>
+    </div>
+   
+  </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5" style="padding-right:0px;padding-left:0px;">
+            <div class="panel panel-primary">
+                <div class="panel-body" id="p0"> 
+				
+				<div class="row" id="toolbar0" style=";padding-top:5px;padding-bottom:5px;">
+				
+			</div>
+			
+				<div>
+				<div class="row trbody" id="pmtbtn" onclick="makepayment();" style="height:60px;border: 1px solid #8159bb;padding-top:20px;text-align:center;margin-top:5px;margin-left:20px;margin-right:20px;margin-bottom:5px;color:#8159bb;border-radius: 4px;">ADD AN EXPENSE</div>
+				
+				<div class="row trbody" id="welcome_msg"  style="border:none;height:60px;padding-top:20px;text-align:center;margin-top:45px;margin-left:20px;margin-right:20px;margin-bottom:5px;color:#8159bb;">
+					<p>Welcome to Expenses!</p>
+					<p>Here you can add any payments you are making towards any vendor. You can also view payments done  Yet Till Date(YTD) and Dues TYD. </p>
+					<p>Click on ADD EXPENSE to register payments and see dues!</p>
+				</div>
+				
+				<ul class="chat" id='pmtip' style="display:none;margin-top:10px;padding-left:20px;padding-right:20px;border-bottom: none">
+				<div class="row trbody" style="height:100%;border-bottom: 1px solid #d3d3d3;" id="pmt">
+					<ul class="chat" id="chat" style="display: flex;padding-top:3px;padding-bottom:3px;">
+						<p style="padding-top:17px;width:70px;">Date </p>
+						<div class='input-group date' style="width:60%;margin-top:10px;" id='datetimepicker1'>
+						<input type='text' class="form-control" id='apt_dt' style="font-size:12px;font-weight: 400" ></input>
+						<span class="input-group-addon">
+								<i id='users' class="fa fa-x fa-calendar"></i>
+						</span>
+						
+						</div>
+					</ul>
+					<ul class="chat" id="chat" style="display: flex;padding-top:3px;padding-bottom:3px;">
+						<p style="padding-top:7px;width:70px;">Vendor </p>
+						<select class="form-control pmt" data-error="please select mode" style="width:70%;font-size:14px;letter-spacing:1px;padding-right:0px;padding-left:1px;" id="vendor" onchange='showDues();'   >
+						<option> Loading...</option>
+						</select>
+						
+                    </ul>
+					<ul class="chat" id="chat" style="display: flex;padding-top:3px;padding-bottom:3px;">
+						<p style="padding-top:7px;width:70px;">Amount </p>
+						<input type="text" class="form-control pmt" id='topay' style="width:70%" placeholder="0"></input>
+						<input type="hidden" id='topay_h'></input>
+                    </ul>
+					
+					<ul class="chat" id="chat" style="display: flex;padding-top:3px;padding-bottom:3px;">
+						<p style="padding-top:7px;width:70px;">Mode </p>
+						<select class="form-control pmt" data-error="please select mode" style="width:70%;font-size:14px;letter-spacing:1px;padding-right:0px;padding-left:1px;" id="pmymode"   >
+						<option value="cash">Cash</option>
+						<option value="paytm">PayTM</option>
+						<option value="neft">NEFT</option>
+						<option value="rtgs">RTGS</option>
+						<option value="cheque">Cheque</option>
+						<option value="card">Card</option>
+						<option value="online">Online</option>
+						</select>
+                    </ul>
+					
+					<ul class="chat" id="x1" style="display: flex;padding-top:3px;padding-bottom:3px;">
+						<button class="btn " style="font-size:14px;width:100%;margin-right:30px" onclick="pmtcancel();">Cancel</button>
+						<button class="btn btn-success" style="font-weight:600;font-size:14px;width:100%" onclick="pmtpay();">Pay</button>
+                    </ul>
+					<ul class="chat" id="x2" style="display: none;padding-top:3px;padding-bottom:3px;text-align:center;">
+						<p class="alert alert-warning"><strong>Warning!</strong> Are you about to mark payment.
+						<br><br><a style="color:#8a6d3b;margin-right:25px;" onclick='pmtcancel1();'><u>Cancel</u></a><a style="color:#8a6d3b;margin-left:15px;" onclick='pmtpay1()'><u>Yes Pay</u></a>
+						</p>
+						
+                    </ul>
+					
+				</div>
+				</ul>
+				
+			
+				<div id="parent_ul"  class="row trbody" style="display:none;height:100%;border-top:1px solid #E0E0E0;" >
+					<ul class='chat' style="letter-spacing:2px;"><b>Billings</b></ul>
+					
+					
+					<div class="row  valtext" style="margin-left:20px;margin-right:10px;font-size:10px;">Received YTD : <span id="rcvd">0</span><span id='btotal' class="pull-right" style="padding-right:15px;">0</span><span class='pull-right'>Dues YTD : </span></div>
+					<div class="row valtext" style="font-size:12px;color:green;font-weight:600;margin-left:20px;margin-right:10px;">Remaining Dues : <span id='rdue'></span>
+					</div>
+				
+				</div>
+				
+				<div id="parent_tr"  class="row trbody" style="display:none;height:100%;border-top:1px solid #E0E0E0;margin-top:40px" >
+					<ul class='chat' style="letter-spacing:2px;"><b>Prevoius Expenses</b> (last 5)</ul>
+					<div id="trans"><i class="fa fa-spinner fa-spin" style="font-size:16px;color:black;"></i></div>
+					
+				</div>
+				</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="./js/dataTbl.js"></script>
+ <script>
+$(function () {
+					var dateNow = new Date();
+					$('#datetimepicker1').datetimepicker({
+						locale: 'en',
+						format: 'DD/MM/YYYY',
+						defaultDate:dateNow,
+						widgetPositioning: {
+						vertical: 'bottom',
+						horizontal: 'left'
+						}
+					});
+					
+				});
+</script>
+<script>
+ function makepayment(){
+	document.getElementById("pmtip").style.display = "block";
+	document.getElementById("parent_ul").style.display = "block";
+	document.getElementById("parent_tr").style.display ="block";
+	document.getElementById("welcome_msg").style.display ="none";
+ }
+ var did = localStorage.did;
+ var q = "SELECT vid,name,due,rcvd from d_vendor_tbl where  did='"+did+"' order by vid desc ;";
+ getDropDownData('vendor',q);
+ 
+ 
+ function showTDetails(data){
+	try{
+		txt = "";
+		document.getElementById("trans").innerHTML = "";
+		var d = JSON.parse(jsonEscape(data));  //jsonEscape to handel new line
+		
+		for (var i = 0; i < d.length; i++) {
+			txt += "<li style='margin-right:20px;height:100%'>";
+			var bdate = formatDate(d[i]["dt"]);
+			txt += "<span>Transaction of Rs.<b>"+d[i]["topay"]+"</b> on:</span><span class='pull-right ' >" + bdate + "<span style='padding-left:10px;' >  </span></span>";
+			txt +="</li>";
+			document.getElementById("trans").innerHTML = txt;
+		}
+	} catch(e) { 
+		txt +="</li>";
+		document.getElementById("trans").innerHTML += txt;
+		console.log("Exception::-"+e.toString());}
+ }
+ 
+ function _ddCallBack(){showDues();}
+ 
+ function showDues(){
+	document.getElementById("rcvd").innerHTML = $('#vendor').find(":selected").attr("rcvd");
+	document.getElementById("btotal").innerHTML = $('#vendor').find(":selected").attr("due");
+	
+	var topay= parseInt($("#btotal").text()) - parseInt($("#rcvd").text());
+	$("#rdue").html(topay);
+	if(topay > 0)
+		document.getElementById("topay").value = topay;
+	
+	// Fill transactions. Clear space and fill
+	// show spinner
+	
+	document.getElementById("trans").innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size:16px;color:black;"></i> Loading...';
+	var vid = $("#vendor").children(":selected").attr("id");
+	getData("q=SELECT topay,dt,mode from d_exp_tbl where vid='" + vid + "' and did='"+did+"' LIMIT 5  ;",0,"dataTbl.php",showTDetails,function(){});
+ }
+ function pmtcancel(){
+	document.getElementById("pmtip").style.display ="none";
+	document.getElementById("parent_ul").style.display ="none";
+	document.getElementById("parent_tr").style.display ="none";
+	document.getElementById("welcome_msg").style.display ="block";
+}
+function pmtcancel1(){
+	document.getElementById("x1").style.display ="flex";
+	document.getElementById("x2").style.display ="none";
+}
+ function pmtpay() {
+	document.getElementById("x1").style.display ="none";
+	document.getElementById("x2").style.display ="flex";
+	
+ }
+ function pmtpay1() {
+	var dt =formateDt($('#datetimepicker1').data('DateTimePicker').date());
+	var vid = $("#vendor").children(":selected").attr("id");
+	var topay = $("#topay").val();
+	var mode = $("#pmymode option:selected").text();
+	document.getElementById("x1").style.display ="flex";
+	document.getElementById("x2").style.display ="none";
+	
+	var q = "dt="+dt+"&vid="+vid+"&topay="+topay+"&mode="+mode+ "&did=" + localStorage.did;
+	getData(q,0,"saveExp.php",function(){location.reload();},function(){});
+ }
+ function formateDt(dt){
+   var date = new Date(dt);
+	var day = date.getDate();
+  var monthIndex = date.getMonth() + 1;
+  var year = date.getFullYear();
+  
+  if(monthIndex < 10)
+	monthIndex = "0" + monthIndex;
+  if(day < 10)
+	day = "0" + day;		
+  
+  return year+"-"+monthIndex+"-"+day;
+}
+
+</script>
+</body>
+</html>	

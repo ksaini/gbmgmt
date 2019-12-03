@@ -1,0 +1,222 @@
+<html><head>
+      <meta charset="utf-8">
+      <meta name="format-detection" content="telephone=no">
+      <meta name="msapplication-tap-highlight" content="no">
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+      <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+      <!---<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />---->
+      
+	  <link href="./assets/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="./css/index.css">
+      <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+	  <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	  
+	  <script src="./js/moment.min.js"></script><script type="text/javascript">navigator.__defineGetter__("userAgent",function(){return "Mozilla/5.0 (Linux; Android 5.0.2; SAMSUNG SM-T550 Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/3.3 Chrome/38.0.2125.102 Safari/537.36"})</script>   
+<script src="./js/jquery-1.10.2.js"></script>
+<script src="./assets/js/bootstrap.min.js"></script>
+<script src="./assets/js/bootstrap-datetimepicker.min.js"></script>
+	  <script src="./assets/js/bootstrap-datetimepicker.min.js"></script>
+      <title>Angel Table</title>
+	  <style>
+body {
+	#background-image:url(img/s71.png);
+	background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    height: auto !important;
+    min-height:100%;
+	text-transform:inherit;
+	height: 100%;
+}	
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding-top: 15px;
+	padding-left:3px;
+	padding-right:3px;
+	display: flex;
+}
+
+.chat li
+{
+    margin-bottom: 2px;
+    padding-bottom: 2px;
+    border-bottom: 1px dotted #B3A9A9;
+	background-color:#F5F5F5;
+	text-align:center;
+	height:60px;
+	vertical-align:middle;
+}
+.panel-body
+{
+    overflow-y: scroll;
+	min-height: 660px;
+    height: 100%;
+	padding-top: 50px;
+}
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+	
+}
+
+.valtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 300;
+	box-shadow: none;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	margin-bottom:0px;
+	letter-spacing: 3px;
+	border: 1px solid #B3A9A9;
+	height:72px;
+	padding-top:15px;
+}
+.valtext:active {
+	background-color : #aa8fd1;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.
+.panel-body
+{
+    overflow-y: scroll;
+	min-height: 660px;
+    height: 100%;
+	padding-top: 50px;
+}
+.panel-footer{
+	padding: 1px 5px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+.navbar-custom{
+	background-color: #8159bb;
+}
+
+
+</style>
+     
+   <style></style></head>
+   <body style="">
+     
+<nav class="navbar navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" style="width:100%;text-align:center;color:white;" href="dashboard.html"> <span style="color:white;font-size:14px;" id="tblname"></span></a>
+    </div>
+   
+  </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5" style="padding-right:0px;padding-left:0px;">
+            <div class="panel panel-primary">
+            <div class="panel-body" id="p0" style="text-align:center;"> 
+														
+				<div class="row" style="height:52px;margin-top:45px;">
+				<div class="content col-xs-2" style="height:82px;"><center>
+					<h1 id="tbl"></h1></center>
+				</div>
+				<div class="content col-xs-1" style="height:82px;"><center>
+					<h1 >x</h1></center>
+				</div>				
+				<div class="content col-xs-2" style="height:82px;"><center>
+					<h1 id="mul"></h1></center>
+				</div>
+				<div class="content col-xs-2" style="height:82px;"><center>
+					<h1 >=</h1></center>
+				</div>
+				<div class="content col-xs-3" style="height:82px;"><center>
+					<h1 id="res">?</h1></center>
+				</div>
+						
+				</div>	
+				<div class="row" style="height:62px;margin-top:45px;text-align:center" >
+					<div class="content col-xs-4 " ></div>
+					<div class="content col-xs-4 " id="ques" style="border-bottom: 1px solid #B3A9A9;font-size:34px;"> </div>
+					<div class="content col-xs-4 " ></div>
+					
+				</div>
+			    <div class="row" id="msg" style="height:52px;margin-top:15px;text-align:center;">
+					<button class="btn btn-success" style="font-size:18px;width:70%;" onclick="nxt()"> Next </button>
+				</div>
+				<div class="row" style="margin-top:5px;">
+					<div class="content col-xs-1 " ></div>
+					<div class="content col-xs-2 valtext btn" id="n1" onclick="op(this)">1</div>
+					<div class="content col-xs-2 valtext btn" id="n2" onclick="op(this)">2</div>
+					<div class="content col-xs-2 valtext btn" id="n3" onclick="op(this)">3</div>
+					<div class="content col-xs-2 valtext btn" id="n4" onclick="op(this)">4</div>
+					<div class="content col-xs-2 valtext btn" id="n5" onclick="op(this)">5</div>
+				</div>	
+				<div class="row" >
+					<div class="content col-xs-1 " ></div>
+					<div class="content col-xs-2 valtext btn" id="n6" onclick="op(this)">6</div>
+					<div class="content col-xs-2 valtext btn" id="n7" onclick="op(this)">7</div>
+					<div class="content col-xs-2 valtext btn" id="n8" onclick="op(this)">8</div>
+					<div class="content col-xs-2 valtext btn" id="n9" onclick="op(this)">9</div>
+					<div class="content col-xs-2 valtext btn" id="n0" onclick="op(this)">0</div>
+				</div>	
+			</div>							
+			</div>
+        </div>
+    </div>
+</div>
+   
+   <script type="text/javascript" src="cordova.js"></script>
+   <script type="text/javascript" src="./js/index.js"></script>
+   
+   <script>
+	var t = getParameterByName("tbl");
+	document.getElementById("tbl").innerHTML = t;
+	document.getElementById("tblname").innerHTML = "Table of " + t;
+	
+	var rnd = Math.floor(Math.random() * 8) + 2 ;
+	document.getElementById("mul").innerHTML = rnd;
+	
+	var ans = parseInt(t) * parseInt(rnd);
+
+function op(e){
+	document.getElementById("ques").innerHTML += e.innerHTML;
+	if(parseInt(document.getElementById("ques").innerHTML) == ans){
+		document.getElementById("res").innerHTML = "<span style='green'>" + ans + "</div>";
+		document.getElementById("ques").innerHTML = '<i class="fa fa-check-circle" style="font-size:38px;color:green;"></i>';
+		}
+}	
+function nxt(){
+	rnd = Math.floor(Math.random() * 8) + 2 ;
+	ans = parseInt(t) * parseInt(rnd);
+	document.getElementById("mul").innerHTML = rnd;
+	document.getElementById("res").innerHTML = "?";
+	document.getElementById("ques").innerHTML = "";
+}	
+
+ function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+ 
+	</script></body></html>

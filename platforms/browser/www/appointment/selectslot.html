@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="msapplication-tap-highlight" content="no" />
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+      <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+      <!---<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />---->
+      
+	  <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="../css/index.css" />
+      <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	  <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	  
+	  <script src="../js/moment.min.js"></script>   
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+	  <script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+      <title>GreyBox Admin</title>
+	  <style>
+body {
+	#background-image:url(img/s71.png);
+	background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    height: auto !important;
+    min-height:100%;
+	text-transform:inherit;
+	height: 100%;
+}	
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding-top: 15px;
+	padding-left:3px;
+	padding-right:3px;
+}
+
+.chat li
+{
+    margin-bottom: 2px;
+    padding-bottom: 2px;
+    border-bottom: 1px dotted #B3A9A9;
+	background-color:#F5F5F5;
+	text-align:center;
+	height:60px;
+	vertical-align:middle;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+	
+}
+
+.valtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    
+    font-size: 22px;
+    font-weight: 300;
+	color: #636972;
+	contenteditable = true;
+	box-shadow: none;
+	border-bottom: 1px solid #B3A9A9;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	margin-bottom:0px;
+	letter-spacing: 3px;
+}
+.valtext:focus {
+	border:0;
+	box-shadow: none;
+	border-bottom: 1px solid #B3A9A9;
+	color:#8159bb;
+}
+
+.chat li .chat-body p
+{
+    margin: 0;
+	width:100%;
+    color: #F5F5F5;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+.stickyfooter {
+  position: fixed;
+  bottom:0;
+}
+.panel-body
+{
+    overflow-y: scroll;
+	min-height: 660px;
+    height: 100%;
+	padding-top: 50px;
+}
+.panel-footer{
+	padding: 1px 5px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+.navbar-custom{
+	background-color: #8159bb;
+}
+a{
+	color:white
+}
+.regtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 300;
+	color: #636972;
+	
+}
+
+
+.errtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    margin-top: -10px;
+    font-size: 12px;
+    font-weight: 300;
+	color: red;
+	
+}
+.infotext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    margin-top: -10px;
+    font-size: 12px;
+    font-weight: 300;
+	color: blue;
+	
+}
+.smallf {
+	font-size:18px;
+}
+.smallf2 {
+	font-size:16px;
+	text-align:left;
+	font-weight: 100;
+}
+.smallf3 {
+	font-size:13px;
+	text-align:left;
+	font-weight: 100;
+	
+}
+.smallf4 {
+	font-size:10px;
+	text-align:left;
+	font-weight: 100;
+	margin-bottom:5px;
+}
+.slots{
+ background-color:#eee;
+}
+.slots:focus {outline:0;}
+
+.slots1{
+ font-size:16px;
+ width:27%;
+ margin-bottom:10px;
+ font-weight: 500;
+ line-height: 1.5;
+ text-align: center;
+ color: #616161;
+ margin-bottom: 16px;
+ height: 46px;
+ border-radius: 4px;
+ background-color: #fff;
+ border: 1px solid #bdbdbd;
+ margin-left:8px;  
+}
+.slotsunavailable{
+	color:#e0e0e0!important;
+}
+.slotselected{
+	border:1.5px solid #8159bb;
+	background-color:#f2eff7;
+}
+
+</style>
+     
+   </head>
+   <body >
+     
+<nav class="navbar navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" style="width:100%;text-align:center;" href="dashboard.html"><i style="position: absolute;left:5px;;" class="fa fa-home" aria-hidden="true"></i> <span>APPOINTMENT</span></a>
+    </div>
+   
+  </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5" style="padding-right:0px;padding-left:0px;">
+            <div class="panel panel-primary">
+                
+				<div class="panel-body" id="p4" >
+                    <ul style="margin-left: -35px;margin-right: 35px;" id="chat">
+						<p class="regtext smallf2">SELECT DATE</p>
+						<div class='input-group date' id='datetimepicker1'>
+								<input type='text' class="form-control" style="font-size:12px;" ></input>
+								<span class="input-group-addon">
+									<i id='users' class="fa fa-x fa-calendar"></i>
+								</span>
+						</div>
+					</ul>
+
+					<ul class="chat" id="chat">
+						<p class="regtext smallf2">DURATION OF APPOINTMENT</p>
+					</ul>
+					<ul class="chat" id="chat">
+						<span>
+						<button id="est15" class="btn slots " onclick="est(this);">15 MIN</button>
+						<button id="est30" class="btn slots" onclick="est(this);">30 MIN</button>
+						<button id="est60" class="btn slots" onclick="est(this);">1 HR</button>
+						<button id="est120" class="btn slots" onclick="est(this);">2 HR</button>
+						</span>
+					</ul>		
+					
+					<ul class="chat" id="chat">
+						<p class="regtext smallf2">SELECT A SLOT</p>
+					</ul>
+					<ul class="chat" id="chat">
+						<span>
+						<button name="sslot" class="btn slots1" onclick="slot(this);">8 - 9 am</button>
+						<button name="sslot" class="btn slots1" onclick="slot(this);">9-10 am</button>
+						<button name="sslot" class="btn slots1" onclick="slot(this);">10-11 am</button>
+						<br>
+						<button name="sslot" class="btn slots1 slotsunavailable" onclick="slot(this);">11-12 am</button>
+						<button name="sslot" class="btn slots1 slotsunavailable" onclick="slot(this);">12-1 pm</button>
+						<button name="sslot" class="btn slots1" onclick="slot(this);">2-3 pm</button>
+						<br>
+						<button name="sslot" class="btn slots1" onclick="slot(this);">3-4 pm</button>
+						<button name="sslot" class="btn slots1 slotsunavailable" onclick="slot(this);">4-5 pm</button>
+						<button name="sslot" class="btn slots1" onclick="slot(this);">5-6 pm</button>
+						<br>
+						<button name="sslot" class="btn slots1" onclick="slot(this);">6-7 pm</button>
+						<button name="sslot" class="btn slots1" onclick="slot(this);">7-8 pm</button>
+						<button name="sslot" class="btn slots1" onclick="slot(this);">8-9 pm</button>
+						
+						</span>
+						<button class="btn slot" style="color:#8159bb;" onclick="goback()">BACK</button>
+						<button class="btn slot pull-right" style="color:#8159bb;">DONE</button>
+					</ul>	
+				</div>
+				<script type="text/javascript" src="../js/dataTbl.js"></script>
+				<script type="text/javascript">
+				$(function () {
+					var dateNow = new Date();
+					$('#datetimepicker1').datetimepicker({
+						locale: 'en',
+						format: 'DD/MM/YYYY',
+						defaultDate:dateNow,
+						widgetPositioning: {
+						vertical: 'bottom',
+						horizontal: 'left'
+						}
+					});
+					
+				});
+				
+				function est(t){
+					document.getElementById("est15").classList.remove("slotselected");
+					document.getElementById("est30").classList.remove("slotselected");
+					document.getElementById("est60").classList.remove("slotselected");
+					document.getElementById("est120").classList.remove("slotselected");
+					t.classList.add("slotselected");
+				}
+				function slot(t){
+					var s = document.getElementsByName("sslot");
+					for(var i=0;i<s.length; i++)
+					{
+						s[i].classList.remove("slotselected");
+					}
+					t.classList.add("slotselected");
+				}
+				function refreshSlots()
+				{
+					alert("here");
+				}
+				function goback(){
+					window.location.href = getParameterByName("ref");
+				}
+				</script>
+				
+				</div>
+				
+			 </div>
+        </div>
+    </div>
+</div>
+   </body>
+   <script type="text/javascript" src="cordova.js"></script>
+   <script type="text/javascript" src="../js/index.js"></script>
+	
+   

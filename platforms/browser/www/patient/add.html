@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="msapplication-tap-highlight" content="no" />
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+      <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+      <!---<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />---->
+      
+	  <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="../css/index.css" />
+      <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	  <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	  
+	  <script src="../js/moment.min.js"></script>   
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+	  <script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+      <title>GreyBox Admin</title>
+	  <style>
+body {
+	#background-image:url(img/s71.png);
+	background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    height: auto !important;
+    min-height:100%;
+	text-transform:inherit;
+	height: 100%;
+}	
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding-top: 15px;
+	padding-left:3px;
+	padding-right:3px;
+	display: flex;
+}
+
+.chat li
+{
+    margin-bottom: 2px;
+    padding-bottom: 2px;
+    border-bottom: 1px dotted #B3A9A9;
+	background-color:#F5F5F5;
+	text-align:center;
+	height:60px;
+	vertical-align:middle;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+	
+}
+
+.valtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    
+    font-size: 18px;
+    font-weight: 300;
+	color: #636972;
+	contenteditable = true;
+	box-shadow: none;
+	border-bottom: 1px solid #B3A9A9;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	margin-bottom:0px;
+	letter-spacing: 3px;
+}
+.valtext:focus {
+	border:0;
+	box-shadow: none;
+	border-bottom: 1px solid #B3A9A9;
+	color:#8159bb;
+}
+
+.chat li .chat-body p
+{
+    margin: 0;
+	width:100%;
+    color: #F5F5F5;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+.stickyfooter {
+  position: fixed;
+  bottom:0;
+}
+.panel-body
+{
+    overflow-y: scroll;
+	min-height: 660px;
+    height: 100%;
+	padding-top: 50px;
+}
+.panel-footer{
+	padding: 1px 5px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+.navbar-custom{
+	background-color: #8159bb;
+}
+a{
+	color:white
+}
+.regtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 300;
+	color: #636972;
+	
+}
+
+
+.errtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    margin-top: -10px;
+    font-size: 12px;
+    font-weight: 300;
+	color: red;
+	
+}
+.infotext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    margin-top: -10px;
+    font-size: 12px;
+    font-weight: 300;
+	color: blue;
+	
+}
+.smallf {
+	font-size:18px;
+}
+.smallf2 {
+	font-size:16px;
+	text-align:left;
+	font-weight: 400;
+}
+.smallf3 {
+	font-size:13px;
+	text-align:left;
+	font-weight: 400;
+	
+}
+.smallf4 {
+	font-size:10px;
+	text-align:left;
+	font-weight: 400;
+	margin-bottom:5px;
+}
+.slots{
+ background-color:#eee;
+}
+.slots:focus {outline:0;}
+
+.slots1{
+ font-size:16px;
+ width:27%;
+ margin-bottom:10px;
+ font-weight: 500;
+ line-height: 1.5;
+ text-align: center;
+ color: #616161;
+ margin-bottom: 16px;
+ height: 46px;
+ border-radius: 4px;
+ background-color: #fff;
+ border: 1px solid #bdbdbd;
+ margin-left:8px;  
+}
+.slotsunavailable{
+	color:#e0e0e0!important;
+}
+.slotselected{
+	border:1.5px solid #8159bb;
+	background-color:#f2eff7;
+}
+.gender {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 300;
+	border-radius: 4px;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	margin-bottom:0px;
+	padding-top:2px;
+	padding-bottom:2px;
+	letter-spacing: 3px;
+}
+.selectedF {
+	border: 1px solid #F7A7C8;
+}
+.selectedM {
+	border: 1px solid #1DC7EA;
+}
+
+</style>
+     
+   </head>
+   <body >
+     
+<nav class="navbar navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" style="width:100%;text-align:center;" href="../dashboard.html"><i style="position: absolute;left:5px;;" class="fa fa-arrow-left" aria-hidden="true"></i> <span>Add Patient</span></a>
+    </div>
+   
+  </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5" style="padding-right:0px;padding-left:0px;">
+            <div class="panel panel-primary">
+                <div class="panel-body" id="p0"> 
+					
+					
+					<div  id="p3">
+                    
+					<br>
+					<ul class="chat" id="chat">
+					
+						<label class="valtext" style="float: left;border-bottom:0;"><i class="fa fa-user" style="font-size:16px;"></i></label>
+						<select class="form-control valtext" data-error="please select title" style="width:30%;font-size:14px;letter-spacing:1px;padding-right:0px;padding-left:1px;" id="title" ><option>Mr.</option>
+<option>Mrs.</option>
+<option>Ms.</option>
+<option>Miss</option>
+<option>Master</option>
+<option>Dr.</option>
+</select>
+						<input type="text" id="cname" class="form-control valtext"   placeholder="Enter Name"></input>
+						
+                    </ul>
+					<ul class="chat" style="text-align:center;"><p id="nameerr" class="errtext" style="display:none;">Name can't be blank</p></ul>
+					<br>
+					<ul class="chat" id="chat">
+						<label class="valtext" style="float: left;border-bottom:0;"><i class="fa fa-mobile-phone"></i></label>
+						<input type="text" id='mobile' class="form-control valtext" placeholder="XXX-XXX-XXX" onclick="clearErr('mobileerr')" onblur="verifyMobile()"></input>
+                    </ul>
+					<ul class="chat" style="text-align:center;"><p id="mobileerr" class="errtext" style="display:none;">Please enter 10 digit number</p></ul>
+					
+					<br>
+					
+					
+					<br>
+					<ul class="chat" id="chat">
+						<input type="text" class="form-control " id="age" style="font-size:14px;letter-spacing: -1px;width:30%;margin-left:20px;" placeholder="AGE"></input>
+						<div style="padding-left:70px;padding-top:-3px;">
+						
+						<label class="gender selectedF" id="female" style="float: left;padding-right:10px;padding-left:10px;" onclick="selectF();"><i class="fa fa-female" style="font-size:38px;color:#F7A7C8;"></i></label>
+						<label class="gender" id="male" style="float: left;padding-right:10px;padding-left:10px;" onclick="selectM();"><i class="fa fa-male" style="font-size:38px;color:#1DC7EA;"></i></label>
+						</div>
+                    </ul>
+					
+					<br>
+					<br>
+					<ul class="chat" id="chat">
+						<label class="valtext" style="float: left;border-bottom:0;"><i class="fa fa-map-marker"></i></label>
+						<textarea  class="form-control valtext" id="addr" style="font-size:14px;letter-spacing: -1px;" rows="1" placeholder="address"></textarea>
+                    </ul>
+					
+					<br>
+					<ul class="chat" id="chat">
+						<label class="valtext" style="float: left;border-bottom:0;"><i class="fa fa-envelope" style="font-size:14px;"></i></label>
+						<input type="text" id="email" class="form-control valtext" style="font-size:18px;letter-spacing: -1px;" placeholder="XXX@gmail.com" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,63}$"></input>
+                    </ul>
+					
+					<br>
+					<ul class="chat" style="text-align:center;"><p id="saveerrr" class="errtext" ></p></ul>
+					
+					<br>
+					<ul class="chat" id="chat">
+						<button class="btn " style="color:#8159bb;font-weight:600;font-size:14px;width:100%;margin-right:30px;" onclick="save();">Save </button>
+						<button class="btn " style="color:#8159bb;font-weight:600;font-size:14px;width:100%" onclick="createcase=1;save();">Save & Create Case</button>
+                    </ul>
+					<ul class="chat" id="chat">
+						<button class="btn " style="color:#8159bb;font-weight:600;font-size:14px;width:100%" onclick="window.history.back()">Back</button>
+                    </ul>
+                </div>
+				
+				
+				
+			 </div>
+        </div>
+    </div>
+</div>
+   </body>
+   <script type="text/javascript" src="cordova.js"></script>
+   <script type="text/javascript" src="../js/index.js"></script>
+    <script type="text/javascript" src="../js/person.js"></script>
+	 <script type="text/javascript" src="../js/dataTbl.js"></script>
+   <script>
+   var createcase = 0;
+  // document.getElementById("p2").style.display = "none";
+   var pid = getParameterByName("pid");
+   if(pid!=undefined){
+	  editProfile(pid);
+   }
+   var srch = getParameterByName("srch");
+    if(srch!=undefined){
+		if(isNaN(srch))
+			document.getElementById("cname").value = srch;
+		else	
+			document.getElementById("mobile").value = srch;
+	}
+   
+   //document.getElementById("p3").style.display = "none";   
+   function searchclient(){
+		document.getElementById("p2").style.display = "block"; 
+		document.getElementById("p3").style.display = "none"; 
+	}
+	function showScreen(s){
+		document.getElementById("p1").style.display = "none"; 
+		document.getElementById("p2").style.display = "none"; 
+		document.getElementById("p3").style.display = "none"; 
+		document.getElementById("p"+s).style.display = "block"; 
+	}
+	function scheduleapt(){
+		window.location.href = "selectslot.html?action=create&ref=create.html";
+	}
+	
+	
+	
+	function save(){
+		var e = document.getElementById("title");
+		var title = e.options[e.selectedIndex].text;
+		var name = document.getElementById("cname").value;
+		var mobile = document.getElementById("mobile").value;
+		var age = document.getElementById("age").value;
+		var addr = document.getElementById("addr").value;
+		var email = document.getElementById("email").value;
+		
+		document.getElementById("nameerr").style.display = "none"; 
+		document.getElementById("mobileerr").style.display = "none"; 
+		
+		//alert(validateEmail(email));
+		if(name.trim().length == 0){
+			document.getElementById("nameerr").style.display = "block"; 
+			document.getElementById("cname").focus();	
+		}
+		else if(mobile.trim().length != 10 && !mobile.trim().isNaN()){
+			document.getElementById("mobileerr").style.display = "block"; 
+			document.getElementById("mobile").focus();	
+		}	
+		else{
+			var p1 = getParameterByName("pid");
+			if(p1== null)
+				p1=0
+			var p = new Person(title,name,mobile,age,addr,gender,email,p1);
+			p.saveRecord();
+		}
+		
+	}
+	function onSuccessP(n){
+		if(n.indexOf("Error") !== -1)	
+			document.getElementById("saveerrr").innerHTML = "Error while Saving.";
+		else{
+			if(createcase==0)
+				window.location = "history.html?pid="+n;
+			else
+				window.location = "view.html?pid="+n + "&cid=0";
+		}		
+	}
+	
+	function verifyMobile() {
+		var m = document.getElementById("mobile").value;
+		m = m.replace(/-/g, '');
+		if(m.length!=10){
+			document.getElementById("mobileerr").style.display = "block"; 
+			document.getElementById("mobile").focus();	
+		}
+		else
+			clearErr("mobileerr");
+	}
+  	 
+    function clearErr(n){
+		document.getElementById(n).style.display = "none";
+	}
+	</script>

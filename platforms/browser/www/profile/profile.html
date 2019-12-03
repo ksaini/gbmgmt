@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="msapplication-tap-highlight" content="no" />
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+      <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+      <!---<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />---->
+      
+	  <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="../css/index.css" />
+      <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	  <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	  
+	  <script src="../js/moment.min.js"></script>   
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+	  <script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+      <title>GreyBox Admin</title>
+	  <style>
+body {
+	#background-image:url(img/s71.png);
+	background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    height: auto !important;
+    min-height:100%;
+	text-transform:inherit;
+	height: 100%;
+	
+}	
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding-top: 5px;
+	padding-bottom: 10px;
+	padding-left:15px;
+	padding-right:5px;
+	border-bottom:1px solid #E0E0E0;
+	
+}
+
+.chat li
+{
+    margin-bottom: 2px;
+    padding-bottom: 2px;
+	color:#B3A9A9;
+	border-bottom: 1px dotted #B3A9A9;
+	height:30px;
+	vertical-align:middle;
+	font-size:15px;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+	
+}
+
+.valtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+	color: #4F545B;
+	contenteditable = true;
+	box-shadow: none;
+	border-bottom: 0px;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	margin-bottom:0px;
+	letter-spacing: 1px;
+}
+
+.chat li .chat-body p
+{
+    margin: 0;
+	width:100%;
+    color: #F5F5F5;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.sticky {
+  
+}
+
+.stickyfooter {
+  position: fixed;
+  bottom:0;
+}
+.panel-body
+{
+    overflow-y: scroll;
+	min-height: 730px;
+    height: 100%;
+	padding-top: 45px;
+}
+.panel-footer{
+	padding: 1px 5px;
+}
+.slots{
+ background-color:#eee;
+}
+.slots:focus {outline:0;}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+.navbar-custom{
+	background-color: #8159bb;
+}
+a{
+	color:white
+}
+
+input:focus,
+select:focus,
+button:focus {
+    outline: none;
+}
+.desc {
+	font-size:14px;
+	font-family: 'open_sans','Open Sans',sans-serif;
+	letter-spacing: 2px;
+	color: #4F545B;
+	padding-top:15px;
+	padding-bottom:15px;
+}
+.goto{
+	padding-right:15px;
+	padding-left:15px;
+	font-size:24px;
+}
+.editmed {
+	padding-right:10px;
+	font-size:12px;
+}
+.editmed:focus {
+	color:darkslateblue;
+	font-size:16px;
+	font-weight:600;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.newproc {
+	padding-left: 30px;
+    padding-right: 15px;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.optn {
+	font-size:10px;
+	margin-left:5px;
+	margin-right:5px;
+}
+</style>
+     
+   </head>
+   <body >
+     
+<nav class="navbar navbar-custom navbar-fixed-top" ">
+  <div class="container-fluid">
+    <div class="navbar-header" >
+      <a class="navbar-brand" style="width:100%;text-align:center;" href="../dashboard.html"><i style="position: absolute;left:5px;;" class="fa fa-home" aria-hidden="true"></i> <span style="font-size:14px;">Manage Profile</span></a>
+    </div>
+   
+  </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5" style="padding-right:0px;padding-left:0px;">
+            <div class="panel panel-primary">
+                <div class="panel-body" id="p0"> 
+				<div class="sticky">
+					<div class="row " style="border-bottom: 1px solid #E0E0E0;">
+						
+						<div class="content col-xs-12" >
+							<h3 style="text-align:center;">Settings<h3>
+						</div>
+						<div id='wrnmsg' style="font-size:12px;background-color: #fcf8e3;color:red;text-align:center;"></div>
+                </div>
+				
+			</div>
+			<ul class="chat desc" >
+				Personal Details <span class="pull-right goto" onclick='viewprofile(this.parentNode)'> +</span>
+			</ul>
+			<ul class="chat desc prolist">
+				Procedure/Cost 
+				<span class="pull-right goto"  onclick="manageTMT(this.parentNode)"> +</span>
+				<span id='s1' style="display:none;" onclick='saveProc()' data-toggle="modal" data-target="#myModal"><i class="fa fa-save pull-right goto " style="font-size:12px;padding-top:7px;"></i></span>
+				<span id='s11' class="pull-right btn-sm" style="font-size:12px;display:none;" onclick='addNewProc(this.parentNode)'>Add</span>
+				<span id='s13' style="display:none;" onclick='delthis(1)'><i class="fa fa-trash pull-right goto " style="font-size:12px;padding-top:7px;color:red"></i></span>
+			</ul>
+			<ul class="chat desc medilist" >
+				Medecines 
+				<span class="pull-right goto" onclick="manageMed(this.parentNode)"> +</span>
+				<span id='s2' style="display:none;" onclick='saveMed()'><i class="fa fa-save pull-right goto " style="font-size:12px;padding-top:7px;"></i></span>
+				<span id='s22' class="pull-right btn-sm" style="font-size:12px;display:none;" onclick='addNewMed(this.parentNode)'>Add</span>
+				<span id='s23' style="display:none;" onclick='delthis(0)'><i class="fa fa-trash pull-right goto " style="font-size:12px;padding-top:7px;color:red"></i></span>
+			</ul>
+			<ul class="chat desc" >
+				Examination Types <span class="pull-right goto" onclick="manageExm(this.parentNode)"> +</span>
+			</ul>
+			<ul class="chat desc" >
+				<span >SMS </span><span class="pull-right goto" style="padding-left:35px;" id="1x" onclick="manageSMS(this,this.parentNode)">+</span>
+				<div id="p1" style="text-align:center;padding-top:10px;"></div>
+				<div id="sss" style="display:none;">
+				<!----<div class="row " style="padding-top:30px;">
+					<div class="col-xs-10 valtext">Enable SMS</div>
+					<div class="col-xs-2"><input type="checkbox" value="" checked></label></div>
+				</div>---->
+				<div class="row " style="padding-top:30px;">
+					<div class="col-xs-9 valtext">SMS Balance</div>
+					<div class="col-xs-3" id='smscount'></div>
+				</div>
+				<div class="row " style="padding-top:10px;">
+					<div class="col-xs-10 valtext">Send SMS for new Reg.</div>
+					<div class="col-xs-2"><input type="checkbox" id="sms_new" value="" checked></label></div>
+				</div>
+				<div class="row " style="padding-top:10px;">
+					<div class="col-xs-10 valtext">Send SMS on Reschedule</div>
+					<div class="col-xs-2"><input type="checkbox" id="sms_re" value="" checked></label></div>
+				</div>
+				<div class="row " style="padding-top:10px;">
+					<div class="col-xs-10 valtext">Send SMS on Save Case</div>
+					<div class="col-xs-2"><input type="checkbox" id="sms_savecase" value="" checked></label></div>
+				</div>
+				<div class="row " style="padding-top:10px;">
+					<p class="btn-sm" style="border: 1px dotted #B3A9A9;width:25%;text-align:center" onclick="savesms()"> Save </p>
+				</div>
+				
+				</div>
+				
+			</ul>
+			
+			</div>
+		</div>	
+		
+	</div>
+</div>
+</div>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+       
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <p>Saving...</p>
+      </div>
+      
+    </div>
+
+  </div>
+</div>
+ <script type="text/javascript" src="../js/dataTbl.js"></script>
+  <script type="text/javascript" src="../js/examination.json"></script>
+  
+<script>
+	var did = localStorage.did;
+	var tmt =0;
+	var med =0;
+	var exam =0;
+	var profile=0;
+	var fn = base_url + "/json/" + did + ".js";
+	var delElement = ""; // element to be deleted
+	
+	loadJS(fn);
+	
+	
+		
+	function manageExm(t){
+		$('ul > li').hide();
+	if(exam==0){	
+		$('span:first', t).html("-");
+		var e = JSON.parse(exm);
+		var txt = "<li></li>";
+		Object.keys(e).forEach(function(key) {
+		  if(e[key]==1)
+			txt +=  "<li>" + key + "</li>";
+		  else
+            txt +=  "<li style='padding-left:10px;'>" + key + "</li>";		  
+			
+		});
+		t.innerHTML += txt;
+		exam = 1;
+	}else{
+		exam=0;
+		$('span:first', t).html("+");
+		}
+	}
+	function manageTMT(t){
+		$('ul > li').hide();
+		$("#s13").hide();
+		$("#s23").hide();
+		if(tmt ==0 ){ // add for the first time
+			addTMT(t);
+		}
+		// If + then expand
+		
+		if($('span:first', t).text().includes("+")){
+			$('span:first', t).html("-");
+			$('.prolist > li').show();
+			$("#s1").show();
+			$("#s11").show();
+			$("#s2").hide();
+			$("#s22").hide();
+		}
+		else if($('span:first', t).text().includes("-")){
+			$('span:first', t).html("+");
+			$('.prolist > li').hide();
+			$("#s1").hide();
+			$("#s11").hide();
+			$("#s2").hide();
+			$("#s22").hide();
+			
+		}
+			
+		
+	}
+	function addTMT(t){
+		var txt = "<li></li>";
+		for(var i=0;i < treatements.length;i++){
+		    var t0 =  treatements[i].split(":")[0];
+			var t1 =  treatements[i].split(":")[1];
+			txt += "<li><span class='editmed'  contenteditable=true onclick='delProc(this)'>" + t0 + "</span><span class='pull-right editmed' contenteditable=true >" + t1 + "</span></li>";
+		}
+		t.innerHTML += txt;
+		tmt = 1;
+	}
+	
+	function manageMed(t){
+		$('ul > li').hide();
+		$("#s13").hide();
+		$("#s23").hide();
+		if(med ==0 ){ // add for the first time
+			addMed(t);
+		}
+		// If + then expand
+		
+		if($('span:first', t).text().includes("+")){
+			$('span:first', t).html("-");
+			$('.medilist > li').show();
+			$("#s2").show();
+			$("#s22").show();
+			$("#s1").hide();
+			$("#s11").hide();
+			
+		}
+		else if($('span:first', t).text().includes("-")){
+			$('span:first', t).html("+");
+			$("#s1").hide();
+			$("#s11").hide();
+			$("#s2").hide();
+			$("#s22").hide();
+			$x = $(".prolist");
+			$('span:first', x).html("+");
+			$('.medilist > li').hide();
+			
+		}
+	
+	}
+	function addMed(t){
+		var txt = "<li></li>";
+		for(var i=0;i < medicines.length;i++){
+			txt += "<li class='editmed' contenteditable=true onclick='delMed(this)'>" + medicines[i]  + "</li>";
+		}
+		t.innerHTML += txt;
+		med = 1;
+	}
+	
+	function viewprofile(t){
+		$('ul > li').hide();
+	if(profile==0){	
+		$('span:first', t).html("-");
+		var txt = "<li></li>";
+		txt += "<li>Name : " + localStorage.dname + "</li>"; 
+		t.innerHTML += txt;
+		profile = 1;
+	}else{
+		profile=0;
+		$('span:first', t).html("+");
+		}
+	}
+	function saveProc(n){
+		var array = [];
+		var ele = '.prolist li';
+		
+		$(ele).each(function(i, li) {
+			//var txt = $(li).clone().children().remove().end().text() + ":" + $('span:first', $(li)).text();
+			var txt = $('span:first', $(li)).text() + ":" + $('span:first', $(li)).next().text();
+			if(txt.length > 3)
+				array.push(txt);
+		});
+		var q = "0&did=" + localStorage.did + "&data=" + JSON.stringify(array);
+		
+		getData(q,1,"saveProc.php",s1,e1);
+	}
+	function saveMed(n){
+		var array1 = [];
+		var ele = '.medilist li';
+		$(ele).each(function(i, li) {
+			var txt = $(li).text();
+			if(txt.length > 3)
+				array1.push(txt);
+		});
+		var q = "1&did=" + localStorage.did + "&data=" + JSON.stringify(array1);
+		
+		getData(q,1,"saveProc.php",s1,e1);
+	}
+	function e1(){
+		$("#myModal").modal('toggle');
+		location.reload();
+	}
+	function s1(data){
+		$("#myModal").modal('toggle');
+		location.reload();
+	}
+	function addNewProc(t){
+		$('li:first', t).next().before("<li style='background-color: #fcf8e3;'><span id='xy' class='editmed' contenteditable='true' onclick='delProc(this)' >NewProc</span><span class='pull-right editmed newproc' contenteditable='true'>0</span></li>");
+		$('#xy').focus();
+	}
+	function addNewMed(t){
+		$('li:first', t).next().before("<li style='background-color: #fcf8e3;' class='editmed' contenteditable='true' onclick='delMed(this)'>Med</li>");
+		$('#xy').focus();
+	}
+	function delMed(t){
+		$("#s23").show();
+		delElement = t;
+	}
+	function delProc(t){
+		$("#s13").show();
+		delElement = t;
+	}
+	function delthis(n){
+	    window.scrollTo(0,0);
+		if(n==1){
+			ele = $(delElement).parent();
+			$(ele).remove();
+			$("#wrnmsg").html("You have marked <i>" + $(delElement).text() + "</i> for deletion. Use SAVE icon to save after you are done with editing.<br>Tap <span class='btn-sm btn-warning' onclick='hide1()'>HERE</span> to revert unsaved changes.<br>");
+			}else {
+			$(delElement).remove();
+			$("#wrnmsg").html("You have marked <i>" + $(delElement).text() + "</i> for deletion. Use SAVE icon to save after you are done with editing.<br>Tap <span class='btn-sm btn-warning' onclick='hide1()'>HERE</span> to revert unsaved changes.<br>");
+		}
+	}
+	function ccl(){
+		$("#wrnmsg").html("");
+		delElement = '';
+	}
+	function hide1(){
+	 location.reload();
+	}
+	function manageSMS(t,p){
+		$('ul > li').hide();
+		if($(t).text() == "+"){
+			$(t).html("-");
+			document.getElementById("p1").innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size:20px"></i>';
+			getData("q=SELECT sms, smsused,smsmeta from d_dr_tbl where did='"+localStorage.did+"' ;",0 ,"dataTbl.php",fetchSMSMeta, errSMSMeta);
+			//getData("q=SELECT max(cid) as cid FROM d_exm_tbl where pid='"+pid+"' and did='"+localStorage.did+"' ;",0,"dataTbl.php",calcBilling,errBill);
+			//document.getElementById("sss").style.display = "block";	
+		}
+		else{
+			$(t).html("+");
+			document.getElementById("sss").style.display = "none";
+			}
+	}
+	
+	function fetchSMSMeta(data){
+		document.getElementById("p1").innerHTML = "";
+		var d = JSON.parse(data);
+		d = d[0];
+		document.getElementById("sss").style.display = "block";
+		$("#smscount").html(d["smsused"]+ "/" + d["sms"])
+		
+		if(d["smsmeta"]!=null){
+			var x = JSON.parse(d["smsmeta"]);
+		    $('#sms_new').prop('checked', x["sms_new"]==1? true:false);
+			$('#sms_re').prop('checked', x["sms_re"]==1? true:false);
+			$('#sms_savecase').prop('checked', x["sms_savecase"]==1? true:false);	 
+		}
+		//alert(d["sms"]);
+	}
+	function errSMSMeta(){document.getElementById("p1").innerHTML = "";}
+	
+	function savesms(){
+		var sms_new = $("#sms_new").is(":checked")? 1:0;
+		var sms_re = $("#sms_re").is(":checked")? 1:0;
+		var sms_savecase = $("#sms_savecase").is(":checked")? 1:0;
+		var q= "sms_new="+sms_new + "&sms_re="+sms_re + "&sms_savecase="+sms_savecase;
+		document.getElementById("sss").style.display = "none";
+		$("#1x").html("+");
+		getData(q,0,'saveSMSMeta.php',function(){},function(){});		
+	}
+	
+</script>	

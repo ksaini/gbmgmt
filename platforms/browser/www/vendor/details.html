@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="msapplication-tap-highlight" content="no" />
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+      <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+      <!---<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />---->
+      
+	  <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="../css/index.css" />
+      <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	  
+	  <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	  <link href="../css/bootstrap-theme.min.css" rel="stylesheet">
+	 	  
+	  
+	  <script src="../js/moment.min.js"></script>   
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+
+
+	  
+      <title>GreyBox Admin</title>
+	  <style>
+body {
+	#background-image:url(img/s71.png);
+	background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    height: auto !important;
+    min-height:100%;
+	text-transform:inherit;
+	height: 100%;
+	
+}	
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding-top: 5px;
+	padding-bottom: 10px;
+	padding-left:15px;
+	padding-right:5px;
+	border-bottom:1px solid #E0E0E0;
+	
+}
+.blist {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+	padding-left:50px;	
+}
+.chat li
+{
+    margin-bottom: 2px;
+    padding-bottom: 2px;
+	color:#B3A9A9;
+    border-bottom: 1px dotted #B3A9A9;
+	height:30px;
+	vertical-align:middle;
+}
+.plchldr {
+	font-size:12px;
+	border:0px;
+	width:65%;
+	height:40px;
+	
+}
+.plchldr:focus {
+	border:0;
+	box-shadow: none;
+	
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+	
+}
+
+.valtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+	color: #4F545B;
+	contenteditable = true;
+	box-shadow: none;
+	border-bottom: 0px;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	margin-bottom:0px;
+	letter-spacing: 1px;
+}
+
+.chat li .chat-body p
+{
+    margin: 0;
+	width:100%;
+    color: #F5F5F5;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.sticky {
+  
+}
+.smallf3 {
+	font-size:11px;
+	text-align:left;
+	font-weight: 400;
+	
+}
+.smallf4 {
+	font-size:12px;
+	text-align:left;
+	font-weight: 400;
+	margin-bottom:5px;
+}
+.stickyfooter {
+  position: fixed;
+  bottom:0;
+}
+.panel-body
+{
+    overflow-y: scroll;
+	min-height: 760px;
+    height: 100%;
+	padding-top: 45px;
+}
+.panel-footer{
+	padding: 1px 5px;
+}
+.slots{
+ background-color:#eee;
+}
+.slots:focus {outline:0;}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+.navbar-custom{
+	background-color: #8159bb;
+}
+a{
+	color:white
+}
+
+.toolbar {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    padding-bottom:7px;padding-top:7px;
+	font-size:10px;
+	padding-left: 5px;
+    padding-right: 5px;
+}
+input:focus,
+select:focus,
+button:focus {
+    outline: none;
+}
+.desc {
+	font-family: 'open_sans','Open Sans',sans-serif;
+	font-size:16px;
+	text-align:center;
+	background-color: #fcf8e3;
+	letter-spacing:3px;
+}
+.zz {
+	margin-left:5px;
+	margin-right:5px;
+	padding-left:1px;
+	padding-right:1px;
+}
+.z1 {
+	padding-left:7px;
+	padding-right:7px;
+}
+.bootstrap-datetimepicker-widget {
+  min-height:300px;
+  background-color: #fff; /* This is your background color. Copy and Paste this row. */
+}
+.info {
+  border-color: #28a4c9;
+  color: #28a4c9;
+  background-color:white;
+  font-weight: 500;
+  margin-left:5px;
+}
+.danger {
+  border-color: #f44336;
+  background-color:white;
+  color: red;
+  margin-right:5px;
+  font-size:12px;
+}
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+  width:100%;
+  margin-left:15px;
+ 
+  
+}
+
+.autocomplete-items {
+  
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+  width:80%;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9; 
+}
+
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+.z2{
+background-color: #fcf8e3;
+width:60px;
+height:27px;
+text-align:center;
+}
+.z3{
+
+width:70px;
+height:27px;
+text-align:center;
+}
+@keyframes placeHolderShimmer{
+    0%{
+        background-position: -468px 0
+    }
+    100%{
+        background-position: 468px 0
+    }
+}
+
+.animated-background {
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px 104px;
+    position: relative;
+}
+
+</style>
+     
+   </head>
+   <body >
+     
+<nav class="navbar navbar-custom navbar-fixed-top" ">
+  <div class="container-fluid">
+    <div class="navbar-header" >
+      <a class="navbar-brand" style="width:100%;text-align:center;" href="../vendor/vendor.html"><i style="position: absolute;left:5px;;" class="fa fa-arrow-left" aria-hidden="true"></i> <span style="font-size:14px;">Vendor Details</span></a>
+    </div>
+   
+  </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5" style="padding-right:0px;padding-left:0px;">
+            <div class="panel panel-primary">
+                <div class="panel-body" id="p0"> 
+				<div class="sticky">
+					<div class="row "><br>
+						<div class="content col-md-2 col-xs-2" >
+							<p class="smallf4">Name: </p>
+						</div>
+						<div class="content col-md-8 col-xs-8" >
+							<p class="valtext animated-background" id="name">&nbsp;</p>
+						</div>
+						<div class="content col-md-2 col-xs-2" >
+							<p id=""></p>
+						</div>
+						
+                </div>
+				<div class="row " >
+						<div class="content col-md-2 col-xs-2" >
+							<p class="smallf4">Contact: </p>
+						</div>
+						<div class="content col-md-8 col-xs-8" >
+							<p class="valtext animated-background" id="contact">&nbsp;</p>
+						</div>
+				</div>
+				<div class="row " >	
+						<div class="content col-md-2 col-xs-2" >
+							<p class="smallf4">Mobile: </p>
+						</div>
+						<div class="content col-md-6 col-xs-6" >
+							<p class="valtext" id="mobile" style="letter-spacing:0px"></p>
+						</div>
+						
+				</div>
+				<div class="row " style="border-bottom: 1px solid #E0E0E0;">
+					<div class="content col-md-2 col-xs-2" >
+							<p class="smallf4">Address: </p>
+						</div>
+						<div class="content col-md-10 col-xs-10" style="letter-spacing:0px">
+							<p class="valtext" id="addr"></p>
+						</div>
+				</div>
+				
+				</div>
+				<div id="toolbar1" class="row " style="border: 1px solid #8159bb;padding-bottom:5px;margin-left:15px;margin-right:15px;margin-top:10px;border-radius: 5px;padding-top:10px;margin-bottom:10px;">
+					<div class="content col-md-12 col-xs-12 toolbar" id="tb1" onclick="addBill()" style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext " style="color:#8159bb;;"><i class="fa fa-plus " ></i> Add Billing</p>
+					
+					</div>
+				</div>
+				<div id="part2" style="display:none;">
+				<div class="row trbody" style="height:100%;border-bottom:1px solid #E0E0E0;border-top:1px solid #E0E0E0;" id="bdate">
+					<ul class="chat desc"><b>New Bill</b></ul>
+					<ul class="chat valtext" id="chat" style="display: flex;">
+						<p style="padding-top:7px;margin-top:10px;;width:100px;">Select Date </p>
+						<div class='input-group date' style="width:60%;margin-top:10px;" id='datetimepicker1'>
+						<input type='text' class="form-control" id='apt_dt' style="font-size:12px;" ></input>
+						<span class="input-group-addon">
+								<i id='users' class="fa fa-x fa-calendar"></i>
+						</span>
+						
+						</div>
+						
+                    </ul>
+				</div>
+				<div class="row trbody" style="height:100%;padding-top:5px;border-bottom:1px solid #E0E0E0;" id="bdate">
+					<ul class="chat valtext" id="chat" style="padding-top:0px;padding-bottom:0px;padding-left:-5px;padding-right:-5px;">
+					<div class="autocomplete" >
+						<input id="seltreat" class="plchldr" price=0 type="text" name="seltreat"  placeholder="Type here to Choose Treatement">
+						<button class="btn btn-sm" onclick="addbdetail()">ADD</button>
+					</div>	
+					
+					</ul>
+				</div>
+					
+				<ul class="chat"  style="margin-top:10px;border-bottom:none;display:none" id="chist">
+					<li style='color: darkslateblue;' ><span name='tname' class='z3' style='text-align:center;'><b>ITEM</b></span><span class='pull-right z3' style="width:40px;" ></span><span class='pull-right z3' ><b>TOTAL</b></span><span  class='pull-right z3' ><b>QTY</b></span></li>
+					<p class = ' text-warning' style='font-size:10px;margin-top:10px;margin-bottom:10px;letter-spacing: 1px;text-align:center'></p>
+					
+				</ul>
+				<ul class="total chat" style="padding-right:35px;display:none" id="chist1" >
+					<li>
+					<div style="width: 100%;">Total (<i class="fa fa-rupee" style="font-size:16px;" aria-hidden="true"></i>)<div id="total"  style="width:60%;float: right;text-align: right;">0</div></div>
+					</li>
+				</ul>
+				<ul class="chat"  id='chist2' style="margin-top:10px;text-align:center;display:none;">
+					<button class="btn danger" onclick="nosave()">Discard Bill</button>
+					<button class="btn info" style="font-weight:500;font-size:12px;width:30%;margin-right:30px;" onclick="saveBill()">Save</button>
+				</ul>		
+				</div>
+				
+				<div  class="row trbody" style="height:100%;border-top:1px solid #E0E0E0;margin-top:160px;" >
+					<ul class='chat' style="letter-spacing:2px;"><b> Recent Billings</b> ()</ul>
+					<ul class="chat" id="part3" >
+						'<i class="fa fa-spinner fa-spin" style="font-size:16px;color:black;"></i> Loading...
+					</ul>
+					
+				</div>
+			</div>
+		</div>	
+	</div>
+</div>
+</div>
+ <script type="text/javascript" src="../js/dataTbl.js"></script>
+ <script type="text/javascript" src="../js/treatement.js"></script>
+ <script type="text/javascript" src="../js/billitem.js"></script>
+ <script>
+$(function () {
+					var dateNow = new Date();
+					$('#datetimepicker1').datetimepicker({
+						locale: 'en',
+						format: 'DD/MM/YYYY',
+						defaultDate:dateNow,
+						widgetPositioning: {
+						vertical: 'bottom',
+						horizontal: 'left'
+						}
+					});
+					
+				});
+</script>
+<script>
+	var did = localStorage.did;
+	var vid = getParameterByName("vid");
+	//var item = ["Cappol 350mg","Cappol 250mg","Dolo 500mg","Dolo -S 500mg","Dolo 600mg","Glycodine 100ug - S","Medicine x1 200","Acypser 300 DX","Acypser 300 SX"];
+	autocomplete(document.getElementById("seltreat"), item,0);	
+	getData("q=SELECT name,contact,cn,addr from d_vendor_tbl where vid='" + vid + "' and did='"+did+"' order by vid desc ;",0,"dataTbl.php",showVDetails,function(){});
+		function showVDetails(data){
+		try{
+			var d = JSON.parse(jsonEscape(data));  //jsonEscape to handel new line
+			d = d[0];
+			// remove class showing loading
+			$("#name").removeClass("animated-background");
+			$("#contact").removeClass("animated-background");
+			
+			$("#name").html(d["name"]);
+			$("#contact").html(d["contact"]);
+			$("#mobile").html(d["cn"]);
+			$("#addr").html(d["addr"]);
+			
+			} catch(e) { console.log("Exception::-"+e.toString());}
+		}
+		
+	getData("q=SELECT bdate , bill from d_bill_tbl where vid='" + vid + "' and did='"+did+"' order by id desc LIMIT 5 ;",0,"dataTbl.php",showBDetails,function(){});	
+		function showBDetails(data){
+		var txt = "";
+		try{
+			document.getElementById("part3").innerHTML = "";
+			var d = JSON.parse(data);  
+			for (var i = 0; i < d.length; i++) {
+			    txt += "<li style='margin-right:20px;height:100%'>";
+				var bdate = formatDate(d[i]["bdate"]);
+				txt += "<span>Billing on:</span><span class='pull-right ' onclick='showItem(this)'>" + bdate + "<span style='padding-left:10px;' >  &gt; </span></span>";
+				var bill = d[i]["bill"];
+				
+				var itm = "";
+				try{
+					// remove "" around [] and {} from bill
+					bill = bill.replace(/"\[/g, '[');
+					bill = bill.replace(/\]"/g, ']');
+					bill = bill.replace(/"\{/g, '{');
+					bill = bill.replace(/\}"/g, '}');
+					bill = JSON.parse(bill);
+					for(var j=0;j<bill.length;j++){
+						itm += "<div class='blist' style='margin-right:20px;color:darkblue;display:none;'><span>" + bill[j]["item"] + " x (" +bill[j]["qty"] + ")</span>"+"<span class='pull-right'>" +bill[j]["total"] +"</span></div>";
+					}
+				} catch (e1) {}
+				txt += itm;
+				txt +="</li>";
+				
+				//document.getElementById("part3").innerHTML += txt;
+			}
+			
+			} catch(e) { 
+				txt +="</li>";
+				console.log("Exception::-"+e.toString());}
+			document.getElementById("part3").innerHTML += txt;
+		}
+
+
+	
+		function addBill(){
+		$("#part2").css("display", "block");
+		$("#toolbar1").css("display", "none");
+		
+		}
+		function bcancel(){
+		$("#bill").css("display", "none");
+		}
+		function nosave(){
+			$("#toolbar1").css("display", "block");
+			$("#part2").css("display", "none");
+			$("#chist").css("display", "none");
+			$("#chist1").css("display", "none");
+			$("#chist2").css("display", "none");
+			document.getElementById("chist").innerHTML = "";
+		}
+		
+		function badd(){
+			var item = $("#item").val();
+			var dt = $("#apt_dt").val();
+			var qty = $("#qty").val();
+			var price = $("#price").val();
+			
+			
+			var txt = '<div class="row" style="padding-top:5px;color: darkblue;">';
+			txt += '<div class="col-xs-4 z1">'+item+'</div>';
+			txt += '<div class="col-xs-1 z1">'+qty+'</div>';
+			txt += '<div class="col-xs-3 z1">'+dt+'</div>';
+			txt += '<div class="col-xs-2 z1">'+price+'</div>';
+			txt += '<div class="col-xs-2 z1"></div>';
+			txt += '</div>';
+			
+			
+			document.getElementById("billdetails").innerHTML += txt;
+			$("#bill").css("display", "none");
+		}
+		function addbdetail(){
+			var txt = "";
+			var val = $("#seltreat").val();
+			$("#seltreat").val("");
+			if(val.trim().length > 1){
+				txt += "<li style='color: darkslateblue;' ><span class='x1' >" + val + "</span><span class='pull-right z3' style='width:40px;' onclick='removeItem(this)'><i class='fa fa-trash-o' style='font-size:18px;color:red'></i></span><span class='pull-right z2 ttl' contenteditable=true onkeyup='calcTotal()'  >0</span><span  class='pull-right z2 x2' contenteditable=true >1</span></li>";
+				document.getElementById("chist").innerHTML += txt;
+				
+				// make tbl header and total visible
+				$("#chist").css("display", "block");
+				$("#chist1").css("display", "block");
+				$("#chist2").css("display", "block");
+			}	
+			
+		}
+		
+		function calcTotal(){
+			// calculate total of all totals
+			var sum = 0;
+			$('.ttl').each(function(){
+				sum += parseFloat($(this).text());  // Or this.innerHTML, this.innerText
+			});
+			$("#total").html(sum);
+		}
+		function saveBill(){
+			// Store items
+			var item = [];
+			$('.x1').each(function(){
+				item.push($(this).text());
+			});
+			//Store Qty
+			var qty = [];
+			$('.x2').each(function(){
+				qty.push($(this).text());
+			});
+			// Store ttl
+			var ttl = [];
+			$('.ttl').each(function(){
+				ttl.push($(this).text());
+			});
+			
+			// create aJSON now.
+			var json = [];
+			var txt="";
+			for (var i = 0; i < item.length; i++) {
+				txt = '{"item":"'+item[i]+'","qty":"'+qty[i]+'", "total" : "'+ttl[i]+'"}';
+				json.push(txt);
+			}
+			var total = $("#total").text();
+			var apt_dt =formateDt($('#datetimepicker1').data('DateTimePicker').date());
+			var q = "1&did="+ localStorage.did + "&vid=" + getParameterByName("vid") + "&total="+total + "&apt_dt=" + apt_dt + "&bill=" + JSON.stringify(json);
+			
+			if(JSON.stringify(json).length >2 )
+				getData(q,1,"saveBill.php",function(){location.reload();},function(){});
+		}
+		function formateDt(dt){
+   var date = new Date(dt);
+	var day = date.getDate();
+  var monthIndex = date.getMonth() + 1;
+  var year = date.getFullYear();
+  
+  if(monthIndex < 10)
+	monthIndex = "0" + monthIndex;
+  if(day < 10)
+	day = "0" + day;		
+  
+  return year+"-"+monthIndex+"-"+day;
+}
+
+function removeItem(o){
+	o.parentNode.parentNode.removeChild(o.parentNode);
+	calcTotal();
+}
+function showItem(e){
+	 $(e.parentNode).find(".blist").css("display", "block");
+}
+		
+</script>	

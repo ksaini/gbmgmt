@@ -1,0 +1,420 @@
+<html><head>
+      <meta charset="utf-8">
+      <meta name="format-detection" content="telephone=no">
+      <meta name="msapplication-tap-highlight" content="no">
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+      <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+      <!---<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />---->
+      
+	  <link href="./assets/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="./css/index.css">
+      <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+	  <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	  
+	  <script src="./js/moment.min.js"></script><script type="text/javascript">navigator.__defineGetter__("userAgent",function(){return "Mozilla/5.0 (Linux; Android 5.0.2; SAMSUNG SM-T550 Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/3.3 Chrome/38.0.2125.102 Safari/537.36"})</script>   
+<script src="./js/jquery-1.10.2.js"></script>
+<script src="./assets/js/bootstrap.min.js"></script>
+<script src="./assets/js/bootstrap-datetimepicker.min.js"></script>
+	  <script src="./assets/js/bootstrap-datetimepicker.min.js"></script>
+      <title>GreyBox Admin</title>
+	  <style>
+body {
+	#background-image:url(img/s71.png);
+	background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    height: auto !important;
+    min-height:100%;
+	text-transform:inherit;
+	height: 100%;
+}	
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding-top: 15px;
+	padding-left:3px;
+	padding-right:3px;
+	display: flex;
+}
+
+.chat li
+{
+    margin-bottom: 2px;
+    padding-bottom: 2px;
+    border-bottom: 1px dotted #B3A9A9;
+	background-color:#F5F5F5;
+	text-align:center;
+	height:60px;
+	vertical-align:middle;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+	
+}
+
+.valtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    
+    font-size: 18px;
+    font-weight: 600;
+	color: #636972;
+	contenteditable = true;
+	box-shadow: none;
+	border-bottom: 1px solid #B3A9A9;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	margin-bottom:0px;
+	letter-spacing: 3px;
+}
+.valtext:focus {
+	border:0;
+	box-shadow: none;
+	border-bottom: 1px solid #B3A9A9;
+	color:#8159bb;
+}
+
+.chat li .chat-body p
+{
+    margin: 0;
+	width:100%;
+    color: #F5F5F5;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+.stickyfooter {
+  position: fixed;
+  bottom:0;
+}
+.panel-body
+{
+    overflow-y: scroll;
+	min-height: 660px;
+    height: 100%;
+	padding-top: 50px;
+}
+.panel-footer{
+	padding: 1px 5px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+.navbar-custom{
+	background-color: #8159bb;
+}
+
+.regtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 18px;
+    font-weight: 600;
+	color: #636972;
+	
+}
+
+
+.errtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    margin-top: -10px;
+    font-size: 12px;
+    font-weight: 300;
+	color: red;
+	
+}
+.infotext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    margin-top: -10px;
+    font-size: 12px;
+    font-weight: 300;
+	color: blue;
+	
+}
+.smallf {
+	font-size:18px;
+}
+.smallf2 {
+	font-size:16px;
+	text-align:left;
+	font-weight: 100;
+}
+.smallf3 {
+	font-size:13px;
+	text-align:left;
+	font-weight: 100;
+	
+}
+.smallf4 {
+	font-size:10px;
+	text-align:left;
+	font-weight: 500;
+	margin-bottom:5px;
+}
+.slots{
+ background-color:#eee;
+}
+.slots:focus {outline:0;}
+
+.slots1{
+ font-size:16px;
+ width:27%;
+ margin-bottom:10px;
+ font-weight: 500;
+ line-height: 1.5;
+ text-align: center;
+ color: #616161;
+ margin-bottom: 16px;
+ height: 46px;
+ border-radius: 4px;
+ background-color: #fff;
+ border: 1px solid #bdbdbd;
+ margin-left:8px;  
+}
+.slotsunavailable{
+	color:#e0e0e0!important;
+}
+.slotselected{
+	border:1.5px solid #8159bb;
+	background-color:#f2eff7;
+}
+.btn1 {
+	display: inline-block;
+    margin-bottom: 0;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+	background-color:white;
+	
+}
+a{
+	color:#aa8fd1;
+}
+.gender {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 300;
+	border-radius: 4px;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	margin-bottom:0px;
+	padding-top:2px;
+	padding-bottom:2px;
+	letter-spacing: 3px;
+}
+.selectedF {
+	border: 1px solid #F7A7C8;
+}
+.selectedM {
+	border: 1px solid #1DC7EA;
+}
+.rowsearch {
+margin-left:-35px;margin-right:15px;border-bottom:1px dotted #B3A9A9;margin-top:10px;
+}
+</style>
+     
+   <style></style></head>
+   <body style="">
+     
+<nav class="navbar navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" style="width:100%;text-align:center;color:white;" href="dashboard.html"> <span style="color:white;font-size:14px;" id="drname"></span></a>
+    </div>
+   
+  </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5" style="padding-right:0px;padding-left:0px;">
+            <div class="panel panel-primary">
+                <div class="panel-body" id="p0"> 
+					<ul class="chat" id="p1" style="display: block;">
+					<div class="input-group" style="width:100%;">
+						<input type="text" class="form-control smallf2" id="srchp" placeholder="Search by Mobile or Name">
+						<span class="input-group-btn">
+						<button class="btn btn-default" style="background-color:#ccc;padding-top:10px;padding:bottom:10px;" type="button" onclick="searchclient();"><i class="fa fa-search"></i></button>
+						</span>
+					</div>
+					
+										   
+                    </ul>
+					<ul id="p2" style="display: none;">
+					<div id="p21"></div>
+                   
+					<div class="row" style="margin-left:-35px;margin-right:15px;margin-top:10px;display: flex;">
+						<button class="btn btn-default" style="background-color:#ccc;font-weight:300;font-size:12px;width:100%;margin-right:10px;" onclick="cancelsearch();">Cancel</button>
+						<button class="btn btn-success" style="font-weight:600;font-size:14px;width:100%" onclick="createnew();">Create New Record</button>
+						
+					</div>	
+					</ul>
+				
+				<div class="row" id="p25" style="height:52px;margin-top:35px;">
+				<div class="content col-md-3 col-xs-6" style="height:82px;"><center>
+					<a href="./patient/add.html">
+					<i class="fa fa-user-plus" style="font-size:28px"></i>
+					<h5>Patient</h5></a></center>
+				</div>
+				
+				<div class="content col-md-3 col-xs-6" style="height:82px;"><center>
+					<a onclick='seeappointment()'>
+					<i class="fa fa-calendar-check-o" style="font-size:28px"></i>
+					<h5>View Appointment</h5></a></center>
+				</div>
+				<div class="content col-md-3 col-xs-6" style="height:82px;"><center>
+					<a href="./report/index.html">
+					<i class="fa fa-pencil-square" style="font-size:28px"></i>
+					<h5>Daily Reports</h5></a></center>
+				</div>
+				<div class="content col-md-3 col-xs-6" style="height:82px;"><center>
+					<a href="">
+					<i class="fa fa-cogs" style="font-size:28px"></i>
+					<h5>Manage Profile</h5></a></center>
+				</div>
+								
+			</div>	
+										
+				
+			 </div>
+        </div>
+    </div>
+</div>
+   
+   <script type="text/javascript" src="cordova.js"></script>
+   <script type="text/javascript" src="./js/index.js"></script>
+   <script type="text/javascript" src="./js/person.js"></script>
+   <script type="text/javascript" src="./js/dataTbl.js"></script>
+	
+   <script>
+   document.getElementById("drname").innerHTML = "Dr. " + localStorage.dname;
+   var did= localStorage.did;
+   var gender = "f";
+   document.getElementById("p2").style.display = "none";
+   document.getElementById("p3").style.display = "none";   
+   var srch = document.getElementById("srchp").value;
+   var q = "did=" + did + "&srch=" + srch + "&start=0&end=4";
+   getData(q,0,'searchP.php',resSuccess,resError);
+   
+	function showSearch(data){
+	    try{
+		var d = JSON.parse(data);
+		
+		var txt = "";
+		for(var i=0;i<d.length;i++){
+			txt += '<div class="row rowsearch" ><div class="col-xs-5 smallf4 regtext">'+d[i]["pname"]+'</div><div class="col-xs-5 smallf4 regtext">'+d[i]["cn1"]+'</div>';
+			txt += '<div class="col-xs-6 smallf4 regtext">1680 Sector 78, Mahagun project noida 78</div>';
+			txt += '<div class="col-xs-6 smallf4 regtext" style="display: flex;">';
+			txt += '<button class="btn1 " style="color:#aa8fd1;font-weight:600;font-size:12px;width:100%;margin-right:10px;padding:7px;" onclick="fetchPatientS('+d[i]['pid']+')"><i class="fa fa-calendar" style="font-size:20px"></i> </button>';
+			txt += '<button class="btn1 " style="color:#aa8fd1;font-weight:300;font-size:12px;width:100%;padding:7px;" onclick="fetchPatientH('+d[i]['pid']+');"><i class="fa fa-arrow-right" style="font-size:20px"></i></button>';
+			txt += '</div></div>';
+		}
+		} catch (e){
+			var d="";
+			txt = "<div class='small3' style='margin-top:10px;font-size:12px;' >No search results.</div>"	
+		}
+		document.getElementById("p21").innerHTML = txt ;
+		document.getElementById("p2").style.display = "block"; 
+		document.getElementById("p3").style.display = "none"; 
+	}
+	function errSearch(){}
+	function showScreen(s){
+		document.getElementById("p1").style.display = "none"; 
+		document.getElementById("p2").style.display = "none"; 
+		document.getElementById("p3").style.display = "none"; 
+		document.getElementById("p"+s).style.display = "block"; 
+	}
+	function scheduleapt(){
+		window.location.href = "selectslot.html?action=create&ref=create.html";
+	}
+	function fetchPatientS(p){
+		// get data for getBasicInfo()
+		getData("q= SELECT * from d_patient_tbl where did='"+did + "' and pid="+p,0,"dataTbl.php",go_schedule,errSearch);
+		//window.location.href = "./patient/appointment.html?pid=" +p;
+	}
+	function go_schedule(x){
+		var d = JSON.parse(x);
+		d = d[0];
+		var p = new Person("",d["pname"],d["cn1"],d["age"],"",d["gender"],"",d["pid"]);
+		localStorage.basicInfo = p.getInfo();
+		window.location.href = "./patient/appointment.html?pid=" +d["pid"];
+	}
+	function fetchPatientH(p){
+		// get data for getBasicInfo()
+		getData("q= SELECT * from d_patient_tbl where did='"+did + "' and pid="+p,0,"dataTbl.php",_history,errSearch);
+		//window.location.href = "./patient/appointment.html?pid=" +p;
+	}
+	function createnew(){
+		window.location.href="./patient/add.html";	
+	}
+	
+	function cancelsearch(){
+		document.getElementById("srchp").value = "";
+		document.getElementById("p2").style.display = "none"; 	
+		document.getElementById("p25").style.display = "block"; 
+	}
+	function selectF(){
+		document.getElementById("male").classList.remove("selectedM");
+		document.getElementById("female").classList.add("selectedF");
+		gender = "f";
+	}
+	function selectM(){
+		document.getElementById("female").classList.remove("selectedF");
+		document.getElementById("male").classList.add("selectedM");
+		gender = "m";
+	}
+	function onSuccessP(data){
+	
+		window.location = "patient/view.html?pid="+data + "&cid=0";
+	}
+	function onErrorP(){}
+	function _history(x){
+		var d = JSON.parse(x);
+		d = d[0];
+		var p = new Person("",d["pname"],d["cn1"],d["age"],"",d["gender"],"",d["pid"]);
+		localStorage.basicInfo = p.getInfo();
+		
+		window.location.href  = "./patient/history.html?pid=" + d["pid"];
+	}
+	function seeappointment(){
+		var dateObj = new Date();
+		var month = dateObj.getMonth() + 1; //months from 1-12
+		var day = dateObj.getDate();
+		var year = dateObj.getFullYear();
+
+		var dt =  day + "/" + month + "/" + year;
+		window.location.href = "./appointment/view.html?dt="+dt;
+	}
+	</script></div></body></html>

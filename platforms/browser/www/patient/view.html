@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="msapplication-tap-highlight" content="no" />
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+      <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+      <!---<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />---->
+      
+	  <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="../css/index.css" />
+      <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	  <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	  
+	  <script src="../js/moment.min.js"></script>   
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+	  <script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+      <title>GreyBox Admin</title>
+	  <style>
+body {
+	#background-image:url(img/s71.png);
+	background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    height: auto !important;
+    min-height:100%;
+	text-transform:inherit;
+	height: 100%;
+	
+}	
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding-top: 5px;
+	padding-bottom: 10px;
+	padding-left:15px;
+	padding-right:5px;
+	border-bottom:1px solid #E0E0E0;
+	display: flex;
+}
+
+.chat li
+{
+    margin-bottom: 2px;
+    padding-bottom: 2px;
+	color:#B3A9A9;
+    border-bottom: 1px dotted #B3A9A9;
+	height:30px;
+	vertical-align:middle;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+	
+}
+
+.valtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+	color: #4F545B;
+	contenteditable = true;
+	box-shadow: none;
+	border-bottom: 0px;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	margin-bottom:0px;
+	letter-spacing: 1px;
+}
+.plchldr:focus {
+	border:0;
+	box-shadow: none;
+	
+}
+
+.chat li .chat-body p
+{
+    margin: 0;
+	width:100%;
+    color: #F5F5F5;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.sticky {
+  
+}
+
+.stickyfooter {
+  position: fixed;
+  bottom:0;
+}
+.panel-body
+{
+    overflow-y: scroll;
+	min-height: 660px;
+    height: 100%;
+	padding-top: 45px;
+}
+.panel-footer{
+	padding: 1px 5px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+.navbar-custom{
+	background-color: #8159bb;
+}
+a{
+	color:white
+}
+
+.toolbar {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    padding-bottom:7px;padding-top:7px;
+}
+.toolbar2 {
+	font-family: 'open_sans','Open Sans',sans-serif;
+	font-size:10px;
+	height:50px;
+	Font-weight:bold;
+    text-align: center;
+    padding-bottom:2px;padding-top:9px;
+	padding-left:2px;padding-right:2px;
+	text-align:center;border-right:1px solid #E0E0E0;
+}
+.smallf {
+	font-size:18px;
+}
+.smallf2 {
+	font-size:16px;
+	text-align:left;
+	font-weight: 400;
+}
+.smallf3 {
+	font-size:11px;
+	text-align:left;
+	font-weight: 400;
+	
+}
+.smallf4 {
+	font-size:12px;
+	text-align:left;
+	font-weight: 400;
+	margin-bottom:5px;
+}
+.slots{
+ background-color:#eee;
+}
+.slots:focus {outline:0;}
+
+.slotsunavailable{
+	color:#e0e0e0!important;
+}
+.slotselected{
+	border:1 px solid #8159bb;
+	background-color:#AAA;
+}
+.tbselected{
+	border:1 px solid #8159bb;
+	background-color:#DCDCDC;
+}
+.gender {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    font-size: 8px;
+    font-weight: 300;
+	border-radius: 4px;
+	border-top: -3px;
+	border-left: 0px;
+	border-right: 0px;
+	margin-bottom:0px;
+	padding-top:0px;
+	padding-bottom:2px;
+	letter-spacing: 3px;
+}
+.selectedF {
+	border: 1px solid #F7A7C8;
+}
+.dchart {
+	width:37px;
+}
+.hide {
+	display:none;
+}
+.show {
+	display:block;
+}
+.btn-nav {
+	height:50px;
+	font-family: 'open_sans','Open Sans',sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+	color: #636972;
+	letter-spacing:1px;
+	background-color:#eee;	
+}
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+  width:100%;
+}
+
+.autocomplete-items {
+  
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+  width:80%;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9; 
+}
+
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+.plchldr {
+	font-size:12px;
+	border:0px;
+	width:80%;
+	height:40px;
+	
+}
+input:focus,
+select:focus,
+button:focus {
+    outline: none;
+}
+.total {
+	font-weight: bold;
+	padding-right:20px;
+	width:100%;padding-left: 15px;height: 30px;
+}
+.desc {
+	font-size:12px;
+	padding-left:0px;
+}
+.tb2{
+ background-color:white;
+ 
+}
+.tb2:focus {outline:0;}
+.med{
+	height:100%;
+}
+.med:focus{
+	border:0;
+	outline: 0px solid transparent;
+	color:#8159bb;
+	
+}
+.trhead {
+	background: #aa8fd1;<!---#4285f4;--->
+	font-family: 'open_sans','Open Sans',sans-serif;	
+	letter-spacing: 1px;
+	color:white;
+	font-size:12px;
+	height:25px;
+	padding-left: 15px;
+    padding-top: 3px;
+	border: 1px solid #d3d3d3;
+	width:100%;
+}
+#tbor {background-color:#fff3cd;}
+
+</style>
+     
+   </head>
+   <body >
+     
+<nav class="navbar navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" style="width:100%;text-align:center;" href="../dashboard.html"><i style="position: absolute;left:5px;;" class="fa fa-home" aria-hidden="true"></i> <span>View Patient</span></a>
+    </div>
+   
+  </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5" style="padding-right:0px;padding-left:0px;">
+            <div class="panel panel-primary">
+                <div class="panel-body" id="p0"> 
+				<div class="sticky">
+					<div class="row "><br>
+						<div class="content col-md-2 col-xs-2" >
+							<p class="smallf4">Name: </p>
+						</div>
+						<div class="content col-md-8 col-xs-8" >
+							<p class="valtext" id="name"></p>
+						</div>
+						<div class="content col-md-2 col-xs-2" >
+							<p id="gender"></p>
+						</div>
+						
+                </div>
+				<div class="row " >
+					<div class="content col-md-2 col-xs-2" >
+						<p class="smallf3">Age: </p>
+					</div>
+					<div class="content col-md-2 col-xs-2" >
+						<p class="valtext" id="age"></p>
+					</div>	
+					<div class="content col-md-2 col-xs-2" >
+						<p class="smallf3">Mobile: </p>
+					</div>
+					<div class="content col-md-4 col-xs-4" >
+						<p class="valtext" id="mobile"></p>
+					</div>
+				</div>
+				<div class="row " style="border-bottom: 1px solid #E0E0E0;">
+					<div class="content col-md-2 col-xs-2" >
+						<p class="smallf3">Address: </p>
+					</div>
+					<div class="content col-md-10 col-xs-10" >
+						<p class="valtext" style="letter-spacing: 1px;font-size:12px;" id="address"></p>
+					</div>
+					
+				
+				</div>
+				<div id="toolbar1" class="row " style="border-bottom: 1px solid #ccc;">
+					<div class="content col-md-4 col-xs-4 toolbar " id="tb1" onclick='viewcases()' style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext "><i class="fa fa-list " ></i></p>
+						<p class="valtext ">View Cases</p>
+					</div>
+					<div class="content col-md-4 col-xs-4 toolbar" id="tb2" onclick='tb1(2)' style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext "><i class="fa fa-rupee " ></i></p>
+						<p class="valtext ">Payments</p>
+					</div>
+					<div class="content col-md-4 col-xs-4 toolbar" id="tb3" onclick='editprofile1()' style="text-align:center">
+						<p class="valtext "><i class="fa fa-edit "></i></p>
+						<p class="valtext ">Edit Profile</p>
+					</div>
+					
+				</div>
+				<div id="forsave" class="row alert-warning" style="border-bottom: 1px solid #ccc;text-align:center;display:none;">
+						<div class="content col-md-12 col-xs-12 " style="margin-bottom:10px;">
+							<p>There are unsaved changes. Would you like to save?</p>
+							<button class="btn btn-sm btn-success" style="font-weight:500;font-size:12px;width:30%;margin-right:30px;" onclick="savecase1(cid)">Save</button>
+							<button class="btn btn-sm" onclick="nosave()">Don't Save</button>
+						</div>
+				</div>
+				</div>
+				<div id="part1" style="display:none;">
+				<ul class="chat" id="body1" >
+				<div class=" row valtext">Upper</div>
+				</ul>
+				<ul class="chat" id="chat" style="background-color:#F8F8F8">
+					<div class="row">
+						<image class="dchart" src = "../img/chart/upper-1.png" id="upper-1"></img>
+						<image class="dchart" src = "../img/chart/upper-2.png" id="upper-2"></img>
+						<image class="dchart" src = "../img/chart/upper-3.png" id="upper-3"></img>
+						<image class="dchart" src = "../img/chart/upper-4.png" id="upper-4"></img>
+						<image class="dchart" src = "../img/chart/upper-5.png" id="upper-5"></img>
+						<image class="dchart" src = "../img/chart/upper-6.png" id="upper-6"></img>
+						<image class="dchart" src = "../img/chart/upper-7.png" id="upper-7"></img>
+						<image class="dchart" src = "../img/chart/upper-8.png" id="upper-8"></img>
+					</div>
+				</ul>
+				<ul class="chat" id="chat" style="background-color:#F8F8F8">
+					<div class="row">
+						<image class="dchart" src = "../img/chart/upper-9.png" id="upper-9"></img>
+						<image class="dchart" src = "../img/chart/upper-10.png" id="upper-10"></img>
+						<image class="dchart" src = "../img/chart/upper-11.png" id="upper-11"></img>
+						<image class="dchart" src = "../img/chart/upper-12.png" id="upper-12"></img>
+						<image class="dchart" src = "../img/chart/upper-13.png" id="upper-13"></img>
+						<image class="dchart" src = "../img/chart/upper-14.png" id="upper-14"></img>
+						<image class="dchart" src = "../img/chart/upper-15.png" id="upper-15"></img>
+						<image class="dchart" src = "../img/chart/upper-16.png" id="upper-16"></img>
+					</div>
+				</ul>
+				<ul class="chat" id="chat" >
+				<div class="row valtext">Lower</div>
+				</ul>
+				<ul class="chat" id="chat" style="background-color:#F8F8F8">
+					<div class="row">
+						<image class="dchart" src = "../img/chart/lower_16.png" id="lower-16"></img>
+						<image class="dchart" src = "../img/chart/lower_15.png" id="lower-15"></img>
+						<image class="dchart" src = "../img/chart/lower_14.png" id="lower-14"></img>
+						<image class="dchart" src = "../img/chart/lower_13.png" id="lower-13"></img>
+						<image class="dchart" src = "../img/chart/lower_12.png" id="lower-12"></img>
+						<image class="dchart" src = "../img/chart/lower_11.png" id="lower-11"></img>
+						<image class="dchart" src = "../img/chart/lower_10.png" id="lower-10"></img>
+						<image class="dchart" src = "../img/chart/lower_9.png" id="lower-9"></img>
+					</div>
+				</ul>
+				
+				<ul class="chat" id="chat" style="background-color:#F8F8F8">
+					<div class="row">
+						<image class="dchart" src = "../img/chart/lower_8.png" id="lower-8"></img>
+						<image class="dchart" src = "../img/chart/lower_7.png" id="lower-7"></img>
+						<image class="dchart" src = "../img/chart/lower_6.png" id="lower-6"></img>
+						<image class="dchart" src = "../img/chart/lower_5.png" id="lower-5"></img>
+						<image class="dchart" src = "../img/chart/lower_4.png" id="lower-4"></img>
+						<image class="dchart" src = "../img/chart/lower_3.png" id="lower-3"></img>
+						<image class="dchart" src = "../img/chart/lower_2.png" id="lower-2"></img>
+						<image class="dchart" src = "../img/chart/lower_1.png" id="lower-1"></img>
+					</div>
+				</ul>
+				<ul style="margin-top:15px;margin-left:-25px;" id="exm_history">
+				</ul>
+				</div>
+				<!-------------------------- PART 2-------------------------->
+				<div id="part2" style="display:none;">
+				<br>
+				<ul class="chat"  >
+				<br><br>
+				<div class="row valtext"><p style="padding-top:10px;font-weight:bold;">ADD EXAMINATION DETAILS</p></div>
+				</ul>
+				
+				<ul class="chat" >
+					
+					<select class="form-control valtext" data-error="please select title" style="width:90%;font-size:12px;letter-spacing:1px;padding-right:0px;padding-left:1px;" id="examination"  title="Examination" >
+					</select>
+				</ul>
+				<ul class="chat"  >
+				<br><br>
+				<div class="row valtext"><p style="padding-top:10px;font-weight:bold;">ADD EXAMINATION NOTES</p></div>
+				</ul>
+				<ul class="chat" >
+					
+						<textarea id="enote"  class="form-control valtext" style="font-size:14px;" rows="2" placeholder="Examination Notes"></textarea>
+				</ul>
+				</div>
+				
+				<!------------------- PART 3 --------------------------------->
+				<div id="part3" style="display:none;">
+				
+				<ul class="chat"  >
+				<br>
+				<div class="row valtext"><p style="padding-top:10px;font-weight:bold;">ADD TREATEMENT</p></div>
+				</ul>
+				
+				<ul class="chat" style="padding-top:0px;padding-bottom:0px;padding-left:-5px;padding-right:-5px;">
+					<div class="autocomplete" >
+						<input id="seltreat" class="plchldr" price=0 type="text" name="seltreat" onclick="hidetb5();" placeholder="Type here to Choose Treatement">
+						<button class="btn btn-sm" onclick="addtreatement()">ADD</button>
+					</div>	
+					
+				</ul>
+				
+				<!-------- tool bar 5------------->
+				
+				
+				<div id="toolbar5" class="row tb2" style="border: 1px solid #ccc;display:none;height:52px;">
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tbor" >
+						<p class="valtext "  style="font-size:10px;font-weight:bold;color:#2c3e85;">Original</p>
+						<p id="price_o" style="padding-top:3px;height: 25px;font-size: 14px;" contenteditable=true onkeyup="calcDiscount()"></p>
+						
+					</div>
+					
+					<div class="content col-md-3 col-xs-3 toolbar2" id="tb1" onclick="updateT('10 Day')" style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext " style="font-size:10px;font-weight:bold;color:#2c3e85;">Dicsount%</p>
+						<input type="number" id="dis_per" min="0" max="100" value="0" style="width: 80%;text-align: center;height:25px;" onkeyup="calcDiscountPer()">
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1"  style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext " style="font-size:10px;font-weight:bold;color:#2c3e85;">Dis(<i class="fa fa-rupee" style="font-size:10px;" aria-hidden="true"></i>)</p>
+						<p id="price_d" style="padding-top:3px;"></p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1"  style="text-align:center;border-right:1px solid #E0E0E0;background-color:#fff3cd;">
+						<p class="valtext "  style="font-size:10px;font-weight:bold;color:#2c3e85;">Final</p>
+						<p id="price_f" style="padding-top:3px;font-size: 14px;"></p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1" onclick='tb5savediscount()' style="text-align:center;border-right:1px solid #E0E0E0;background-color:#5aaa78"><i class="fa fa-check" style="color:white;font-size:16px;padding-top:10px;" aria-hidden="true"></i>
+					</div>
+					<div class="content col-md-1 col-xs-1 toolbar2" id="tb1" onclick='removeTMT(selectedPrice)' style="text-align:center;border-right:1px solid #E0E0E0;"><i class="fa fa-trash" style="color:red;font-size:16px;padding-top:10px;" aria-hidden="true"></i>
+					</div>
+					<div class="content col-md-12 col-xs-12 alert-warning" style="border: 1px solid #ccc;font-size: 12px;">
+						Tap on Original to change fee value. 
+					</div>
+				</div>	
+				
+				<ul class="chat" style="border-bottom:none;padding-top:30px;padding-left:5px;" >
+					<div id="xx" class="valtext" style="width:100%"></div>
+				</ul>
+				<ul class="total pull-right" onclick="edittotaldiscount();">
+					<div style="width: 100%;float: left;">Total (<i class="fa fa-rupee" style="font-size:16px;" aria-hidden="true"></i>)<div id="total"  style="width:60%;float: right;text-align: right;"></div></div>
+					<div class="content col-md-12 col-xs-12 alert-warning" style="border: 1px solid #ccc;font-size:10px;margin-top:10px;">
+						Tap on any Treatement to see more options. 
+					</div>
+				</ul>
+				</div>
+				
+				
+				<!-------------- PART 4 : Prescription ---------------------->
+				<div id="part4" style="display:none;">
+				
+				<ul class="chat"  >
+				<div class="row valtext"><p style="padding-top:10px;font-weight:bold;">Prescription</p></div>
+				<div id="debug" style="font-size:10px;color:red;"></div>
+				</ul>
+				
+				<ul class="chat" style="padding-top:0px;padding-bottom:0px;padding-left:-5px;padding-right:-5px;">
+					<div class="autocomplete" >
+						<input id="selmed" class="plchldr" price=0 type="text" name="selmed" placeholder="Type here to Choose Medecine">
+						<button class="btn btn-sm" onclick="addmed()">ADD</button>
+					</div>	
+					
+				</ul>
+				<!---- tool bar 2----->
+				<div id="toolbar2" class="row tb2" style="border: 1px solid #ccc;display:none;">
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1" onclick="updateF('1-o-o')" style="">
+						<p class="valtext " style="font-size:10px;padding-top:12px;font-weight:bold;color:#2c3e85;">1-o-o</p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1" onclick="updateF('1-o-1')" style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext " style="font-size:10px;padding-top:10px;font-weight:bold;color:#2c3e85;">1-o-1</p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1" onclick="updateF('1-1-1')" style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext " style="font-size:10px;padding-top:10px;font-weight:bold;color:#2c3e85;">1-1-1</p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1" onclick="updateF('o-o-1')" style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext " style="font-size:10px;padding-top:10px;font-weight:bold;color:#2c3e85;">o-o-1</p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1" onclick="updateF('SOS')" style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext " style="font-size:10px;padding-top:10px;font-weight:bold;color:#2c3e85;">SOS</p>
+					</div>
+					
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1" onclick='tb1(1)' style="text-align:center;border-right:1px solid #E0E0E0;background-color:#5aaa78"><i class="fa fa-check" style="color:white;font-size:16px;padding-top:10px;" aria-hidden="true"></i>
+						
+					</div>
+					
+				</div>	
+					<!------ tool bar 3 ------>
+					
+				<div id="toolbar3" class="row tb2" style="border: 1px solid #ccc;display:none;">
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1" onclick="updateT('1 Day')" style="">
+						<p class="valtext " style="font-size:10px;padding-top:10px;font-weight:bold;color:#2c3e85;">1 Day</p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1" onclick="updateT('3 Day')" style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext " style="font-size:10px;padding-top:10px;font-weight:bold;color:#2c3e85;">3 Days</p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1" onclick="updateT('5 Day')" style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext " style="font-size:10px;padding-top:10px;font-weight:bold;color:#2c3e85;">5 Days</p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1" onclick="updateT('10 Day')" style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext " style="font-size:10px;padding-top:10px;font-weight:bold;color:#2c3e85;">10 Days</p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1" onclick="updateT('1 Mth')" style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext " style="font-size:10px;font-weight:bold;padding-top:10px;color:#2c3e85;">1 Month</p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1" onclick='tb1(1)' style="text-align:center;border-right:1px solid #E0E0E0;background-color:#5aaa78"><i class="fa fa-check" style="color:white;font-size:16px;padding-top:10px;" aria-hidden="true"></i>
+					</div>
+					
+				</div>	
+					<!------ tool bar 4 ------>
+					
+				<div id="toolbar4" class="row tb2" style="border: 1px solid #ccc;display:none;">
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1"  style="">
+						<p class="valtext " style="font-size:10px;padding-top:10px;font-weight:bold;color:#2c3e85;"></p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1" onclick="moveUp(selectedMed)" style="">
+						<p class="valtext " style="font-size:10px;padding-top:10px;font-weight:bold;color:#2c3e85;"><i class="fa fa-arrow-up" aria-hidden="true"></i></p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1" onclick="moveDown(selectedMed 	)" style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext " style="font-size:10px;padding-top:10px;font-weight:bold;color:#2c3e85;"><i class="fa fa-arrow-down" aria-hidden="true"></i></p>
+					</div>
+					<div class="content col-md-3 col-xs-3 toolbar2" id="tb1" onclick="emptyS(selectedMed)" style="text-align:center;border-right:1px solid #E0E0E0;">
+						<p class="valtext " style="font-size:10px;padding-top:4px;font-weight:bold;color:#2c3e85;">Empty Stomatch</p>
+					</div>
+					
+					<div class="content col-md-3 col-xs-3 toolbar2" id="tb1" onclick='removeMed(selectedMed)' style="text-align:center;border-right:1px solid #E0E0E0;"><i class="fa fa-trash" style="color:red;font-size:16px;padding-top:10px;" aria-hidden="true"></i>
+						
+					</div>
+					
+				</div>
+				
+				<ul class="chat" style="border-bottom:none;padding-top:20px;padding-left:5px;" >
+					<div id="yy" class="valtext" style="width:100%"></div>
+					
+				</ul>
+				<div style="font-size:10px;font-weight:300">* Empty stomatch</div>
+			</div>
+			
+		<!-------------- PART 5 : Summary ---------------------->
+		<div id="part5" style="display:none;">
+				<ul class="chat" style="padding-top:25px;padding-bottom:10px;padding-left:-5px;padding-right:-5px;">
+					<div class="row" style="width:100%" >
+						<div class="content desc col-md-3 col-xs-3">
+							Examination
+						</div>
+						<div class="content valtext col-md-9 col-xs-9" id='r2'>
+						</div>
+						<div class="content col-md-3 col-xs-3">
+							
+						</div>
+						<div class="content valtext col-md-9 col-xs-9" id="r1">
+						</div>
+						<div class="content col-md-3 col-xs-3">
+							
+						</div>
+						<div class="content valtext col-md-9 col-xs-9" id='r3'>
+						</div>
+						
+					</div>
+				</ul>
+				<ul class="chat" style="padding-top:5px;padding-bottom:10px;padding-left:-5px;padding-right:-5px;">	
+					<div class="row" style="width:100%" >
+						<div class="content desc col-md-3 col-xs-3">
+							Treatement
+						</div>
+						<div class="content valtext col-md-9 col-xs-9" id='r4'>
+						</div>
+					</div>
+					
+				</ul>
+				<ul class="chat" style="padding-top:5px;padding-bottom:10px;padding-left:-5px;padding-right:-5px;">	
+					<div class="row" style="width:100%" >
+						<div class="content desc col-md-3 col-xs-3">
+							Medecines
+						</div>
+						<div class="content valtext col-md-9 col-xs-9" id='r5'>
+						</div>
+					</div>
+					
+				</ul>
+				<ul class="chat" style="padding-top:10px;padding-bottom:10px;padding-left:-5px;padding-right:-5px;">	
+					<div class="row" style="width:100%;text-align:center;margin-bottom: -10px;" >
+						<div class="content desc col-md-6 col-xs-6" id='r61'>
+							<p  style="color:black" onclick="window.history.back()">Back</p>
+						</div>
+						<div class="content valtext col-md-6 col-xs-6" id='r62' style="background-color: #5cb85c;color:white;margin-top: -10px;margin-bottom: -15px;">
+							<p style="padding-top: 10px;" onclick='fn2()'><b>Edit</b></p>
+						</div><br>
+						
+					</div>
+					<div class="row" style="width:100%;text-align:center;margin-bottom: -10px;" >
+						<div class="content valtext col-md-6 col-xs-6" id='r62' style="margin-top: -10px;margin-bottom: -15px;">
+							<p style="padding-top: 10px;padding-left:10px;height:100%" ><b>Print</b></p>
+						</div>
+					</div>
+					
+				</ul>
+		</div>
+			
+			
+	<div class="panel-footer stickyfooter" style="width:100%;margin-left: -15px;">
+	<div class="btn-group btn-group-justified" id="f1">
+		<a href="#" class="btn btn-nav" style="border-right:1px solid #aaa;" onclick="window.history.back()">Cancel</a>
+		<a href="#" class="btn btn-nav" onclick="examination(1);fetchJson();">Examination</a>
+	</div>
+	<div class="btn-group btn-group-justified" id="f2" style="display:none;">
+		
+		<a href="#" class="btn btn-nav" style="border-right:1px solid #aaa;" onclick="examination(2)">Back</a>
+		<a href="#" class="btn btn-nav" onclick="examination(3)">Treatement</a>
+	</div>
+	<div class="btn-group btn-group-justified" id="f3" style="display:none;">
+		
+		<a href="#" class="btn btn-nav" style="border-right:1px solid #aaa;" onclick="fn3()">Back</a>
+		<a href="#" class="btn btn-nav" onclick="examination(5);">Prescription</a>
+	</div>
+	<div class="btn-group btn-group-justified" id="f4" style="display:none;">
+		
+		<a href="#" class="btn btn-nav" style="border-right:1px solid #aaa;" onclick="fn4()">Back</a>
+		<a href="#" class="btn btn-nav" onclick="reviewcase(cid)">Review</a>
+	</div>
+	<div class="btn-group btn-group-justified" id="f5" style="display:none;">
+		
+		<a href="#" class="btn btn-nav" style="border-right:1px solid #aaa;" onclick="fn5()">Back</a>
+		<a href="#" class="btn btn-nav" onclick="savecase(cid)">Save</a>
+	</div>
+   
+    </div>
+    </div>
+	</div>
+   </div>
+</div>
+  
+   <script type="text/javascript" src="cordova.js"></script>
+   
+   <script type="text/javascript" src="../js/index.js"></script>
+   <script type="text/javascript" src="../js/examination.json"></script>
+   <script type="text/javascript" src="../js/treatement.js"></script>
+   <script type="text/javascript" src="../js/dataTbl.js"></script>
+  
+   <script type="text/javascript" src="../js/person.js"></script>
+	 </body>
+   <script>
+        ////////////////////////////Init //////////////
+		document.addEventListener("deviceready", onDeviceReady, false);
+		function onDeviceReady(){alert("here");}
+		
+		var fn = base_url + "/json/" + localStorage.did + ".js";
+		setTimeout(function(){
+			loadJS(fn);
+			}, 1000);
+		var cid =0;
+		var did= localStorage.did;
+		var myJSON;
+		if(localStorage.basicInfo== undefined)
+			myJSON = '{"title":"Mr","name":"Uday Kumar Bhaskar", "age":31,"gender":"m","mobile":"9876543210", "addr":"Dadabari Kota"}';
+		else
+			myJSON = localStorage.basicInfo;
+			
+		if(parseInt(getParameterByName("cid")) > 0) // Existing or New Case
+		{
+				cid = getParameterByName("cid");
+				// Fetch other details and fill them	
+		}
+		
+		displayBasicInfo();
+		displayCaseHistory();
+					
+		// Class listener
+		var classname = document.getElementsByClassName("dchart");
+        teeth = [];
+		var myFunction = function() {
+			if(this.classList.contains("slotselected"))
+				this.classList.remove("slotselected");
+			else	
+				this.classList.add("slotselected");
+			if(teeth.indexOf(this.id)== -1)
+				teeth.push(this.id); // add if not there
+			else
+				teeth.splice(teeth.indexOf(this.id),1);
+					
+		};
+
+		for (var i = 0; i < classname.length; i++) {
+			classname[i].addEventListener('click', myFunction, false);
+		}
+		
+		// Load Examination
+		loadExamination();
+		// Load Case data.
+		// If it is an existing case load data here
+		
+		loadCaseHistory("pid="+getParameterByName('pid')+"&cid="+getParameterByName('cid') + "&did=" + did);
+	    
+	/////////////////////////////////////////////////////////////////////////
+	
+	    var casedetails = {};
+		var mid =1; //medicin id counter
+		
+		
+		var selectedMed =0; // var to point selected medicine row
+		var selectedPrice =0; // var to save treatement price
+		function tb1(n){
+			document.getElementById("tb1").classList.remove("tbselected");
+			document.getElementById("tb2").classList.remove("tbselected");
+			document.getElementById("tb3").classList.remove("tbselected");
+			document.getElementById("tb"+n).classList.add("tbselected");
+			if(n==2){
+			    if(localStorage.isDirty ==1)
+					document.getElementById("forsave").style.display = "block";
+				else
+					window.location = "payments.html?pid="+getParameterByName("pid");
+				
+				}
+		}
+		function addtreatement(){
+			var t = document.getElementById("seltreat").value;
+			var t0 = t.split(":")[0];
+			var t1 = document.getElementById("seltreat").getAttribute("price");
+			// Default value if mid ==1, if revisit calculate mid from child  of element XX
+			mid = document.getElementById("xx").childElementCount +1;
+			
+				
+			if(t.trim().length > 0){
+				document.getElementById("xx").innerHTML += "<li style='color: darkslateblue;' onclick='showDiscountTB("+mid+");'><span name='tname'>" + t0 + "</span><span id='prid_"+mid+"'  style='width:50px' class='pull-right'>"+ t1 +"</span></li>";
+				document.getElementById("seltreat").value = "";
+				if(isNaN(parseInt(total)))
+					total =0;
+				total = parseInt(total) + parseInt(t1);
+				document.getElementById("total").innerHTML = total;
+				mid++;
+			}
+		}
+		function addmed(){
+			// if case is a revisit set mid from current list of medecine
+			mid = document.getElementById("yy").childElementCount +1;
+		
+			document.getElementById("toolbar2").style.display = "none";
+			var t = document.getElementById("selmed").value;
+			if(t.trim().length > 0){
+				document.getElementById("yy").innerHTML += "<div class='row'  style='height:30px;'><div class='col-xs-6 med' id='med_"+mid+"' onclick='selectMed("+mid+");' >" + t + "</div><div class='col-xs-3'  onclick='selectFrequency("+mid+");' style='height:100%;'><p class='valtext' id='fid_"+mid+"'  style='font-size:10px;font-style: italic;'>Frequency</p></div><div class='col-xs-3' onclick='selectTenure("+mid+");'><p class='valtext' style='font-size:10px;font-style: italic;' id='tid_"+mid+"' >Tenure</p></div>" +"</li>";
+			
+				mid++;
+				document.getElementById("selmed").value = "";
+			}	
+		}
+		function selectFrequency(m){
+			document.getElementById("toolbar4").style.display = "none";
+			document.getElementById("toolbar3").style.display = "none";
+			document.getElementById("toolbar2").style.display = "block";
+			selectedMed = m;
+			
+		}
+		function selectTenure(m){
+		    document.getElementById("toolbar4").style.display = "none";
+			document.getElementById("toolbar2").style.display = "none";
+			document.getElementById("toolbar3").style.display = "block";
+			selectedMed = m;
+		}
+		function selectMed(m){
+			document.getElementById("toolbar2").style.display = "none";
+			document.getElementById("toolbar3").style.display = "none";
+			document.getElementById("toolbar4").style.display = "block";
+			selectedMed = m;
+		}	
+        function showDiscountTB(m){
+			document.getElementById("toolbar5").style.display = "block";
+			document.getElementById("dis_per").value  = "0";
+			document.getElementById("price_d").innerHTML  = "0";
+			selectedPrice = m;
+			
+			document.getElementById("price_o").innerHTML = document.getElementById("prid_"+m).innerHTML;
+			document.getElementById("price_f").innerHTML = document.getElementById("prid_"+m).innerHTML;
+		}		
+		function updateF(s){
+			document.getElementById("fid_"+ selectedMed).innerHTML = s;
+		}
+		function updateT(s){
+			document.getElementById("tid_"+ selectedMed).innerHTML = s;
+		}
+		function calcDiscountPer(){
+		    var dis = document.getElementById("dis_per").value;
+			dis = 100 - parseInt(dis);
+			var finalval = parseInt(parseFloat(document.getElementById("price_o").innerHTML) * parseFloat(dis/100));
+			document.getElementById("price_f").innerHTML = finalval;
+			
+			document.getElementById("price_d").innerHTML = parseInt(document.getElementById("price_o").innerHTML) - finalval;
+		}
+		function calcDiscount(){
+			var o = document.getElementById("price_o").innerHTML;
+			document.getElementById("price_f").innerHTML = o;
+		}
+		function removeTMT(m){
+				var o =document.getElementById("prid_"+m);
+				total = parseInt(document.getElementById("total").innerHTML) - parseInt(o.innerHTML);
+				//o.parentNode.parentNode.removeChild(o.parentNode);
+				o.innerHTML = "";
+				o.previousSibling.innerHTML="";
+				o.parentNode.style.display = "none";
+				document.getElementById("total").innerHTML = total;
+		}
+		function removeMed(m){
+				var o =document.getElementById("med_"+m);
+				o.parentNode.parentNode.removeChild(o.parentNode);
+				
+		}
+		function tb5savediscount(){   
+		    var o =  document.getElementById("prid_"+selectedPrice);
+			if(selectedPrice ==0)
+				o=document.getElementById("total");
+				
+			var f =  document.getElementById("price_f");
+			//Update total first then Individual treatement price
+			total = parseInt(document.getElementById("total").innerHTML) - parseInt(o.innerHTML) + parseInt(f.innerHTML);
+			
+			//Now update element
+			o.innerHTML = f.innerHTML;
+			
+			//Update total
+			document.getElementById("total").innerHTML = total;
+			
+			document.getElementById("toolbar5").style.display = "none";
+			document.getElementById("price_f").innerHTML = 0; 
+            document.getElementById("price_d").innerHTML = 0;
+            document.getElementById("price_o").innerHTML = 0;
+            document.getElementById("dis_per").innerHTML = 0;			
+		}
+		function hidetb5(){
+			document.getElementById("toolbar5").style.display = "none";
+		}
+		function edittotaldiscount(){
+			document.getElementById("toolbar5").style.display = "block";
+			document.getElementById("price_o").innerHTML = document.getElementById("total").innerHTML;
+			document.getElementById("price_f").innerHTML = document.getElementById("total").innerHTML;
+			selectedPrice = 0;
+		}
+		function reviewcase(cid){
+			
+			var e1 = {};
+			localStorage.isDirty=1;
+			// Teeth
+			e1["teeth"] = teeth.sort();
+			// Examination
+			
+			var e = document.getElementById("examination");
+			var details = e.options[e.selectedIndex].text;
+			var enote = document.getElementById("enote").value;
+			e1["details"] = details;
+			e1["note"] = enote;
+			
+			// Treatement
+			var t = [];
+			var ul = document.getElementById("xx");
+			var list = ul.getElementsByTagName("li"); 
+			for (i = 0; i < list.length; i++) {
+				var tmp = [list[i].childNodes[0].innerHTML,list[i].childNodes[1].innerHTML];
+				t.push(tmp);
+			}
+			t.push(["Total",document.getElementById("total").innerHTML]);
+			// Medecines
+			var m = [];
+			ul = document.getElementById("yy");
+			list = ul.getElementsByTagName("div"); 
+			for (i = 0; i < list.length; i++) {
+			  try{
+					var tmp = [list[i].childNodes[0].innerHTML,list[i].childNodes[1].childNodes[0].innerHTML,list[i].childNodes[2].childNodes[0].innerHTML];
+					m.push(tmp);
+				} catch(err) {}
+			}
+			// add to casedetails
+			casedetails["exm"] = e1;
+			casedetails["tmt"] = t;
+			casedetails["med"] = m;
+			casedetails["pid"] = getParameterByName("pid");
+			casedetails["cid"] = getParameterByName("cid");
+			casedetails["did"] = localStorage.did;
+			casedetails["flag_e"] = intelliSave(e1,"exm");
+			casedetails["flag_t"] = intelliSave(t,"tmt");
+			casedetails["flag_m"] = intelliSave(m,"med"); // flags to update exm,tmt and med
+			examination(6);
+			
+			fillSummary();
+			
+			
+	}
+	function intelliSave(v,s){
+		var c = JSON.stringify(v);
+		var fetchDetails = "";
+		if(localStorage["fetchDetails"])
+			fetchDetails = JSON.parse(localStorage["fetchDetails"]);
+		
+		var f = JSON.stringify(fetchDetails[s]);
+		if( JSON.stringify(c) == f )
+			return 0;
+		else
+			return 1;
+			
+	}
+	function fillSummary(){
+		document.getElementById("r1").innerHTML = casedetails["exm"].details;
+		document.getElementById("r2").innerHTML = casedetails["exm"].teeth.toString();
+		document.getElementById("r3").innerHTML = casedetails["exm"].note;
+		
+		// fill treatement
+		var txt = '';
+		for (i = 0; i < casedetails["tmt"].length; i++) {
+			txt += "<div class='row'><div class='col-xs-9'>" + casedetails["tmt"][i][0] + "</div><div class='col-xs-3'>" + casedetails["tmt"][i][1] + "</div></div>";
+		}
+		document.getElementById("r4").innerHTML = txt;
+		
+		// fill medecine
+		txt = '';
+		for (i = 0; i < casedetails["med"].length; i++) {
+			txt += "<div class='row'><div class='col-xs-6'>" + casedetails["med"][i][0] + "</div><div class='col-xs-4'>" + casedetails["med"][i][1] + "</div><div class='col-xs-2'>" + casedetails["med"][i][2] + "</div></div>";
+		}
+		document.getElementById("r5").innerHTML = txt;
+	}
+	function displayCaseHistory() {
+		// check if casedetails already exists
+		var txt = '';
+		if(casedetails != null && Object.keys(casedetails).length > 0){
+			for (i = 0; i < casedetails["tmt"].length; i++) {
+			    var t0 = casedetails["tmt"][i][0];
+				var t1 = casedetails["tmt"][i][1];
+				txt += "<li style='color: darkslateblue;' onclick='showDiscountTB("+(i+1)+");'><span name='tname'>" + t0 + "</span><span id='prid_"+(i+1)+"' style='width:50px' class='pull-right'>"+ t1 +"</span></li>";
+			}
+		}
+		
+		document.getElementById("xx").innerHTML +=  txt;
+		
+		
+	}
+	function savecase(){
+	  reviewcase(cid);	
+	  if(getParameterByName("pid") != null)
+		getData(JSON.stringify(casedetails),1,"saveCase.php",onSuccessP,onErrorP);
+	}
+	function savecase1(){
+	  reviewcase(cid);	
+	  if(getParameterByName("pid") != null)
+		getData(JSON.stringify(casedetails),1,"saveCase.php",onSuccessP,onErrorP);
+	}
+	function onSuccessP(){
+		var pid = getParameterByName("pid");
+		localStorage.isDirty = 0;
+		window.location.href = "history.html?pid=" + pid;
+	}
+	function onErrorP(){}
+	function fn2(){
+		localStorage.isDirty=1;
+		//fetchJson();
+		document.getElementById("part5").style.display = "none";
+		document.getElementById("part1").style.display = "block";
+		document.getElementById("f1").style.display = "block";
+	}
+	function fn3(){
+		document.getElementById("part3").style.display = "none";
+		document.getElementById("part2").style.display = "block";
+		document.getElementById("f3").style.display = "none";
+		document.getElementById("f2").style.display = "block";
+	}
+	function fn4(){
+		document.getElementById("part4").style.display = "none";
+		document.getElementById("part3").style.display = "block";
+		document.getElementById("f4").style.display = "none";
+		document.getElementById("f3").style.display = "block";
+	}
+	function fn5(){
+		document.getElementById("part5").style.display = "none";
+		document.getElementById("part4").style.display = "block";
+		document.getElementById("f5").style.display = "none";
+		document.getElementById("f4").style.display = "block";
+	}
+	function fetchJson(){
+		localStorage.isDirty=1;
+		// Fill medecines/treatement info
+		autocomplete(document.getElementById("seltreat"), treatements,1);
+		autocomplete(document.getElementById("selmed"), medicines,0);
+	}
+	function moveUp(m){
+		
+		var e = document.getElementById("med_" + m);
+		var p = e.parentNode;
+
+		if(p.previousElementSibling)
+			p.parentNode.insertBefore(p, p.previousElementSibling);
+	}
+	function moveDown(m){
+		
+		var e = document.getElementById("med_" + m);
+		var p = e.parentNode;
+
+		if(p.nextElementSibling)
+			p.parentNode.insertBefore(p.nextElementSibling, p);
+	}
+	function emptyS(m){
+		var e = document.getElementById("med_" + m);
+		e.innerHTML += "*";
+	}
+	function nosave(){
+		localStorage.isDirty = 0;
+		document.getElementById("forsave").style.display='none'
+	
+	}
+	var fileContent = '<html>Phonegap Print Plugin</html>';
+	function prnt(){
+	window.open('http://www.kidzout.com', '_system'); return false;
+//cordova.plugins.printer.print(page, 'Document.html');
+		
+//window.PrintPlugin.print(fileContent,function(){console.log('success')},function(){console.log('fail')},"",type,title);
+	}
+	</script>
+
+</html> 

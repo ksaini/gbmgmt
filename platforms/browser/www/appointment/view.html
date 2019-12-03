@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="msapplication-tap-highlight" content="no" />
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+      <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+      <!---<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />---->
+      
+	  <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="../css/index.css" />
+      <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	  
+	  
+	  <script src="../js/moment.min.js"></script>   
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+	  <script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+      <title>GreyBox Admin</title>
+	  <style>
+body {
+	#background-image:url(img/s71.png);
+	background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    height: auto !important;
+    min-height:100%;
+	text-transform:inherit;
+	height: 100%;
+}	
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left:2px;
+	padding-right:2px;
+	
+}
+
+.chat li
+{
+    margin-bottom: 2px;
+    padding-bottom: 2px;
+	color:#B3A9A9;
+    border-bottom: none;
+	height:30px;
+	vertical-align:middle;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 10px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 10px;
+	
+}
+.chat li .chat-body p
+{
+    margin: 0;
+	width:100%;
+    color: #F5F5F5;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+	
+}
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+.navbar-custom{
+	background-color: #8159bb;
+}
+
+.panel-body
+{
+    overflow-y: scroll;
+	min-height: 750px;
+    height: 100%;
+	padding-top: 50px;
+	padding-left:5px;
+	padding-right:5px;
+}
+.panel-footer{
+	padding: 1px 5px;
+}
+.regtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 300;
+	color: #636972;	
+}
+.valtext {
+	font-family: 'open_sans','Open Sans',sans-serif;
+    font-size: 12px;
+    font-weight: 100;
+	color: #636972;
+	contenteditable = true;
+	box-shadow: none;
+	border-bottom: 0px;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	margin-bottom:0px;
+	letter-spacing: 1px;
+}
+.fc-list-heading-main, .fc-list-heading-alt {
+	color: #8159bb;	
+}
+h2 {
+	font-size: 16px; 
+	padding-top: 10px;
+	font-family: 'open_sans','Open Sans',sans-serif;
+	letter-spacing: 1px;	
+}
+.fc-toolbar, .fc-header-toolbar {
+    margin-bottom: 1em;
+    margin-top: 12px;
+    font-size: 11px;
+	font-family: 'open_sans','Open Sans',sans-serif;
+	
+}	
+.fc-widget-content, .fc-list-heading-main{
+	font-family: 'open_sans','Open Sans',sans-serif;
+	font-size: 12px; 
+}
+.fc-event-dot {
+    width: 5px;
+    height: 5px;
+   }
+.fx {
+	display: flex;	
+}   
+.oc {
+	background-color:#eee9f6;
+	font-size:9px;
+	padding-left:5px;
+	padding-right:5px;
+	padding-top:0px;
+	padding-bottom:5px;
+	color:#8159bb;
+	text-align:center;
+}
+
+.oc1 {
+	background-color:#c2dfcd;
+	font-size:9px;
+	padding-left:5px;
+	padding-right:5px;
+	padding-top:0px;
+	padding-bottom:5px;
+	color:#8159bb;
+	text-align:center;
+}
+.uoc{
+	border: 1px dotted #8159bb;
+	height:30px;
+	font-size:11px;
+	padding-top:5px;
+	padding-left:3px;
+	border-bottom:none;
+}
+.tm {
+	font-family: 'open_sans','Open Sans',sans-serif;
+	padding:top:9px;
+	font-size:16px;
+	color:white;
+	background-color:#8159bb;
+	padding-left:10px;
+	border: 1px dotted #eee9f6;
+}
+.tb2{
+ background-color:white;
+ 
+}
+.tb2:focus {outline:0;}
+.med{
+	height:100%;
+}
+.toolbar2{
+	padding-top:10px;
+	text-align:center;border-right:1px solid #E0E0E0;
+	padding-bottom:10px;
+	font-size:12px;
+}
+.msg{
+	font-size:12px;
+	font-family: 'open_sans','Open Sans',sans-serif;
+	font-weight:100px;
+	text-align:center;
+	padding:5px;
+}
+</style>
+
+     
+   </head>
+   <body >
+     
+<nav class="navbar navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" style="width:100%;text-align:center;color:white;" href="../dashboard.html"><i style="position: absolute;left:5px;;" class="fa fa-home" aria-hidden="true"></i> <span style="font-size:14px;">APPOINTMENT</span></a>
+    </div>
+   
+  </div>
+</nav>
+<div class="container">
+<div class="row">
+	<div class="panel panel-primary">
+		<div class="panel-body" >
+			<div class="row" id="toolbar0" style="background-color: #DCDCDC;padding-top:5px;padding-bottom:5px;">
+				<div class="col-xs-3 valtext" style="font-size:20px;line-height: 1.6;text-align:center;" onclick='shiftdate(-1)'> &lt; </div>
+				<div class="col-xs-6" id='c_dt' style="font-size:16px;line-height: 1.6;padding-top:2px;letter-spacing: 1px;text-align:center"> </div>
+				<div class="col-xs-3 valtext" style="font-size:20px;line-height: 1.6;text-align:center;" onclick='shiftdate(1)'> &gt; </div>
+			</div>
+			
+			<ul class="chat" id="chat" style="border-bottom: 1px dotted #8159bb;">
+				<div id="toolbar5" class="row tb2" style="border: 1px solid #ccc;">
+					<div class="content col-md-1 col-xs-1 toolbar2" id="" >
+						<p class="valtext "  ></p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2 oc" name="ap" onclick="setTenure(1)" id="ap1" >
+						<p class="valtext"  >15Min</p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" name="ap" onclick="setTenure(2)" id="ap2" >
+						<p class="valtext "  >30Min</p>
+					</div>
+					
+					<div class="content col-md-2 col-xs-2 toolbar2" name="ap" onclick="setTenure(4)" id="ap4" >
+						<p class="valtext "  >1Hr</p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" name="ap" onclick="setTenure(8)" id="ap8" >
+						<p class="valtext "  >2Hr</p>
+					</div>
+					<div class="content col-md-2 col-xs-2 toolbar2" id="tb1" onclick='savecalendar()' style="text-align:center;border-right:1px solid #E0E0E0;background-color:#5aaa78"><i class="fa fa-check" style="color:white;font-size:12px;padding-top:1px;" aria-hidden="true"></i>
+					</div>
+					
+				</div>	
+				
+			</ul>
+			
+		</div>	
+	</div>
+</div>	
+</div>
+   </body>
+   <script type="text/javascript" src="cordova.js"></script>
+   <script type="text/javascript" src="../js/index.js"></script>
+   <script type="text/javascript" src="../js/dataTbl.js"></script>
+   <script>
+	$(function () {
+		var dateNow = new Date();
+		$('#datetimepicker1').datetimepicker({
+			locale: 'en',
+			format: 'DD/MM/YYYY',
+			defaultDate:dateNow,
+			widgetPositioning: {
+			vertical: 'bottom',
+			horizontal: 'left'
+		}
+		});
+	});
+   </script>
+   <script>
+   var did = localStorage.did;
+   var pid = getParameterByName("pid");
+   
+   var dx = 1; //duration i.e 15 min,30 min
+   var dy = '';// id of element
+   var data = '[]';
+   var dt = getParameterByName("dt");
+   if(dt != null){
+		var tmpdt = dt.split("/");
+		document.getElementById("c_dt").innerHTML = formatDate(new Date(tmpdt[2],tmpdt[1]-1,tmpdt[0]));
+		
+		}
+	else	{
+		document.getElementById("c_dt").innerHTML = formatDate(new Date());
+		
+		}
+		
+	placeSlots();
+	
+   // fetch data
+   var f_dt = dt.split("/");
+   f_dt = f_dt[2]+ "-" + f_dt[1] + "-" + f_dt[0];
+   getData("q=SELECT meta from d_cal_tbl where dt='"+ f_dt + "' and did='" + did + "' " ,0,"dataTbl.php",fillSlots,errLCH);   
+   //fillSlots();
+   //document.getElementById("p3").style.display = "none";   
+   function searchclient(){
+		document.getElementById("p2").style.display = "block"; 
+		document.getElementById("p3").style.display = "none"; 
+	}
+	function showScreen(s){
+		document.getElementById("p1").style.display = "none"; 
+		document.getElementById("p2").style.display = "none"; 
+		document.getElementById("p3").style.display = "none"; 
+		document.getElementById("p"+s).style.display = "block"; 
+	}
+	function scheduleapt(){
+		window.location.href = "selectslot.html?action=create&ref=create.html";
+	}
+	function createSlot(id){
+		var z = id < 12 ? "AM" : "PM";
+		var txt = "";
+		var t = (id%12 == 0)? 12 : id%12;
+		txt += '<li class="chat" style="display: flex;">';
+		txt += '<div class="uoc tm" style="width:20%;">&nbsp;'+ t + '<span style="font-size:8px;"> ' + z +'</span></div>';
+		txt += '<div name="st" id="s_'+id*100+'" class="uoc" style="width:20%;" onclick="_apt(this)"></div>';
+		txt += '<div name="st" id="s_'+(parseInt(id*100)+25)+'" class="uoc" style="width:20%;" onclick="_apt(this)"></div>';
+		txt += '<div name="st" id="s_'+(parseInt(id*100)+50)+'" class="uoc" style="width:20%;" onclick="_apt(this)"></div>';
+		txt += '<div name="st" id="s_'+(parseInt(id*100)+75)+'" class="uoc" style="width:20%;" onclick="_apt(this)"></div>';
+		txt += '</li>';	
+			
+		document.getElementById("chat").innerHTML += txt;	
+	}
+	function placeSlots(){
+		for(var i=8; i <=21;i++){
+			createSlot(i);
+		}
+	}
+	var pidmap = {};
+	var pidlist = [];
+	function fillSlots(x){
+		
+		var d = JSON.parse(x);
+		d = d[0]["meta"]; 
+		d = JSON.parse(d);
+		for (var i = 0; i < d.length; i++){
+			var ss = d[i]["slot"].split("_");
+			var duration = parseInt(d[i]["duration"]);
+			for(var j =0;j< duration;j++){
+				var id = "s_" + (parseInt(ss[1]) + parseInt(25*j));
+				document.getElementById(id).innerHTML = 'Reserved';// d[i]["pid"];
+				pidmap[id] = d[i]["pid"];
+				pidlist.push(d[i]["pid"]);
+				document.getElementById(id).classList.add("oc");
+			}
+		}
+		getData("q=SELECT pid,pname from d_patient_tbl where did="+ did + " and pid in (" + pidlist.toString() + " )",0,"dataTbl.php",resolvePID,errCal );
+	}
+function resolvePID(x){
+	
+	//loop through pidmap
+	 for (var key in pidmap){
+		document.getElementById(key).innerHTML = getName(x,pidmap[key]);
+	 }
+}		
+function getName(x,p){
+	var d = JSON.parse(x);
+	for(var i=0;i<d.length;i++){
+		if(d[i]["pid"]==p)
+			return d[i]["pname"];
+	}
+	return "Reserved";
+}
+function _apt(e){
+	// clear all slots first
+	var st = document.getElementsByName("st");
+	for(var i=0;i<st.length;i++){
+		st[i].classList.remove("oc1");
+	}
+	dy = e.id;
+	for(i=0;i<dx;i++){
+		var id = e.id.split("_");
+		var v = parseInt(id[1])+parseInt(25*i);
+		document.getElementById("s_"+v).classList.add("oc1");
+	}	
+}
+function setTenure(n){
+	dx = n;
+	var st = document.getElementsByName("ap");
+	for(var i=0;i<st.length;i++){
+		st[i].classList.remove("oc");
+	}
+	document.getElementById("ap"+n).classList.add("oc");
+}
+function savecalendar(){
+	var p = "did=" + did +"&pid=" +pid + "&dt=" + dt + "&dx=" + dx + "&dy=" + dy;
+	getData(p,0,"saveCalendar.php",successCal,errCal);
+}
+function successCal(){
+	window.location.href  = "../patient/appointment.html?pid=" + pid;
+}
+function errCal(){}
+function shiftdate(n){
+   var f_dt = dt.split("/");
+   var d = new Date(f_dt[2],f_dt[1]-1,f_dt[0]);
+   d.setDate(d.getDate() + n);
+   var month = d.getMonth()+1 ; //months from 1-12
+   
+   var day = d.getDate();
+   var year = d.getFullYear();
+   var newdate =  day + "/" + month + "/" + year;
+   window.location = "view.html?dt=" + newdate + "&pid=" + pid;	
+}
+	</script>
