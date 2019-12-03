@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.greyboxerp.gbmgmt" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>ToothFairy</name>
+    <name>GreyBox School Management</name>
     <description>
-        A Dental app Management System for Doctors
+        GreyBox School Management App for School Admins
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
         GreyBox Team
