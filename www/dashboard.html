@@ -139,7 +139,7 @@ a{
 <div class="container">
     <div class="row">
 	
-        <div class="col-xs-6 slimL fixedH " >
+        <div class="col-xs-6 slimL fixedH " id = "attend" style="display:none" >
 			<a href="./attendance.html">
 			<div class="panel panel-primary slim spray"><br>
 				<i id='users' class="fa fa-3x fa-user"></i>
@@ -149,7 +149,7 @@ a{
 			</a>
 		</div>
 		
-		 <div class="col-xs-6 slimR fixedH" id="discussion">
+		 <div class="col-xs-6 slimR fixedH" id="discussion" style="display:none">
 			<a href="./communicate.html">
 			<div class="panel panel-primary slim spray"><br>
 				<i id='users' class="fa fa-3x fa-comment"></i>
@@ -159,7 +159,7 @@ a{
 			</a>
 		</div>
 		
-		 <div class="col-xs-6 slimL fixedH">
+		 <div class="col-xs-6 slimL fixedH" id="hw" style="display:none">
 			<a href="./homework.html">
 			<div class="panel panel-primary slim spray"><br>
 				<i id='users' class="fa fa-3x fa-comment"></i>
@@ -169,7 +169,7 @@ a{
 			</a>
 		</div>
 		
-		 <div class="col-xs-6 slimL fixedH">
+		 <div class="col-xs-6 slimR fixedH" id="fee" style="display:none">
 			<a href="./searchstudent.html">
 			<div class="panel panel-primary slim spray"><br>
 				<i id='users' class="fa fa-3x fa-rupee"></i>
@@ -203,6 +203,11 @@ app.initialize();
 		//When a user presses back button deom dashboard it should not go to logged out page.
     }
 
+var a = localStorage["gb_permissions"];
+a = a.replace(/"/g, '');
+a = a.replace(/'/g, '"'); 
+var perm = JSON.parse(a);
+showDashboard(perm);	
 
 newMsg();
 
@@ -226,6 +231,19 @@ function logout(){
  function switchclass(){
 	document.location='resolveCID.html?cid=' + localStorage["cidlist"];	
  }
+
+function showDashboard(p){
+	if(p["attend"] == 1)
+		$("#attend").show();
+	if(p["chat"] == 1)	
+		$("#discussion").show();
+	if(p["hw"] == 1)	
+		$("#hw").show();
+	if(p["fee"] == 1)	
+		$("#fee").show();	
+		
+} 
+ 
 </script>
 
 </html>

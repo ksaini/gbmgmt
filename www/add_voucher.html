@@ -25,7 +25,7 @@ body {
 	height: 100%;
 }	
 .fdetails {
-	font-size:8px;
+	font-size:10px;
     text-transform: uppercase;
     color: #9A9A9A;
     font-weight: 400;
@@ -51,6 +51,7 @@ table, tbody {
 .btn1{
 	border: 1px solid #34495E;
 	color:#34495E;
+	
 }
 .table>tbody>tr>td {
 	vertical-align: middle;
@@ -93,6 +94,14 @@ table, tbody {
 	border-radius: 3px;
 	width:70px;
 }
+.btn2 {
+	height: 25px;
+    padding: 5px;
+    #background-color: #34495E;
+	color:#34495E;
+	border: 1px solid #34495E;
+    font-weight: 700;
+}
 </style>
 </head>
 <body>
@@ -100,7 +109,7 @@ table, tbody {
 	 <div class="panel-heading sticky" style="background-color: #34495E;">
         <div class="row" >
 			<div class="col-xs-1" style="color:white;text-align:center;">
-				<i class="fa fa-arrow-circle-left" onclick="window.location.href='dashboard.html'"></i>
+				<i class="fa fa-home" style="font-size:20px;" onclick="window.location.href='dashboard.html'"></i>
 			</div>
 			<div class="col-xs-10" style="color:white;text-align:center;">Fee</div>
 			<div class="col-xs-1"></div>
@@ -173,11 +182,11 @@ table, tbody {
 							<option id='online' value='online'>Online</option>
 							</select>
 					</div>
-					<div class="col-xs-8" style="font-size:10px;padding-top:10px">
+					<div class="col-xs-7" style="font-size:10px;padding-top:10px">
 						<label  >Pay :&nbsp;</label><label style="font-size:14px;color:red" id="tot" ></label>
 					</div>
-					<div class="col-xs-4" style="font-size:10px;">
-						<br><button type="button" style="font-size:12px;" class="btn btn1" onclick="saveRecord()">Save</button>
+					<div class="col-xs-5" style="font-size:10px;">
+						<br><button type="button" style="font-size:12px;margin-right:10px;" class="btn btn1" onclick="saveRecord()">Save</button>
 						<button type="button" style="font-size:12px;" class="btn btn1" onclick="document.getElementById('feenode').style.display = 'none';">Close</button>
 						
 					</div>	
@@ -256,19 +265,22 @@ table, tbody {
                               <div class="content ">
                                   	<div class="row" >
 				                	<div class="card" style="font-size:10px;">
-						                <div class="col-md-3" style="display:flex;padding-top:10px;"> 
-                                            <label >Select Fee :&nbsp;</label><select style="font-size:10px;" id='feeid' class="form-control select-sm"></select>
+						                <div class="col-xs-9" style="display:flex;padding-top:10px;"> 
+                                            <label style="padding-top:10px;" >Select Fee &nbsp;</label><select style="font-size:10px;width:80%" id='feeid' class="form-control select-sm"></select>
                                         </div>    
-                                         <div class="col-md-3" style="display:flex;padding-top:10px;"> 
-                                             <label >Fee Value :&nbsp;</label><input type="form-control input-sm" style="border-radius: 5%;text-align:center;width:50%;" class="width:100%;text-align:center" id="fv" value="0">
+                                         <div class="col-xs-9" style="display:flex;padding-top:10px;"> 
+                                             <label style="padding-top:10px;" >Fee Value &nbsp;</label><input type="form-control input-sm" style="border-radius: 5%;text-align:center;width:80%;" id="fv" value="0">
                                         </div>
-                                        <div class="col-md-4"  style="display:flex;padding-top:10px;"> 
-                                        	<label >Fee Date# :&nbsp;</label><input class="form-control input-sm" type='date' id='f1d' >
+                                        <div class="col-xs-9"  style="display:flex;padding-top:10px;"> 
+                                        	<label style="padding-top:10px;" >Fee Date &nbsp;</label><input style="width:80%" class="form-control input-sm" type='date' id='f1d' >
                                         </div>
-                                        <div class="col-md-12"  style="display:flex;padding-top:10px;"> 
-                                            <button class="btn btn-sm" type="button" onclick="addindfee()">Assign Fee</button>
+										
+                                        <div class="col-xs-6"  style="display:flex;padding-top:10px;"> 
+                                            <button class="btn btn-sm btn1" style="margin-bottom:15px;" type="button" onclick="addindfee()">Assign Fee</button>
                                         </div>
-                                         	
+										<div class="col-xs-3"  style="padding-top:10px;"> .
+										</div>
+                                         	<br>
                                     </div> <!------ card----->
                                     </div> <!----row---->
 									<br><br>
@@ -323,6 +335,8 @@ var rcvdfee=0;
 var balfee=0;
 var discount=0;
 var sdetails = {};
+localStorage.r = false;
+localStorage.smsg = 0;
 </script>
 <script type='text/javascript'>
 	var flg = 4;
@@ -372,6 +386,8 @@ var sdetails = {};
 <script>
 
 var totaldiscount = 0;
+var mode = "";
+var amt = "";
 
 function custom(d,p){
 	if(p==1001){
@@ -393,9 +409,23 @@ function custom(d,p){
 function confirmRecord(){
 
 }
+function cnfMsg(){
+	document.getElementById("alert1").innerHTML = "Sending SMS....";
+	
+	var msg = "Thanks for depositing Rs. " + amt + "  as "+ mode +" against fee for " + name + "(" + sid + ")";
+	
+	if(amt.trim().length >0 && window.cn1.length >7)
+			sendSMS(window.cn1,msg);
+	else
+		document.getElementById("alert1").innerHTML = "Error: Either amount is 0 OR No valid mobile registered with this student.";
+		
+	if(amt.trim().length >0 && window.cn2.length >7)
+			sendSMS(window.cn2,msg);	
+	//sendFeeSMS(node);
+}
 function saveCnf(){
 	localStorage.r=true;
-	document.getElementById("alert1").innerHTML = "n";
+	document.getElementById("alert1").innerHTML = "";
 	saveRecord();
 }
 function saveCncl(){
@@ -414,8 +444,9 @@ function saveRecord()
 	//var r = confirm("You are going to deposit Rs:" + document.getElementById("totvalue").innerHTML);
 	document.getElementById("alert1").innerHTML = "You are going to deposit Rs:" + document.getElementById("totvalue").innerHTML + "<br><span class='btn btn-sm ok' onclick='saveCnf()'>Ok</span><span class='btn btn-sm cncl' onclick='saveCncl()'>Cancel</span>";
 	r = localStorage.r;
-	if(r== true)
+	if(r == "true")
 	{
+		document.getElementById("alert1").innerHTML = "Wait saving result.......";
 		// get jsom for all fees
 		var rows = document.getElementById("fdetail").childNodes;
 		var jsn = [];
@@ -449,14 +480,16 @@ function saveRecord()
 	    
 		var req = new XMLHttpRequest();
 			req.onreadystatechange = function() {
-			if (req.readyState == 4 && req.status == 200) {
-				//alert(req.responseText);
-				location.reload();
+			if (req.readyState == 4 ) 
+			{
+				if (req.status == 200)
+					location.reload();
+				else
+					document.getElementById("alert1").innerHTML = "Some Error occured ";
 			}
 			};
 	
-				
-			req.open("POST", base_url + "/addvoucher2.php", true);
+			req.open("POST", base_url + "./addvoucher2.php", true);
 			req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		
 			req.send(sql);	
@@ -537,23 +570,25 @@ function addPrint_prev(node){
 }
 
 function sendFeeSMS(node){
-	var mode = node.cells[3].innerHTML;
-	var amt = node.cells[1].innerHTML;
+	
+	mode = node.cells[3].innerHTML;
+	amt = node.cells[1].innerHTML;
 	var name = getParameterByName('name');
 	var sid = getParameterByName('sid');
     var msg = "Thanks for depositing Rs. " + amt + "  as "+ mode +" against fee for " + name + "(" + sid + ")";
-	//if(localStorage.schoolcode == "SASBSS")	
-		//msg = name + "  के लिए rs "+amt+" जमा करने के लिए धन्यवाद।  शाहिदे आजम स्कूल M: 978378913";
-	if(amt.trim().length >0 && window.cn1.length >7)
-		sendSMS(window.cn1,msg);
-	if(amt.trim().length >0 && window.cn2.length >7)
-		sendSMS(window.cn2,msg);	
 	
-	//alert(msg)
-	//
+	// First confirm with user
+	document.getElementById("alert1").innerHTML = "You are going to send a SMS for fee confirmation of amount : " +amt + "<br><span class='btn btn-sm ok' onclick='cnfMsg()'>Ok</span><span class='btn btn-sm cncl' onclick='saveCncl()'>Cancel</span>";
+	
+	window.scrollBy(0, -300);
+	
 }
-function smsCallback(x){ alert(x);}
-
+function smsCallback(x){ 
+	document.getElementById("alert1").innerHTML = "Message Sent";
+}
+function smsCallbackErr(x){ 
+	document.getElementById("alert1").innerHTML = "Error Sending Message.";
+}
 function feeSchedule(d){
 	var tblBodyId = 'table_ps';
 	
@@ -579,7 +614,7 @@ function feeSchedule(d){
 					tmp.push(rcvd_details[i]);
 				}
 				//document.getElementById("name").innerHTML = JSON.stringify(rcvd_details);
-				localStorage["s_start"] = "2019-04-01";
+				
 				var s_start = new Date(localStorage["s_start"]);
 				
 				for(var i=0;i<d.length; i++){
@@ -636,7 +671,7 @@ function feeSchedule(d){
 				document.getElementById("table_fs").innerHTML = displaySchedule2(d,period,period1);
 	
 				
-				document.getElementById("pd11").innerHTML = document.getElementById("prev_due").value;
+				//document.getElementById("pd11").innerHTML = document.getElementById("prev_due").value;
 				
 				} catch (e) {
 				console.log("Exceptions::-"+e.toString());
@@ -685,7 +720,7 @@ function displaySchedule1(d,period,period1){
 			tbodyData += "<td class='valign' colspan='1' id=pending_"+i+" style='color:green;'>+"+(r-sm + ds)+"</td>";
 		
 		balfee += parseInt((sm));			
-		tbodyData +="<td class='valign' ><button class='btn' type='button' onclick=payAggr("+p+")>Pay for "+period[p]+"</button><br><div id='div_"+p+"' style='display:none;'><label style='font-size:10px;' ></label></div></td>";
+		tbodyData +="<td class='valign' ><button class='btn btn2' type='button' onclick=payAggr("+p+")>Pay for "+period[p]+"</button><br><div id='div_"+p+"' style='display:none;'><label style='font-size:10px;' ></label></div></td>";
 		tbodyData +="</tr>";
 		
 		due += parseInt(sm);
@@ -778,7 +813,7 @@ function getRcvd2(id,s,e){
 
 
 function getPeriod1(){
-    localStorage["s_start"] = "2019-04-01";
+    
 	var dateObj = new Date(localStorage["s_start"]);
 	var m = dateObj.getMonth() + 1; //months from 1-12
 	var day = dateObj.getDate();
@@ -949,7 +984,7 @@ if(data[0]["id"] == "Total"){
 			//tbodyData += "<td width='5%' id='"+tblId+"_p"+i+"' onclick='delReceipt(this.parentNode)' data-toggle='tooltip' title='Delete'><i class='fa fa-trash' style='color:red;' aria-hidden='true'></i></td>";
 			//tbodyData += "<td width='5%' id='"+tblId+"_p"+i+"' onclick='addPrint(this.parentNode)' data-toggle='tooltip' title='Print Receipt'><i class='fa fa-print' aria-hidden='true'></i></td>";
 			//tbodyData += "<td width='10%' id='"+tblId+"_p"+i+"' onclick='addPrint1(this.parentNode)' data-toggle='tooltip' title='Print Receipt'><u style='font-size:10px;' > Raw Print </u></td>";
-			tbodyData += "<td width='5%' id='"+tblId+"_s"+i+"' onclick='sendFeeSMS(this.parentNode)' data-toggle='tooltip' title='Send SMS'><i class='fa fa-2x fa-mobile' aria-hidden='true'></i></td>";
+			tbodyData += "<td width='10%' id='"+tblId+"_s"+i+"' onclick='sendFeeSMS(this.parentNode)' data-toggle='tooltip' title='Send SMS'><i class='fa fa-2x fa-mobile' aria-hidden='true'></i></td>";
 			sum_amount =parseInt(data[i]["amount"]);
 			tbodyData +="</tr>";
 			totalrcpt++;

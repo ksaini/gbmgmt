@@ -30,6 +30,8 @@ body {
 }	
 .chat {
 	background-color: #fff; 
+	padding:5px;
+	padding-left:15px;
 }
 .regtext {
 	font-family: 'open_sans','Open Sans',sans-serif;
@@ -99,8 +101,17 @@ body {
 .gbhide {
 	display: none;
 }
+.hdr{
+	border-bottom: 1px solid #34495E;
+	font-size:14px;
+}
 .navbar-custom{
 	background-color: #34495E;
+}
+.btn { 
+	border: 1px solid #34495E;
+	border-radius: 5px;
+	color:#34495E;
 }
 </style>
 <script type="text/javascript" src="js/camera.js"></script>
@@ -115,30 +126,26 @@ body {
   </div>
 </nav>
 <div class="row">
-   <div class="col-md-5" style="padding-right:0px;padding-left:0px;">
+   <div class="col-xs-12" style="padding-right:0px;padding-left:0px;">
 		<div class="content" >
         <div class="container-fluid" >
 			<div class="panel-body">
 				
-	<div class="row" style="padding-top:20px;">
-	<div class="content col-xs-9" style="padding-right:3px;">
-		<input  class="form-control" type='text' name='' id='byid' placeholder="Student Name/ID" onkeypress="return runscript(this.value,event)" autofocus> 
-	</div>
-	<div class="content col-xs-3" style="padding-left:3px;">
-		<button type='button' id="search" class='btn' onClick='changeMe()'>Search</button>
-	</div>
-    </div>	
-	<div  class="panel-body" style="padding-top:20px;">
-	<div id="notice" class="chat"></div>
-	</div>
-			</div>		
-			 
-		 </div>
-    	</div>
-     </div>
-</div>	 
-
-              
+				<div class="row" style="padding-top:20px;">
+					<div class="content col-xs-9" style="padding-right:3px;">
+						<input  class="form-control" type='text' name='' id='byid' placeholder="Student Name/ID" onkeypress="return runscript(this.value,event)" autofocus> 
+					</div>
+					<div class="content col-xs-3" style="padding-left:3px;">
+						<button type='button' id="search" class='btn' onClick='changeMe()'>Search</button>
+					</div>
+				</div>	
+			
+				<div id="notice" class="chat"></div>
+			</div>
+		</div>		
+		</div>
+    </div>
+</div>
    
   </body>
   <script src='js/msg.js'></script>
@@ -152,10 +159,10 @@ body {
 	req.onreadystatechange = function() {
 		if (req.readyState == 4 && req.status == 200) {
 			try {
-				var txt = '<div class="row rowsearch" ><div class="col-xs-2 regtext">Sr No.</div>';
-				txt += '<div class="col-xs-3 regtext">Name</div>';
-				txt += '<div class="col-xs-3 regtext">Father Name</div>';
-				txt += '<div class="col-xs-2 regtext">Class</div>';
+				var txt = '<div class="row rowsearch hdr" ><div class="col-xs-2 regtext"><b>Sr No.</b></div>';
+				txt += '<div class="col-xs-3 regtext"><b>Name</b></div>';
+				txt += '<div class="col-xs-3 regtext"><b>Father Name</b></div>';
+				txt += '<div class="col-xs-2 regtext"><b>Class</b></div>';
 				txt += '<div class="col-xs-2 regtext"></div></div>';
 				var data=JSON.parse(req.responseText);
 				data.forEach(function(e){
@@ -163,7 +170,7 @@ body {
 					txt += '<div class="col-xs-3 smallf3 regtext">' + e["name"] + "</div>";
 					txt += '<div class="col-xs-3 smallf3 regtext">' + e["fathername"] + "</div>";
 					txt += '<div class="col-xs-2 smallf3 regtext">' + e["class"] + "</div>";
-					txt += '<div class="col-xs-2 smallf3 regtext"><a href="./add_voucher.html?sid='+e["admn"]+'&name='+e["name"]+'&class='+e["class"]+'">View</a></div>';
+					txt += '<div class="col-xs-2 smallf3 regtext"><a href="./add_voucher.html?sid='+e["admn"]+'&name='+e["name"]+'&class='+e["class"]+'"><b>View</b></a></div>';
 					txt += "</div>";
 				});
 				document.getElementById('notice').innerHTML = txt;

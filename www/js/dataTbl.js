@@ -623,13 +623,19 @@ function sendSMS(mobile,msg){
 	//alert(param);
 	var req = new XMLHttpRequest();
 	req.onreadystatechange = function() {
-		if (req.readyState == 4 && req.status == 200) {
+		if (req.readyState == 4 ) {
+			if (req.status == 200) {
 			try {
 				//document.getElementById('cn_'+mobile).innerHTML = 'Done';
 				smsCallback(req.responseText);
-			} catch (e) {
+			} catch (e) {alert("xxx");
 				console.log("Exception::-"+e.toString());
+				smsCallbackErr(req.responseText);
 			}
+			}
+			else	
+				smsCallbackErr("Error");
+			
 		}
 	};
 	

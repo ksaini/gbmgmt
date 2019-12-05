@@ -203,6 +203,7 @@ div.desc {
    var firstlogin = getParameterByName('login');
    localStorage["cid_arr"] = "";
    
+   getData('','',"r2_session_01",0,0,1004,localStorage["db"]);
    document.getElementById("mname").innerHTML = " &nbspWelcome " + localStorage["mname"] + " , select a class.";
    getData('','',"SELECT id, concat(classname,'-',section) as cname from s_class_master order by id asc;",0,0,1001,localStorage["db"]);
    
@@ -230,10 +231,16 @@ div.desc {
 	}
 	else if(p==1002)
        initCIDMID(data);
+	else if(p==1004)
+       setSession(data);   
 	else
 		updateCIDMID(data);
    }
   
+  function setSession(data){
+	var d = data[0];
+	localStorage["s_start"] = d["start_date"];
+  }
   function getClass(data,cid){
 	for(var i = 0; i < data.length; i++) {
 		if(data[i]["id"] == cid.trim())

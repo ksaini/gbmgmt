@@ -151,6 +151,7 @@ var branch="";
 
 <script async defer type="text/javascript">
 app.initialize();
+var permissions = "";//{"attend" : "0", "chat": "1", "hw" :  "0", "fee" : "1"};
 function verify(){
 if(branch.trim().length < 1)
 {
@@ -206,6 +207,7 @@ function setdata(data){
 		}
 		localStorage["cid_mid"] = JSON.stringify(cid_mid);
 		localStorage["sid"] =  data["id"];
+		localStorage["gb_permissions"] = JSON.stringify(data["permission"]);
 		
 		// Go to resolve CID page to give mentors a choice, if they are eligible to access more t han one classes
 		document.location='resolveCID.html?login=1&cid=' + data["cid"];	
